@@ -38,16 +38,19 @@
   <body class="text-center">
 
 <main class="form-signin">
-  <form>
+  <form action="loginauth.php" method="post">
     <img class="mb-4" src="logo1.jpg" alt="" width="300" height="200" style="border-radius: 20px;">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+    <?php if(isset($_GET['error'])){ ?>
+      <p class = "error"> <?php echo $_GET['error']; ?></p>
+    <?php } ?>
+    
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
       <label for="floatingPassword">Password</label>
     </div>
 
@@ -57,10 +60,9 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-
+      
   </form>
 </main>
-
 
 
   </body>
