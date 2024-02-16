@@ -14,35 +14,39 @@
     <div class="col-md-6">
       <h2 class="mb-4" style="text-align: center;">Créer un compte</h2>
       <img class="mb-4" src="logo1.jpg" alt="" width="300" height="200" style="border-radius: 20px; margin-left: 120px;">
-      <form>
+      <form action="abonnerauth.php" method="POST">
 
         <div class="form-group">
           <label for="nombre">Nom</label>
-          <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+          <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom" required>
         </div>
         <div class="form-group">
           <label for="nombre">Prenom</label>
-          <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prenom">
+          <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez votre prenom" required>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Entrer votre Email">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Entrer votre Email" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Tapez votre mot de passe">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Tapez votre mot de passe" required>
         </div>
         <div class="form-group">
+        <?php if(isset($_GET['errorpass'])){ ?>
+          <p class = "errorpass" style="color: red;"> <?php echo $_GET['errorpass']; ?></p>
+        <?php } ?>
           <label for="confirmPassword">Confirmer Password</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmer mot de passe">
+          <input type="password" class="form-control" id="confirmPassword" name="cpassword" placeholder="Confirmer mot de passe" required>
         </div>
-        <button type="submit" class="btn btn-primary">Enregistrement</button>
+        <button type="submit" class="btn btn-primary" name="submit">Enregistrement</button>
         <br>
         <br>
       </form>
     </div>
   </div>
 </div>
+
 
 <!-- Incluimos jQuery, Popper.js y Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
