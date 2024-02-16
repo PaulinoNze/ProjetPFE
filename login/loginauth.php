@@ -30,7 +30,7 @@
                 $_SESSION['userid'] = $row['userid'];
                 $_SESSION['nom'] = $row['nom'];
                 if($email === "admin@gmail.com" && $password === "admin"){
-                    header("Location: ../adminDashboard.php");
+                    header("Location: ../adminDashboard/adminDashboard.php");
                     exit();
                 } else {
                     header("Location: ../dashboard.php");
