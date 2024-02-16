@@ -17,16 +17,16 @@
             <a class="nav-link" href="#">Établissement</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="conctat.php">Contact</a>
           </li>
         </ul>
          <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 550px;">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login/login.php">Connect</a>
+            <a class="btn btn-success" href="login/login.php" style="margin-right: 10px;">Connect</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" href="s_abonner/inscritp.php" style=" background-color: aqua">S'abonner</a>
+            <a class="btn btn-danger" href="s_abonner/inscritp.php" >S'abonner</a>
           </li>
         </ul>
        </div>
