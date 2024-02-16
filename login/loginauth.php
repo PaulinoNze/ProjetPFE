@@ -28,8 +28,14 @@
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['userid'] = $row['userid'];
-                header("Location: ../dashboard.php");
-                exit();
+                $_SESSION['nom'] = $row['nom'];
+                if($email === "admin@gmail.com" && $password === "admin"){
+                    header("Location: ../adminDashboard.php");
+                    exit();
+                } else {
+                    header("Location: ../dashboard.php");
+                    exit();
+                }
             }else{
                 header("Location: login.php?error=Incorrect Email or Password");
                 exit();

@@ -42,7 +42,7 @@
     <img class="mb-4" src="logo1.jpg" alt="" width="300" height="200" style="border-radius: 20px;">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     <?php if(isset($_GET['error'])){ ?>
-      <p class = "error"> <?php echo $_GET['error']; ?></p>
+      <p class = "error" style="color: red;"> <?php echo $_GET['error']; ?></p>
     <?php } ?>
     
     <div class="form-floating">
