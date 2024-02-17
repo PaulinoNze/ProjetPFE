@@ -240,7 +240,7 @@
 <div class="row">
 <div class="col-md-5">
 <div class="profile-info-left">
-<h3 class="user-name m-t-0">Jeffrey M. Wong</h3>
+<h3 class="user-name m-t-0"><?php echo $_SESSION['prenom']." ". $_SESSION['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
 <small class="text-muted">Admin</small>
 <div class="staff-id">Employee ID : HOD-0001</div>
@@ -254,7 +254,7 @@
 </li>
 <li>
 <span class="title">Email:</span>
-<span class="text"><a href=""><span class="__cf_email__" data-cfemail="422827242427303b2f352d2c2502273a232f322e276c212d2f">[email&#160;protege]</span></a></span>
+<span class="text"><?php echo $_SESSION['email']; ?></span>
 </li>
 <li>
 <span class="title">Date de Naissance</span>
