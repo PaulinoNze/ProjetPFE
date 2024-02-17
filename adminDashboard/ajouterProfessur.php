@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +47,7 @@
 <i class="fa fa-search"></i>
 </a>
 <form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
+<input class="form-control" type="text" placeholder="Recherche">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
 </div>
@@ -123,7 +128,7 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
@@ -134,23 +139,23 @@
  <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>
@@ -169,7 +174,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
@@ -220,7 +225,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
-<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><a href="index.html">Professeurs</a></li>
 <li class="breadcrumb-item"><span> AJouter Professeur</span></li>
 </ul>
@@ -236,7 +241,7 @@
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <form>
 <div class="form-group">
-<label>Firstname</label>
+<label>Prenom</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
@@ -244,26 +249,26 @@
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Password</label>
+<label>Mot de Passe</label>
 <input type="password" class="form-control">
 </div>
 <div class="form-group">
-<label>Subject</label>
+<label>Filiere</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Gender</label>
+<label>Genre</label>
 <select class="form-control select">
-<option>Male</option>
-<option>Female</option>
+<option>Homme</option>
+<option>Femme</option>
 </select>
 </div>
 <div class="form-group">
-<label>Birth Date</label>
+<label>Date de Naissance</label>
 <input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
 </div>
 <div class="form-group">
-<label>Class</label>
+<label>Salle</label>
 <input type="text" class="form-control">
 </div>
 </form>
@@ -271,38 +276,30 @@
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <form>
 <div class="form-group">
-<label>Lastname</label>
+<label>Nom</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Joining Date</label>
-<input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
-</div>
-<div class="form-group">
-<label>Confirm Password</label>
+<label>Comfirmez le mot de passe</label>
 <input type="password" class="form-control">
 </div>
 <div class="form-group">
-<label>Mobile number</label>
+<label>Telephone</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Subject</label>
+<label>Cours</label>
 <select class="form-control select">
-<option>Computer</option>
-<option>Science</option>
+<option>Programmation Web</option>
+<option>Java</option>
 <option>Maths</option>
-<option>Tamil</option>
-<option>English</option>
-<option>Social Science</option>
+<option>Tec</option>
+<option>Anglais</option>
+<option>C++</option>
 </select>
 </div>
 <div class="form-group">
-<label>ID</label>
-<input type="text" class="form-control">
-</div>
-<div class="form-group">
-<label>Section</label>
+<label>CIN</label>
 <input type="text" class="form-control">
 </div>
 </form>
@@ -310,7 +307,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 <form>
 <div class="form-group">
-<label>Premanent Address</label>
+<label>Adresse</label>
 <textarea class="form-control" rows="4"></textarea>
 </div>
 </form>
@@ -326,8 +323,8 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 <form>
 <div class="form-group text-center custom-mt-form-group">
-<button class="btn btn-primary mr-2" type="submit">Submit</button>
-<button class="btn btn-secondary" type="reset">Cancel</button>
+<button class="btn btn-primary mr-2" type="submit">Soumettre</button>
+<button class="btn btn-secondary" type="reset">Annuler</button>
 </div>
 </form>
 </div>
@@ -566,3 +563,9 @@
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>

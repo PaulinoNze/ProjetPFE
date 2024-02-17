@@ -27,6 +27,7 @@
             $row = mysqli_fetch_assoc($result);
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
+                $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
                 $_SESSION['userid'] = $row['userid'];
                 $_SESSION['nom'] = $row['nom'];
                 if($email === "admin@gmail.com" && $password === "admin"){

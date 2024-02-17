@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,23 +137,23 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>
@@ -167,7 +172,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeur</span> <span class="menu-arrow"></span></a>
@@ -218,7 +223,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
-<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><a href="adminDashboard.php">Etudiants</a></li>
 <li class="breadcrumb-item"> <span>Tous L'Etudiants</span></li>
 </ul>
@@ -229,10 +234,10 @@
 <div class="col-sm-4 col-12">
 </div>
 <div class="col-sm-8 col-12 text-right add-btn-col">
-<a href="add-student.html" class="btn btn-primary btn-rounded float-right"><i class="fas fa-plus"></i> Add Student</a>
+<a href="ajouterEdutiant.php" class="btn btn-primary btn-rounded float-right"><i class="fas fa-plus"></i> Ajouter Etudent</a>
 <div class="view-icons">
 <a href="tousEtudiants.php" class="grid-view btn btn-link active"><i class="fas fa-th"></i></a>
-<a href="students-list.html" class="list-view btn btn-link"><i class="fas fa-bars"></i></a>
+<a href="tousEtudiants.php" class="list-view btn btn-link"><i class="fas fa-bars"></i></a>
 </div>
 </div>
 </div>
@@ -240,19 +245,19 @@
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus">
 <input type="text" class="form-control floating">
-<label class="focus-label">Student ID</label>
+<label class="focus-label">CIN</label>
 </div>
 </div>
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus">
 <input type="text" class="form-control floating">
-<label class="focus-label">Student Name</label>
+<label class="focus-label">Nom</label>
 </div>
 </div>
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus select-focus">
 <select class="select form-control">
-<option>Select class</option>
+<option>Selectionner</option>
 <option>1</option>
 <option>2</option>
 <option>3</option>
@@ -264,11 +269,11 @@
 <option>9</option>
 <option>10</option>
 </select>
-<label class="focus-label">Class</label>
+<label class="focus-label">Salle</label>
 </div>
 </div>
 <div class="col-sm-6 col-md-3">
-<a href="#" class="btn btn-search rounded btn-block mb-3"> search </a>
+<a href="#" class="btn btn-search rounded btn-block mb-3"> Recherche</a>
 </div>
 </div>
 <div class="row staff-grid-row">
@@ -280,8 +285,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Ruth C. Gault</a></h4>
@@ -296,8 +301,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Michael V. Buttars</a></h4>
@@ -312,8 +317,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">John Smith</a></h4>
@@ -328,8 +333,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Mike Litorus</a></h4>
@@ -344,8 +349,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Wilmer Deluna</a></h4>
@@ -360,8 +365,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Jeffrey Warden</a></h4>
@@ -376,8 +381,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Bernardo Galaviz</a></h4>
@@ -392,8 +397,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Lesley Grauer</a></h4>
@@ -408,8 +413,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Jeffery Lalor</a></h4>
@@ -424,8 +429,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Loren Gatlin</a></h4>
@@ -440,8 +445,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Tarah Shropshire</a></h4>
@@ -456,8 +461,8 @@
 <div class="dropdown profile-action">
 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="edit-student.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
 </div>
 </div>
 <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Catherine Manseau</a></h4>
@@ -681,13 +686,13 @@
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content modal-md">
 <div class="modal-header">
-<h4 class="modal-title">Delete Employee</h4>
+<h4 class="modal-title">Supprimer Employee</h4>
 </div>
 <form>
 <div class="modal-body">
 <p>Are you sure want to delete this?</p>
 <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-<button type="submit" class="btn btn-danger">Delete</button>
+<button type="submit" class="btn btn-danger">Supprimer</button>
 </div>
 </div>
 </form>
@@ -708,3 +713,9 @@
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>

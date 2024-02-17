@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,23 +135,23 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
  <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>
@@ -165,7 +170,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
@@ -215,7 +220,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
-<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><a href="tousProfessur.php">Professeur</a></li>
 <li class="breadcrumb-item"><span> Profil Du Professeur</span></li>
 </ul>
@@ -244,7 +249,7 @@
 <div class="col-md-7">
 <ul class="personal-info">
 <li>
-<span class="title">Phone:</span>
+<span class="title">Telephone:</span>
 <span class="text"><a href="">973-584-58700</a></span>
 </li>
 <li>
@@ -252,16 +257,16 @@
 <span class="text"><a href=""><span class="__cf_email__" data-cfemail="422827242427303b2f352d2c2502273a232f322e276c212d2f">[email&#160;protected]</span></a></span>
 </li>
 <li>
-<span class="title">Birthday:</span>
+<span class="title">Date Naissance:</span>
 <span class="text">2nd August</span>
 </li>
 <li>
-<span class="title">Address:</span>
+<span class="title">Adresse:</span>
 <span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
 </li>
 <li>
-<span class="title">Gender:</span>
-<span class="text">Male</span>
+<span class="title">Genre:</span>
+<span class="text">h</span>
 </li>
 </ul>
 </div>
@@ -494,3 +499,9 @@
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>

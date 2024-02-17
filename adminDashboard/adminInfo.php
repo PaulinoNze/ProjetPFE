@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ESTD admin compte</title>
+<title>ESTD Admin compte</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -18,10 +18,6 @@
 
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
-
-<link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
-
-<link rel="stylesheet" href="../assets/css/select2.min.css">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <!--[if lt IE 9]>
@@ -47,7 +43,7 @@
 <i class="fa fa-search"></i>
 </a>
 <form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
+<input class="form-control" type="text" placeholder="Recherche">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
 </div>
@@ -138,11 +134,11 @@
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
-<span class="status online"></span></span>
+ <span class="status online"></span></span>
 <span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="adminInfo.php">Modifier le profil</a>
 <a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
 <a class="dropdown-item" href="adminSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
@@ -180,7 +176,7 @@
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
-<li><a href="ajouterProfessur.php"><span>AJouter Professeur</span></a></li>
+<li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
 <li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
@@ -199,14 +195,14 @@
 <li><a href="ajouterEdutiant.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
-<li class="active">
+<li>
 <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="forum.php"><span>Forum</span></a></li>
-<li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
+<li><a href="ajouterForum.php"><span>Ajouter Forum</span></a></li>
 <li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
 </ul>
 </li>
@@ -220,324 +216,63 @@
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Examen</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Mon Profil</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-<li class="breadcrumb-item"><a href="#">Examen</a></li>
-<li class="breadcrumb-item"><span> Examen</span></li>
+<li class="breadcrumb-item"><a href="tousProfessur.php">Pages</a></li>
+<li class="breadcrumb-item"><span> Mon Profil</span></li>
 </ul>
 </div>
 </div>
 </div>
+<div class="card-box m-b-0">
 <div class="row">
-<div class="col-sm-4 col-12">
-</div>
-<div class="col-sm-8 col-12 text-right add-btn-col">
-<a href="adjouterExam.php" class="btn btn-primary float-right btn-rounded"><i class="fas fa-plus"></i> Ajouter Examen</a>
-</div>
-</div>
-<div class="content-page">
-<div class="row filter-row">
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus">
-<input type="text" class="form-control floating">
-<label class="focus-label">Nom de Examen</label>
+<div class="col-md-12">
+<div class="profile-view">
+<div class="profile-img-wrap">
+<div class="profile-img">
+<a href=""><img class="avatar" src="../assets/img/user.jpg" alt=""></a>
 </div>
 </div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus">
-<input type="text" class="form-control floating">
-<label class="focus-label">Salle</label>
-</div>
-</div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus select-focus">
-<select class="form-control select">
-<option>Maths</option>
-<option>Anglais</option>
-<option>Java</option>
-<option>Programmation Web</option>
-<option>Tec</option>
-</select>
-<label class="focus-label">Cours</label>
-</div>
-</div>
-<div class="col-sm-6 col-md-3">
-<a href="#" class="btn btn-search rounded btn-block mb-3"> Recherche</a>
-</div>
-</div>
+<div class="profile-basic">
 <div class="row">
-<div class="col-md-12 mb-3">
-<div class="table-responsive">
-<table class="table custom-table datatable">
-<thead class="thead-light">
-<tr>
-<th>Nom De Examen </th>
-<th>Cours</th>
-<th>Salle</th>
-<th>Filiere</th>
-<th>Temps</th>
-<th>Jour</th>
-<th class="text-right">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
- <button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar">J</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2> <a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2> <a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="col-md-5">
+<div class="profile-info-left">
+<h3 class="user-name m-t-0">Jeffrey M. Wong</h3>
+<h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
+<small class="text-muted">Admin</small>
+<div class="staff-id">Employee ID : HOD-0001</div>
+</div>
+</div>
+<div class="col-md-7">
+<ul class="personal-info">
+<li>
+<span class="title">Telephone</span>
+<span class="text"><a href="">973-584-58700</a></span>
+</li>
+<li>
+<span class="title">Email:</span>
+<span class="text"><a href=""><span class="__cf_email__" data-cfemail="422827242427303b2f352d2c2502273a232f322e276c212d2f">[email&#160;protege]</span></a></span>
+</li>
+<li>
+<span class="title">Date de Naissance</span>
+<span class="text">2nd August</span>
+</li>
+<li>
+<span class="title">Adresse:</span>
+<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+</li>
+<li>
+<span class="title">Genre:</span>
+<span class="text">Male</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -549,7 +284,7 @@
 </div>
 <div class="drop-scroll msg-list-scroll">
 <ul class="list-box">
-<li>
+ <li>
 <a href="chat.html">
 <div class="list-item">
 <div class="list-left">
@@ -615,7 +350,7 @@
 <div class="list-left">
 <span class="avatar">C</span>
 </div>
-<div class="list-body">
+ <div class="list-body">
 <span class="message-author"> Catherine Manseau </span>
 <span class="message-time">12:28 AM</span>
 <div class="clearfix"></div>
@@ -712,7 +447,7 @@
 <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
 </div>
 </div>
- </a>
+</a>
 </li>
 <li>
 <a href="chat.html">
@@ -745,44 +480,21 @@
 </a>
 </li>
 </ul>
-</div>
+ </div>
 <div class="topnav-dropdown-footer">
 <a href="chat.html">See all messages</a>
 </div>
 </div>
 </div>
 </div>
+
 </div>
 
-<div id="delete_employee" class="modal" role="dialog">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content modal-md">
-<div class="modal-header">
-<h4 class="modal-title">Delete Employee</h4>
-</div>
-<form>
-<div class="modal-body">
-<p>Are you sure want to delete this?</p>
-<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-<button type="submit" class="btn btn-danger">Delete</button>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script data-cfasync="false" src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="../assets/js/jquery.slimscroll.js"></script>
-<script src="../assets/js/jquery.dataTables.min.js"></script>
-<script src="../assets/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="../assets/js/select2.min.js"></script>
-<script src="../assets/js/moment.min.js"></script>
 
 <script src="../assets/js/app.js"></script>
 </body>

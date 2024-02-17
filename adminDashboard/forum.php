@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +124,7 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
@@ -130,23 +135,23 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
  <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>
@@ -165,7 +170,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
@@ -215,8 +220,8 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
-<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Home</a></li>
-<li class="breadcrumb-item"><a href="adminDashboard.php">Forum</a></li>
+<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
+<li class="breadcrumb-item"><a href="#">Pages</a></li>
 <li class="breadcrumb-item"><span> Forum</span></li>
 </ul>
 </div>
@@ -224,7 +229,7 @@
 </div>
 <div class="row">
 <div class="col-lg-12 col-sm-12 col-12 text-right add-btn-col">
-<a class="btn btn-primary btn-rounded float-right" href="add-blog.html"><i class="fas fa-plus"></i> Add Forum</a>
+<a class="btn btn-primary btn-rounded float-right" href="ajouterForum.php"><i class="fas fa-plus"></i> Ajouter Forum</a>
 </div>
 </div>
 <div class="row">
@@ -234,9 +239,9 @@
 <a href="forumInfo.php"><img class="img-fluid" src="../assets/img/blog/blog-01.jpg" alt=""></a>
 </div>
 <div class="blog-content">
-<h3 class="blog-title"><a href="forumInfo.php">Do You Know the ABCs School?</a></h3>
+<h3 class="blog-title"><a href="forumInfo.php">À Quoi S'Attendre À L'Estd?</a></h3>
 <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor incididunt ut labore etmis dolore magna aliqua. Ut enim ad minim veniam, quis noftrud exercitation ullamco sit laboris.</p>
-<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> Read More</a>
+<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
 <div class="blog-info clearfix">
 <div class="post-left">
 <ul>
@@ -254,9 +259,9 @@
 <a href="forumInfo.php"><img class="img-fluid" src="../assets/img/blog/blog-02.jpg" alt=""></a>
 </div>
 <div class="blog-content">
-<h3 class="blog-title"><a href="forumInfo.php">Do You Know the ABCs School?</a></h3>
+<h3 class="blog-title"><a href="forumInfo.php">À Quoi S'Attendre À L'Estd?</a></h3>
 <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor incididunt ut labore etmis dolore magna aliqua. Ut enim ad minim veniam, quis noftrud exercitation ullamco sit laboris.</p>
-<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> Read More</a>
+<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
 <div class="blog-info clearfix">
 <div class="post-left">
 <ul>
@@ -274,9 +279,9 @@
 <a href="forumInfo.php"><img class="img-fluid" src="../assets/img/blog/blog-03.jpg" alt=""></a>
 </div>
 <div class="blog-content">
-<h3 class="blog-title"><a href="forumInfo.php">Do You Know the ABCs School?</a></h3>
+<h3 class="blog-title"><a href="forumInfo.php">À Quoi S'Attendre À L'Estd?</a></h3>
 <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor incididunt ut labore etmis dolore magna aliqua. Ut enim ad minim veniam, quis noftrud exercitation ullamco sit laboris.</p>
-<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> Read More</a>
+<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
 <div class="blog-info clearfix">
 <div class="post-left">
 <ul>
@@ -294,9 +299,9 @@
 <a href="forumInfo.php"><img class="img-fluid" src="../assets/img/blog/blog-04.jpg" alt=""></a>
 </div>
 <div class="blog-content">
-<h3 class="blog-title"><a href="forumInfo.php">Do You Know the ABCs School?</a></h3>
+<h3 class="blog-title"><a href="forumInfo.php">À Quoi S'Attendre À L'Estd?</a></h3>
 <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor incididunt ut labore etmis dolore magna aliqua. Ut enim ad minim veniam, quis noftrud exercitation ullamco sit laboris.</p>
-<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> Read More</a>
+<a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
 <div class="blog-info clearfix">
 <div class="post-left">
 <ul>
@@ -532,3 +537,9 @@
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>

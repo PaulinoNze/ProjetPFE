@@ -1,8 +1,13 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Preschool - Bootstrap Admin Template</title>
+<title>ESTD admin compte</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -44,7 +49,7 @@
 <i class="fa fa-search"></i>
 </a>
 <form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
+<input class="form-control" type="text" placeholder="Recherche">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
 </div>
@@ -125,7 +130,7 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
@@ -136,23 +141,23 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/index.php">Logout</a>
 </div>
 </div>
 </div>
@@ -171,7 +176,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li class="active">
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeur</span> <span class="menu-arrow"></span></a>
@@ -219,12 +224,12 @@
 <div class="page-header">
 <div class="row">
 <div class="col-md-6">
-<h3 class="page-title mb-0">Dashboard</h3>
+<h3 class="page-title mb-0">Tableau de Bord</h3>
 </div>
 <div class="col-md-6">
 <ul class="breadcrumb mb-0 p-0 float-right">
-<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Home</a></li>
-<li class="breadcrumb-item"><span>Dashboard</span></li>
+<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
+<li class="breadcrumb-item"><span>Tableau de Bord</span></li>
 </ul>
 </div>
 </div>
@@ -235,7 +240,7 @@
 <div class="dash-widget dash-widget5">
 <span class="float-left"><img src="../assets/img/dash/dash-1.png" alt="" width="80"></span>
 <div class="dash-widget-info text-right">
-<span>Students</span>
+<span>Etudiants</span>
 <h3>60,000</h3>
 </div>
 </div>
@@ -243,69 +248,10 @@
 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 <div class="dash-widget dash-widget5">
 <div class="dash-widget-info text-left d-inline-block">
-<span>Teachers</span>
+<span>Professeurs</span>
 <h3>12,000</h3>
 </div>
 <span class="float-right"><img src="../assets/img/dash/dash-2.png" width="80" alt=""></span>
-</div>
-</div>
-<!-------------------------------------calendar---------------------------------------->
-<div class="row">
-<div class="col-lg-6 col-md-12 col-12 d-flex">
-<div class="card flex-fill">
-<div class="card-header">
-<div class="row align-items-center">
-<div class="col-auto">
-<div class="page-title">
-Events
-</div>
-</div>
-<div class="col text-right">
-<div class=" mt-sm-0 mt-2">
-<button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Another action</a>
-<div role="separator" class="dropdown-divider"></div>
- <a class="dropdown-item" href="#">Something else here</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="card-body">
-<div id="calendar" class=" overflow-hidden"></div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-md-12 col-12 d-flex">
-<div class="card flex-fill">
-<div class="card-header">
-<div class="row align-items-center">
-<div class="col-auto">
-<div class="page-title">
-Total Member
-</div>
-</div>
-<div class="col text-right">
-<div class=" mt-sm-0 mt-2">
-<button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Another action</a>
-<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Something else here</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="card-body d-flex align-items-center justify-content-center overflow-hidden">
-<div id="chart3"> </div>
-</div>
-</div>
 </div>
 </div>
 <!--------------------------------------------tous les etudiants----------------------------------------------->
@@ -316,7 +262,7 @@ Total Member
 <div class="row align-items-center">
 <div class="col-sm-6">
  <div class="page-title">
-All Students
+Tous Les Etudiants
 </div>
 </div>
 <div class="col-sm-6 text-sm-right">
@@ -340,19 +286,19 @@ All Students
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
-<th>Name </th>
-<th>Student ID</th>
-<th>Class</th>
-<th>Section</th>
-<th>Mobile</th>
-<th>Date of Birth</th>
+<th>Nom</th>
+<th>CIN</th>
+<th>Salle</th>
+<th>Semester</th>
+<th>Telephone</th>
+<th>Date de Naissance</th>
 <th class="text-right">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-1.jpg" alt=""></a><a href="profile.html">Parker <span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-1.jpg" alt=""></a><a href="adminInfo.php">Parker <span></span></a></h2>
 </td>
 <td>ST-0d001</td>
 <td>1</td>
@@ -370,7 +316,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-2.jpg" alt=""></a><a href="profile.html">Smith <span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-2.jpg" alt=""></a><a href="adminInfo.php">Smith <span></span></a></h2>
 </td>
 <td>ST-0d002</td>
 <td>2</td>
@@ -388,7 +334,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-3.jpg" alt=""></a><a href="profile.html">Hensley<span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-3.jpg" alt=""></a><a href="adminInfo.php">Hensley<span></span></a></h2>
 </td>
 <td>ST-0d003</td>
 <td>1</td>
@@ -406,7 +352,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-4.jpg" alt=""></a><a href="profile.html">Friesen<span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-4.jpg" alt=""></a><a href="adminInfo.php">Friesen<span></span></a></h2>
 </td>
 <td>ST-0d004</td>
 <td>1</td>
@@ -424,7 +370,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-5.jpg" alt=""></a><a href="profile.html">Jackson<span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-5.jpg" alt=""></a><a href="adminInfo.php">Jackson<span></span></a></h2>
 </td>
 <td>ST-0d005</td>
 <td>1</td>
@@ -442,7 +388,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-6.jpg" alt=""></a><a href="profile.html">Mason<span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-6.jpg" alt=""></a><a href="adminInfo.php">Mason<span></span></a></h2>
 </td>
 <td>ST-0d006</td>
 <td>1</td>
@@ -460,7 +406,7 @@ All Students
 </tr>
 <tr>
 <td>
-<h2><a href="profile.html" class="avatar text-white"><img src="../assets/img/profile/img-7.jpg" alt=""></a><a href="profile.html">Garrett <span></span></a></h2>
+<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-7.jpg" alt=""></a><a href="adminInfo.php">Garrett <span></span></a></h2>
 </td>
 <td>ST-0d007</td>
 <td>1</td>
@@ -719,3 +665,9 @@ All Students
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>
