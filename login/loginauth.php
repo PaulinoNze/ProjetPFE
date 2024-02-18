@@ -1,52 +1,89 @@
 <?php
-    session_start();
-    include "../database.php";
+session_start();
+include "../database.php";
 
-    function validate($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $email = validate($_POST['email']);
+    $password = validate($_POST['password']);
+
+    if(empty($email) || empty($password)){
+        header("Location: login.php?error=Email and password are required");
+        exit();
     }
+    try{
+        $sqlAdmin = "SELECT * FROM admin WHERE email = ?";
+        $stmtAdmin = mysqli_prepare($conn, $sqlAdmin);
+        mysqli_stmt_bind_param($stmtAdmin, "s", $email);
+        mysqli_stmt_execute($stmtAdmin);
+        $resultAdmin = mysqli_stmt_get_result($stmtAdmin);
 
-    if(isset($_POST['email']) && isset($_POST['password'])){
-        $email = validate($_POST['email']);
-        $password = validate($_POST['password']);
+        $sqlEtud = "SELECT * FROM etudiant WHERE email = ?";
+        $stmtEtud = mysqli_prepare($conn, $sqlEtud);
+        mysqli_stmt_bind_param($stmtEtud, "s", $email);
+        mysqli_stmt_execute($stmtEtud);
+        $resultEtud = mysqli_stmt_get_result($stmtEtud);
 
-        if(empty($email) || empty($password)){
-            header("Location: login.php?error=Email and password are required");
-            exit();
-        }
-        $sql = "SELECT * FROM utilisateurs WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $sqlProf = "SELECT * FROM professeur WHERE email = ?";
+        $stmtProf = mysqli_prepare($conn, $sqlProf);
+        mysqli_stmt_bind_param($stmtProf, "s", $email);
+        mysqli_stmt_execute($stmtProf);
+        $resultProf = mysqli_stmt_get_result($stmtProf);
 
-        if(mysqli_num_rows($result) === 1){
-            $row = mysqli_fetch_assoc($result);
+        if(mysqli_num_rows($resultAdmin) > 0){
+            $row = mysqli_fetch_array($resultAdmin);
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
                 $_SESSION['userid'] = $row['userid'];
                 $_SESSION['nom'] = $row['nom'];
-                if($email === "admin@gmail.com" && $password === "admin"){
-                    header("Location: ../adminDashboard/adminDashboard.php");
-                    exit();
-                } else {
-                    header("Location: ../dashboard.php");
-                    exit();
-                }
-            }else{
+                header("Location: ../adminDashboard/adminDashboard.php");
+                exit();
+            }else {
                 header("Location: login.php?error=Incorrect Email or Password");
                 exit();
             }
-        }else{
-            header("Location: login.php?error=Incorrect Email or Password");
-            exit();
+        }elseif(mysqli_num_rows($resultEtud) > 0){
+            $row = mysqli_fetch_array($resultEtud);
+            if(password_verify($password, $row['password'])){
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
+                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['nom'] = $row['nom'];
+                header("Location: ../prof.php");
+                exit();
+            }else {
+                header("Location: login.php?error=Incorrect Email or Password");
+                exit();
+            }
+        }elseif((mysqli_num_rows($resultProf) > 0)){
+            $row = mysqli_fetch_array($resultProf);
+            if(password_verify($password, $row['password'])){
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
+                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['nom'] = $row['nom'];
+                header("Location: ../prof.php");
+                exit();
+            }else {
+                header("Location: login.php?error=Incorrect Email or Password");
+                exit();
+            }
+        }else {
+            throw new Exception("Email does not exist");
         }
-    }else{
-        header("Location: ../index.php");
+    }catch (Exception $e) {
+        header("Location: login.php?error=" . "L'utilisateur n'existe pas");
         exit();
     }
+}else {
+    header("Location: ../index.php");
+    exit();
+}
 ?>
