@@ -35,13 +35,7 @@
         if($userType === 'Etudiant'){
             $sqlEtud = "INSERT INTO etudiant(nom, prenom, email, password, telephone, filiere, gender, date_naissance, cin) VALUES ('$nom', '$prenom', '$email', '$hash', '$telephone', '$selectedOption', '$genre', '$dateNaissance', '$CIN')";
             if(mysqli_query($conn, $sqlEtud)) {
-                // Set session variables
-                $_SESSION['user_type'] = $userType;
-                $_SESSION['email'] = $email;
-                $_SESSION['nom'] = $nom;
-                $_SESSION['telephone'] = $telephone;
-                // Redirect to appropriate page
-                header("Location: ../prof.php");
+                header("Location: redirect.php");
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);
@@ -50,13 +44,7 @@
         } elseif($userType === 'Professeur'){
             $sqlProf = "INSERT INTO professeur(nom, prenom, email, password, telephone, cours, gender, date_naissance,cin) VALUES ('$nom', '$prenom', '$email', '$hash', '$telephone', '$designation', '$genre', '$dateNaissance', '$CIN')";
             if(mysqli_query($conn, $sqlProf)) {
-                // Set session variables
-                $_SESSION['user_type'] = $userType;
-                $_SESSION['email'] = $email;
-                $_SESSION['nom'] = $nom;
-                $_SESSION['telephone'] = $telephone;
-                // Redirect to appropriate page
-                header("Location: ../prof.php");
+                header("Location: redirect.php");
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);
@@ -65,13 +53,7 @@
         } elseif($userType === 'Administration'){
             $sqlAdmin = "INSERT INTO admin(nom, prenom, email, password, telephone, designation, gender, dateNaissance, cin) VALUES ('$nom', '$prenom', '$email', '$hash', '$telephone', '$designation', '$genre', '$dateNaissance', '$CIN')";
             if(mysqli_query($conn, $sqlAdmin)) {
-                // Set session variables
-                $_SESSION['user_type'] = $userType;
-                $_SESSION['email'] = $email;
-                $_SESSION['nom'] = $nom;
-                $_SESSION['telephone'] = $telephone;
-                // Redirect to appropriate page
-                header("Location: ../adminDashboard/adminDashboard.php");
+                header("Location: redirect.php");
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);
