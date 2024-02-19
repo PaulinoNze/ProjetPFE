@@ -19,18 +19,20 @@
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
 
+<link rel="stylesheet" href="../assets/css/fullcalendar.min.css">
+
 <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
 
-<link rel="stylesheet" href="../assets/css/select2.min.css">
+<link rel="stylesheet" href="../assets/plugins/morris/morris.css">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <!--[if lt IE 9]>
-		<script src="../assets/js/html5shiv.min.js"></script>
-		<script src="../assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
-
+<!------------------------------------------------------header----------------------------------------------->
 <div class="main-wrapper">
 
 <div class="header-outer">
@@ -135,7 +137,7 @@
 <li class="nav-item dropdown d-none d-sm-block">
 <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img src="../assets/img/sidebar/icon-23.png" alt=""> </a>
 </li>
-<li class="nav-item dropdown has-arrow">
+ <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
@@ -143,7 +145,7 @@
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profile</a>
 <a class="dropdown-item" href="adminSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
@@ -152,16 +154,15 @@
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminInfo.php">Mon profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profile</a>
 <a class="dropdown-item" href="adminSettings.php">Parametres</a>
-<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+<a class="dropdown-item" href="../PHP/index.php">Logout</a>
 </div>
 </div>
 </div>
 </div>
-
-
+<!------------------------------------sidebar--------------------------------------------------------->
 <div class="sidebar" id="sidebar">
 <div class="sidebar-inner slimscroll">
 <div id="sidebar-menu" class="sidebar-menu">
@@ -173,14 +174,14 @@
 </div>
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
-<li>
+<li class="active">
 <a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
+<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeur</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
-<li><a href="ajouterProfessur.php"><span>AJouter Professeur</span></a></li>
+<li><a href="tousProfessur.php"><span>Professeurs</span></a></li>
+<li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
 <li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
@@ -193,355 +194,135 @@
 </ul>
 </li>
 <li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-5.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
+<a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Approver Formation</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
-<li class="active">
+<li>
 <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="forum.php"><span>Forum</span></a></li>
-<li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
+<li><a href="ajouterForum.php"><span>Ajouter Forum</span></a></li>
 <li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
 </ul>
 </li>
+
 </div>
 </div>
 </div>
 
-
+<!--------------------------------------------------------page contents-------------------------------------------->
 <div class="page-wrapper">
 <div class="content container-fluid">
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Examen</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Modifier le profile</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-<li class="breadcrumb-item"><a href="#">Examen</a></li>
-<li class="breadcrumb-item"><span> Examen</span></li>
+<li class="breadcrumb-item"><a href="#">Pages</a></li>
+<li class="breadcrumb-item"><span>Modifier le profile</span></li>
 </ul>
 </div>
 </div>
 </div>
+<div class="page-content">
 <div class="row">
-<div class="col-sm-4 col-12">
+<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="card">
+<div class="card-header">
+<div class="card-title">informations de base</div>
 </div>
-<div class="col-sm-8 col-12 text-right add-btn-col">
-<a href="adjouterExam.php" class="btn btn-primary float-right btn-rounded"><i class="fas fa-plus"></i> Ajouter Examen</a>
+<div class="card-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+<form>
+<div class="form-group">
+<label>Prenom</label>
+<input type="text" class="form-control" value="<?php echo isset($_SESSION['prenom']) ? $_SESSION['prenom'] : ''; ?>">
 </div>
+<div class="form-group">
+<label>Email</label>
+<input type="text" class="form-control" value="<?php echo $_SESSION['email']; ?>">
 </div>
-<div class="content-page">
-<div class="row filter-row">
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus">
-<input type="text" class="form-control floating">
-<label class="focus-label">Nom de Examen</label>
+<div class="form-group">
+<label>Mot de Passe</label>
+<input type="password" class="form-control">
 </div>
+<div class="form-group">
+<label>Designation</label>
+<input type="text" class="form-control" value="Receptionniste">
 </div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus">
-<input type="text" class="form-control floating">
-<label class="focus-label">Salle</label>
-</div>
-</div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus select-focus">
+<div class="form-group">
+<label>Genre</label>
 <select class="form-control select">
-<option>Maths</option>
-<option>Anglais</option>
-<option>Java</option>
-<option>Programmation Web</option>
-<option>Tec</option>
+<option>Femme</option>
+<option>Homme</option>
 </select>
-<label class="focus-label">Cours</label>
 </div>
+<div class="form-group">
+<label>Date de Naissance</label>
+<input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
 </div>
-<div class="col-sm-6 col-md-3">
-<a href="#" class="btn btn-search rounded btn-block mb-3"> Recherche</a>
+</form>
 </div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+<form>
+<div class="form-group">
+<label>Nom</label>
+<input type="text" class="form-control" value="<?php echo $_SESSION['nom']; ?>">
 </div>
-<div class="row">
-<div class="col-md-12 mb-3">
-<div class="table-responsive">
-<table class="table custom-table datatable">
-<thead class="thead-light">
-<tr>
-<th>Nom De Examen </th>
-<th>Cours</th>
-<th>Salle</th>
-<th>Filiere</th>
-<th>Temps</th>
-<th>Jour</th>
-<th class="text-right">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
- <button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar">J</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2> <a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2> <a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="exam-detail.html" class="avatar text-white">C</a><a href="exam-detail.html">Class Test</a></h2>
-</td>
-<td>Maths</td>
-<td>1</td>
-<td>B</td>
-<td>10.00 am-11.00 am</td>
-<td>20/12/2018</td>
-<td class="text-right">
-<a href="edit-exam.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="form-group">
+<label>Comfirmez le mot de passe</label>
+<input type="password" class="form-control">
+</div>
+<div class="form-group">
+<label>Telephone</label>
+<input type="number" class="form-control" value="9735845870">
+</div>
+</form>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+<form>
+<div class="form-group">
+<label>Adresse</label>
+<textarea class="form-control" placeholder="Adresse"></textarea>
+</div>
+</form>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+<form>
+<div class="form-group">
+<label>Image</label>
+<input type="file" name="pic" accept="image/*" class="form-control">
+</div>
+</form>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+<form>
+<div class="form-group text-center custom-mt-form-group">
+<button class="btn btn-primary mr-2" type="submit">Soumettre</button>
+<button class="btn btn-secondary" type="reset">Annuler</button>
+</div>
+</form>
 </div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--------------------------------------------messages and notifications -------------------------------->
 <div class="notification-box">
 <div class="msg-sidebar notifications msg-noti">
 <div class="topnav-dropdown-header">
@@ -712,7 +493,7 @@
 <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
 </div>
 </div>
- </a>
+</a>
 </li>
 <li>
 <a href="chat.html">
@@ -754,35 +535,25 @@
 </div>
 </div>
 
-<div id="delete_employee" class="modal" role="dialog">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content modal-md">
-<div class="modal-header">
-<h4 class="modal-title">Delete Employee</h4>
 </div>
-<form>
-<div class="modal-body">
-<p>Are you sure want to delete this?</p>
-<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-<button type="submit" class="btn btn-danger">Delete</button>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
+
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="../assets/js/jquery.slimscroll.js"></script>
-<script src="../assets/js/jquery.dataTables.min.js"></script>
-<script src="../assets/js/dataTables.bootstrap4.min.js"></script>
-
+ 
 <script src="../assets/js/select2.min.js"></script>
 <script src="../assets/js/moment.min.js"></script>
+
+<script src="../assets/js/fullcalendar.min.js"></script>
+<script src="../assets/js/jquery.fullcalendar.js"></script>
+
+<script src="../assets/plugins/morris/morris.min.js"></script>
+<script src="../assets/plugins/raphael/raphael-min.js"></script>
+<script src="../assets/js/apexcharts.js"></script>
+<script src="../assets/js/chart-data.js"></script>
 
 <script src="../assets/js/app.js"></script>
 </body>

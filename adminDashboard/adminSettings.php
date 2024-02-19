@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>EST-D admin compte</title>
+<title>ESTD admin compte</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -19,18 +19,20 @@
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
 
-<link rel="stylesheet" href="../assets/plugins/datetimepicker/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="../assets/css/fullcalendar.min.css">
 
-<link rel="stylesheet" href="../assets/css/select2.min.css">
+<link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
+
+<link rel="stylesheet" href="../assets/plugins/morris/morris.css">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <!--[if lt IE 9]>
-		<script src="../assets/js/html5shiv.min.js"></script>
-		<script src="../assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
-
+<!------------------------------------------------------header----------------------------------------------->
 <div class="main-wrapper">
 
 <div class="header-outer">
@@ -47,7 +49,7 @@
 <i class="fa fa-search"></i>
 </a>
 <form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
+<input class="form-control" type="text" placeholder="Recherche">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
 </div>
@@ -77,7 +79,7 @@
 <div class="media-body">
 <p class="noti-details"><span class="noti-title">John Doe</span> is now following you </p>
 <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
- </div>
+</div>
 </div>
 </a>
 </li>
@@ -128,23 +130,23 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
 <li class="nav-item dropdown d-none d-sm-block">
 <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img src="../assets/img/sidebar/icon-23.png" alt=""> </a>
 </li>
-<li class="nav-item dropdown has-arrow">
- <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+ <li class="nav-item dropdown has-arrow">
+<a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
 <span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
-<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profile</a>
+<a class="dropdown-item" href="adminSettings.php">Settings</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
@@ -152,15 +154,15 @@
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
-<a class="dropdown-item" href="adminSettings.php">Parametres</a>
-<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profile</a>
+<a class="dropdown-item" href="adminSettings.php">Settings</a>
+<a class="dropdown-item" href="../PHP/index.php">Logout</a>
 </div>
 </div>
 </div>
 </div>
-
+<!----------------------------------------------sidebar---------------------------------------------------->
 
 <div class="sidebar" id="sidebar">
 <div class="sidebar-inner slimscroll">
@@ -172,43 +174,20 @@
 </a>
 </div>
 <ul class="sidebar-ul">
-<li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
+<a href="adminDashboard.php" class="border-top-0"><i class="fas fa-home back-icon"></i> Retour a Accueil</a>
 </li>
-<li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
-<ul class="list-unstyled" style="display: none;">
-<li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
-<li><a href="tousProfessur.php"><span>AJouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
-</ul>
-</li>
-<li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Etudiants</span> <span class="menu-arrow"></span></a>
-<ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
-<li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a class="active" href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
-</ul>
-</li>
-<li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-5.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
-<ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Approver Formation</span></a></li>
-<li><a href="ajouterEdutiant.php"><span>Ajouter Formation</span></a></li>
-</ul>
+<li class="menu-title">Parametres</li>
+<li class="active">
+<a href="adminSettings.php">Parametres de l'ecole</a>
 </li>
 <li>
-<a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
+<a href="permissionsAdmin.php">Permissions</a>
 </li>
-<li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
-<ul class="list-unstyled" style="display: none;">
-<li><a href="forum.php"><span>Forum</span></a></li>
-<li><a href="ajouterForum.php"><span>Ajouter Forum</span></a></li>
-<li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
-
+<li>
+<a href="changePassword.php">Changer le mot de passe</a>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -219,107 +198,97 @@
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Modifier Etudiant</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Parametres de l'ecole</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-<li class="breadcrumb-item"><a href="tousEtudiants.php">Etudiant</a></li>
-<li class="breadcrumb-item"><span> Modifier Etudiant</span></li>
+<li class="breadcrumb-item"><a href="adminSettings.php">Parametres</a></li>
+<li class="breadcrumb-item"><span> Parametres de l'ecole</span></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="page-content">
-<div class="row">
-<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+<!---------------------------------------------------------content------------------------------------------>
 <div class="card">
 <div class="card-body">
 <div class="row">
-<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
+<div class="col-md-12">
+<form>
+<div class="row">
+<div class="col-sm-6">
 <div class="form-group">
-<label>Prenom</label>
-<input type="text" class="form-control" value="Richard Miles">
+<label>Nom de L'Ecole <span class="text-danger">*</span></label>
+<input type="text" class="form-control" value="L'Ecole Superirure de Technologie - Dakhla">
 </div>
+</div>
+<div class="col-sm-6">
 <div class="form-group">
-<label>Email</label>
-<input type="text" class="form-control" value="you@example.com">
+<label>Contact</label>
+<input type="text" class="form-control" value="Director">
 </div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
 <div class="form-group">
-<label>Mot De Passe</label>
-<input type="password" class="form-control">
+<label>Adresse</label>
+<textarea class="form-control" placeholder="Adresse" rows="4"></textarea>
 </div>
+</div>
+
+<div class="row">
+<div class="col-sm-6">
 <div class="form-group">
-<label>Filiere</label>
-<input type="text" class="form-control" value="Maths">
+<label>Email </label>
+<input type="email" class="form-control" value="admin@estd.com">
 </div>
-<div class="form-group">
-<label>Genre</label>
-<select class="form-control select">
-<option>Hommme</option>
-<option>Femme</option>
-</select>
 </div>
-<div class="form-group">
-<label>Date de Naissance</label>
-<input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
-</div>
-<div class="form-group">
-<label>Salle</label>
-<input type="text" class="form-control" value="1">
-</div>
-</form>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
-<div class="form-group">
-<label>Nom</label>
-<input type="text" class="form-control" value="Miles">
-</div>
-<div class="form-group">
-<label>Comfirmez le mot de passe</label>
-<input type="password" class="form-control">
-</div>
+<div class="col-sm-6">
 <div class="form-group">
 <label>Telephone</label>
-<input type="number" value="9853467121" class="form-control">
+<input type="text" class="form-control" value="818-978-7102">
 </div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-6">
 <div class="form-group">
-<label>CIN</label>
-<input type="text" class="form-control" value="FD-00d1">
+<label>Telephone</label>
+<input type="text" class="form-control" value="818-635-5579">
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<label>Fax</label>
+<input type="text" class="form-control" value="818-978-7102">
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="form-group">
+<label>Website Url</label>
+<input type="text" class="form-control" value="https://www.example.com">
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-center m-t-20"><br>
+<button type="button" class="btn btn-primary btn-lg mb-3">Enregistrer &amp; Mettre a jour</button>
+</div>
 </div>
 </form>
 </div>
-
-<div class="form-group">
-<div class="form-group">
-<label>Image</label>
-<input type="file" name="pic" accept="image/*" class="form-control">
-</div>
-</div>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<form class="custom-mt-form">
-<div class="form-group text-center custom-mt-form-group">
-<button class="btn btn-primary mr-2" type="submit">Soumettre</button>
-<button class="btn btn-secondary" type="reset">Annuler</button>
-</div>
-</form>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
+<!-------------------------------------------------notifications and messages---------------------------------->
 <div class="notification-box">
 <div class="msg-sidebar notifications msg-noti">
 <div class="topnav-dropdown-header">
- <span>Messages</span>
+<span>Messages</span>
 </div>
 <div class="drop-scroll msg-list-scroll">
 <ul class="list-box">
@@ -386,7 +355,7 @@
 <li>
 <a href="chat.html">
 <div class="list-item">
- <div class="list-left">
+<div class="list-left">
 <span class="avatar">C</span>
 </div>
 <div class="list-body">
@@ -514,7 +483,7 @@
 <span class="message-time">12:28 AM</span>
 <div class="clearfix"></div>
 <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
- </div>
+</div>
 </div>
 </a>
 </li>
@@ -526,17 +495,27 @@
 </div>
 </div>
 </div>
+</div>
+
+</div>
+
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="../assets/js/jquery.slimscroll.js"></script>
-
+ 
 <script src="../assets/js/select2.min.js"></script>
 <script src="../assets/js/moment.min.js"></script>
 
-<script src="../assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../assets/js/fullcalendar.min.js"></script>
+<script src="../assets/js/jquery.fullcalendar.js"></script>
+
+<script src="../assets/plugins/morris/morris.min.js"></script>
+<script src="../assets/plugins/raphael/raphael-min.js"></script>
+<script src="../assets/js/apexcharts.js"></script>
+<script src="../assets/js/chart-data.js"></script>
 
 <script src="../assets/js/app.js"></script>
 </body>

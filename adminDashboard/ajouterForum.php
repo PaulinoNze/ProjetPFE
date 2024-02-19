@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+        
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +126,7 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
@@ -132,23 +137,23 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
 <span class="status online"></span></span>
-<span>Admin</span>
+<span><?php echo $_SESSION['nom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
 </ul>
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-<a class="dropdown-item" href="settings.html">Settings</a>
-<a class="dropdown-item" href="login.html">Logout</a>
+<a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+<a class="dropdown-item" href="adminSettings.php">Parametres</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>
@@ -167,7 +172,7 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Dashboard</span></a>
+<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span>Professeurs</span> <span class="menu-arrow"></span></a>
@@ -231,13 +236,13 @@
 <div class="col-md-12">
 <form>
 <div class="form-group">
-<label>Forum Name</label>
+<label>Nom du Forum</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Forum Images</label>
+<label>Image du Forum</label>
 <input type="file" name="pic" accept="image/*" class="form-control">
-<small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png. Maximum 10 images only.</small>
+<small class="form-text text-muted">Max. taille du fichier : 50 Mo. Images autorisées : jpg, gif, png. Maximum 10 images seulement.</small>
 </div>
 <div class="form-group">
 <div class="row">
@@ -282,7 +287,7 @@
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
-<label>Forum Category</label>
+<label>Catégorie du forum</label>
 <select class="form-control select">
 <option>Sports</option>
 <option>Library</option>
@@ -292,7 +297,7 @@
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="form-group">
-<label>Forum Sub Category</label>
+<label>Sous-Catégorie du forum</label>
 <select class="form-control select">
 <option>Maths </option>
 <option>Science</option>
@@ -306,30 +311,30 @@
 </div>
 </div>
 <div class="form-group">
-<label>Forum Description</label>
+<label>Description du forum</label>
 <input type="text" class="form-control">
 </div>
 <div class="form-group">
-<label>Tags <small>(separated with a comma)</small></label>
+<label>Mots Cle <small>(séparé par une virgule)</small></label>
 <input type="text" data-role="tagsinput" class="form-control">
 </div>
 <div class="row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<h4>Forum status</h4>
+<h4>Statut du forum</h4>
 <div class="form-check-inline">
 <label class="form-check-label" for="radio1">
-<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked="">Active
+<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked="">Actif
 </label>
 </div>
 <div class="form-check-inline">
 <label class="form-check-label" for="radio2">
-<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Inactive
+<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Inactif
 </label>
 </div>
 </div>
 </div>
 <div class="m-t-20 text-center">
-<button class="btn btn-primary btn-lg">Publish Forum</button>
+<button class="btn btn-primary btn-lg">Publier le forum</button>
 </div>
 </form>
 </div>
@@ -562,3 +567,9 @@
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
+?>
