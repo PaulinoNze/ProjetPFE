@@ -27,10 +27,47 @@
   </div>
   <br>
   <div class="row">
-    <div class="col">
+  <div class="col">
     <label for="nombre">Email:</label>
-      <input type="text" class="form-control" placeholder="Email" name="email" require>
-    </div>
+    <input type="text" class="form-control" placeholder="Email" name="email" id="emailInput" required>
+    <span id="emailError" style="color: red;"></span>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const emailInput = document.getElementById("emailInput");
+    const emailError = document.getElementById("emailError");
+    const submitButton = document.getElementById("submitButton");
+
+    emailInput.addEventListener("input", function() {
+        const email = emailInput.value.trim();
+        if (email === "") {
+            emailError.textContent = "";
+            return;
+        }
+
+        // AJAX request to check if email exists
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "check_email.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.exists) {
+                    emailError.textContent = "Email already registered";
+                    submitButton.disabled = true;
+                } else {
+                    emailError.textContent = "";
+                    submitButton.disabled = false;
+                }
+            }
+        };
+        xhr.send("email=" + encodeURIComponent(email));
+    });
+});
+</script>
+
+
+</script>
     <div class="col">
     <label for="nombre">Telephone:</label>
       <input type="text" class="form-control" placeholder="07 77 77 77 77" name="telephone" require>
@@ -146,7 +183,8 @@
   </div>
   
 </div><br>
-<button type="submit" class="btn btn-primary" name="submit">Enregistrement</button>
+<button type="submit" class="btn btn-primary" name="submit" id="submitButton">Enregistrement</button>
+
 <br>
 <?php if(isset($_GET['error'])){ ?>
       <p class = "error" style="color: red;"> <?php echo $_GET['error']; ?></p>
