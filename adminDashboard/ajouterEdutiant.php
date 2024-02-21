@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
 <!DOCTYPE html>
@@ -137,9 +137,14 @@
 </li>
 <li class="nav-item dropdown has-arrow">
  <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
 <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -181,7 +186,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>AJouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 
 </ul>
 </li>
@@ -190,7 +194,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a class="active" href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -239,74 +242,71 @@
 <div class="card-body">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
+<form class="custom-mt-form" action="../PHP/ajoutEtud.php" method="post" enctype="multipart/form-data">
 <div class="form-group">
 <label>Prenom</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" name="prenom">
 </div>
 <div class="form-group">
 <label>Email</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" name="email">
 </div>
 <div class="form-group">
 <label>Mot de Passe</label>
-<input type="password" class="form-control">
+<input type="password" class="form-control" name="password">
 </div>
 <div class="form-group">
 <label>Filiere</label>
-<input type="text" class="form-control">
+<select class="form-control" name="filiere" >
+        <option value="Genie Informatique">Genie Informatique</option>
+        <option value="Genie Electrique">Genie Electrique</option>
+        <option value="Technique de Management">Technique de Management</option>
+        <option value="Genie des Procedes Alimentaires">Genie des Procedes Alimentaires</option>
+</select>
 </div>
 <div class="form-group">
 <label>Genre</label>
-<select class="form-control select">
+<select class="form-control select" name="gender">
 <option>Homme</option>
 <option>Femme</option>
 </select>
 </div>
 <div class="form-group">
 <label>Date de Naissance</label>
-<input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
+<input type="date"  name="dateNaissance" class="form-control">
 </div>
-</form>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
 <div class="form-group">
 <label>Nom</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" name="nom">
 </div>
 <div class="form-group">
 <label>Comfirmez le mot de passe</label>
-<input type="password" class="form-control">
+<input type="password" class="form-control" >
 </div>
 <div class="form-group">
 <label>Telephone</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" name="telephone">
 </div>
 <div class="form-group">
 <label>CIN</label>
- <input type="text" class="form-control">
+ <input type="text" class="form-control" name="cin">
 </div>
 <div class="form-group">
 <label>Salle</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" name="salle">
 </div>
-</form>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<form class="custom-mt-form">
 <div class="form-group">
 <label>Etudent Image</label>
-<input type="file" name="pic" accept="image/*" class="form-control">
+<input type="file" name="image"  class="form-control">
 </div>
-</form>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<form class="custom-mt-form">
-</form>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<form class="custom-mt-form">
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 <div class="form-group text-center custom-mt-form-group">
 <button class="btn btn-primary mr-2" type="submit">Soumettre</button>
 <button class="btn btn-secondary" type="reset">Annuler</button>

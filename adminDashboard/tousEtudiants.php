@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+    include "../database.php";
+    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
 <!DOCTYPE html>
@@ -135,9 +136,14 @@
 </li>
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
 <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -187,7 +193,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a class="active" href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -205,7 +210,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="blog.html"><span>Forum</span></a></li>
 <li><a href="ajouterForum.php"><span>Ajouter Forum</span></a></li>
-<li><a href="modifierForum.php"><span>Modifier Forum</span></a></li>
 </ul>
 </li>
 
@@ -276,200 +280,97 @@
 <a href="#" class="btn btn-search rounded btn-block mb-3"> Recherche</a>
 </div>
 </div>
-<div class="row staff-grid-row">
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php"><img class="avatar" src="../assets/img/user.jpg" alt=""></a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Ruth C. Gault</a></h4>
-<div class="small text-muted">1 std A</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">M</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Michael V. Buttars</a></h4>
-<div class="small text-muted">3 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">J</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">John Smith</a></h4>
-<div class="small text-muted">1 std C</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">M</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Mike Litorus</a></h4>
-<div class="small text-muted">5 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">W</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Wilmer Deluna</a></h4>
-<div class="small text-muted">2 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">J</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Jeffrey Warden</a></h4>
-<div class="small text-muted">3 std A</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">B</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Bernardo Galaviz</a></h4>
-<div class="small text-muted">1 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">L</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Lesley Grauer</a></h4>
-<div class="small text-muted">3 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">J</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Jeffery Lalor</a></h4>
-<div class="small text-muted">3 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">L</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Loren Gatlin</a></h4>
-<div class="small text-muted">3 std B</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">T</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Tarah Shropshire</a></h4>
-<div class="small text-muted">2 std A</div>
-</div>
-</div>
-<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-<div class="profile-widget">
-<div class="profile-img">
-<a href="etudiantInfo.php" class="avatar">C</a>
-</div>
-<div class="dropdown profile-action">
-<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="modifierEdutiant.php"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a>
-</div>
-</div>
-<h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="etudiantInfo.php">Catherine Manseau</a></h4>
-<div class="small text-muted">1 std B</div>
-</div>
-</div>
-</div>
+<?php
+// Assuming you have already started the session and included the database connection
+
+// Fetch data from the database (example query)
+$sql = "SELECT * FROM etudiant";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    echo '<div class="row">'; // Start of row
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+            <div class="profile-widget">
+                <div class="profile-img">
+                    <a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>" class="avatar text-white">
+                        <?php if (!empty($row['image'])): ?>
+                            <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
+                        <?php else: ?>
+                            <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
+                        <?php endif; ?>
+                    </a>
+                </div>
+                <div class="dropdown profile-action">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item delete-etudiant" href="#" data-etudiant-id="<?php echo $row['etudId']; ?>">
+                            <i class="fas fa-trash-alt m-r-5"></i> Supprimer
+                        </a>
+                    </div>
+                </div>
+                <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
+                    <a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>">
+                        <?php echo $row['nom']; ?>
+                    </a>
+                </h4>
+                <div class="small text-muted"><?php echo $row['filiere']; ?></div>
+            </div>
+        </div>
+        <?php
+    }
+    echo '</div>'; // End of row
+} else {
+    echo "Aucun professeur trouvé";
+}
+?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.delete-etudiant').click(function(e){
+        e.preventDefault();
+        var etudiantId = $(this).data('etudiant-id');
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce etudiant ?")) {
+            $.ajax({
+                url: 'tousEtudiants.php',
+                type: 'POST',
+                data: { etudId: etudiantId }, // Update to match the attribute name in HTML
+                success: function(response){
+                    // Reload the page after successful deletion
+                    window.location.reload();
+                },
+                error: function(xhr, status, error){
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
+});
+</script>
+<?php
+include '../database.php';
+
+if(isset($_POST['etudId'])) {
+    $etudiantId = $_POST['etudId'];
+    
+    // SQL to delete a professor
+    $sql = "DELETE FROM etudiant WHERE etudId = $etudiantId";
+    
+    if(mysqli_query($conn, $sql)) {
+        // Deletion successful
+        echo "Professor deleted successfully";
+    } else {
+        // Error in deletion
+        echo "Error deleting professor: " . mysqli_error($conn);
+    }
+}
+?>
+
+
 <div class="notification-box">
 <div class="msg-sidebar notifications msg-noti">
 <div class="topnav-dropdown-header">

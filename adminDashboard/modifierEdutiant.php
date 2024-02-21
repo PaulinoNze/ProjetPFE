@@ -1,7 +1,43 @@
-<?php
-    session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+<<?php
+session_start();
+include "../database.php";
+if(isset($_SESSION['userid']) || isset($_SESSION['nom']) || isset($_SESSION['email'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(isset($_GET['id'])) {
+            $userId = $_GET['id'];
+            // Retrieve form data
+            $prenom = $_POST['prenom'];
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $filiere = $_POST['filiere'];
+        $gender = $_POST['gender'];
+        $dateNaissance = $_POST['dateNaissance'];
+        $salle = $_POST['salle'];
+        $nom = $_POST['nom'];
+        $telephone = $_POST['telephone'];
+        $cin = $_POST['cin'];
         
+
+        if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK){
+            $imgData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+            $sqlUpdate = "UPDATE etudiant SET prenom='$prenom', email='$email', password='$password', filiere='$filiere', gender='$gender', date_naissance='$dateNaissance', salle='$salle', nom='$nom', telephone='$telephone', cin='$cin', image='$imgData' WHERE etudId=$userId";
+        } else {
+            // Update query without image data
+            $sqlUpdate = "UPDATE etudiant SET prenom='$prenom', email='$email', password='$password', filiere='$filiere', gender='$gender', date_naissance='$dateNaissance', salle='$salle', nom='$nom', telephone='$telephone', cin='$cin' WHERE etudId=$userId";
+        }
+        
+        // Perform update query
+        if(mysqli_query($conn, $sqlUpdate)) {
+            // Redirect to another page to display edited information
+            header("Location: etudiantInfo.php?id=$userId");
+            exit();
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+        }
+    } else {
+        echo "ID de l'utilisateur non spécifié.";
+    }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,9 +173,14 @@
 </li>
 <li class="nav-item dropdown has-arrow">
  <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
 <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -181,7 +222,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="tousProfessur.php"><span>AJouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -189,7 +229,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a class="active" href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -237,75 +276,98 @@
 <div class="card-body">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
-<div class="form-group">
-<label>Prenom</label>
-<input type="text" class="form-control" value="Richard Miles">
-</div>
-<div class="form-group">
-<label>Email</label>
-<input type="text" class="form-control" value="you@example.com">
-</div>
-<div class="form-group">
-<label>Mot De Passe</label>
-<input type="password" class="form-control">
-</div>
-<div class="form-group">
-<label>Filiere</label>
-<input type="text" class="form-control" value="Maths">
-</div>
-<div class="form-group">
-<label>Genre</label>
-<select class="form-control select">
-<option>Hommme</option>
-<option>Femme</option>
-</select>
-</div>
-<div class="form-group">
-<label>Date de Naissance</label>
-<input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker">
-</div>
-<div class="form-group">
-<label>Salle</label>
-<input type="text" class="form-control" value="1">
-</div>
-</form>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<form class="custom-mt-form">
-<div class="form-group">
-<label>Nom</label>
-<input type="text" class="form-control" value="Miles">
-</div>
-<div class="form-group">
-<label>Comfirmez le mot de passe</label>
-<input type="password" class="form-control">
-</div>
-<div class="form-group">
-<label>Telephone</label>
-<input type="number" value="9853467121" class="form-control">
-</div>
-<div class="form-group">
-<label>CIN</label>
-<input type="text" class="form-control" value="FD-00d1">
-</div>
+<form class="custom-mt-form" action="" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <?php
+            if(isset($_GET['id'])) {
+                // Retrieve the user ID from the URL
+                $userId = $_GET['id'];
+            
+                // Fetch user information from the database using the user ID
+                $sql = "SELECT * FROM etudiant WHERE etudId = $userId";
+                $result = mysqli_query($conn, $sql);
+            
+                // Check if a user was found with the specified ID
+                if(mysqli_num_rows($result) > 0) {
+                    // User found, display user information or perform any necessary actions
+                    $user = mysqli_fetch_assoc($result);
+                } else {
+                    // User not found with the specified ID
+                    echo "Utilisateur non trouvé.";
+                }
+            } else {
+                    // User ID not set in the URL
+                    echo "ID de l'utilisateur non spécifié.";
+                }
+        ?>
+    <label>Prenom</label>
+    <input type="text" class="form-control" value="<?php echo $user['prenom']; ?> " name="prenom">
+    </div>
+    <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" value="<?php echo $user['email']; ?>" name="email">
+    </div>
+    <div class="form-group">
+    <label>Mot De Passe</label>
+    <input type="password" class="form-control" name="password">
+    </div>
+    <div class="form-group">
+    <label>Filiere</label>
+    <input type="text" class="form-control" value="<?php echo $user['filiere']; ?>" name="filiere">
+    </div>
+    <div class="form-group">
+        <label>Genre</label>
+        <select class="form-control select" name="gender">
+            <option value="Hommme" <?php echo ($user['gender'] === 'Hommme') ? 'selected' : ''; ?> name="gender">Homme</option>
+            <option value="Femme" <?php echo ($user['gender'] === 'Femme') ? 'selected' : ''; ?> name="gender" >Femme</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Date de Naissance</label>
+        <input class="form-control datetimepicker-input datetimepicker" type="text" data-toggle="datetimepicker" name="dateNaissance" value="<?php echo $user['date_naissance']; ?>">
+    </div>
+
+    <div class="form-group">
+    <label>Salle</label>
+    <input type="text" class="form-control" value="<?php echo $user['salle']; ?>" name="salle">
+    </div>
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+
+    <div class="form-group">
+    <label>Nom</label>
+    <input type="text" class="form-control" value="<?php echo $user['nom']; ?>" name="nom">
+    </div>
+    <div class="form-group">
+    <label>Comfirmez le mot de passe</label>
+    <input type="password" class="form-control">
+    </div>
+    <div class="form-group">
+    <label>Telephone</label>
+    <input type="number" value="<?php echo $user['telephone']; ?>" class="form-control" name="telephone">
+    </div>
+    <div class="form-group">
+    <label>CIN</label>
+    <input type="text" class="form-control" value="<?php echo $user['cin']; ?>" name="cin">
+    </div>
+    <div class="form-group">
+    <div class="form-group">
+    <label>Image</label>
+    <input type="file" name="image" class="form-control">
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="form-group text-center custom-mt-form-group">
+    <button class="btn btn-primary mr-2" type="submit" name="submit">Soumettre</button>
+    <button class="btn btn-secondary" type="reset"><a href="adminDashboard.php" style="text-decoration: none; color:white;">Annuler</a></button>
+    </div>
 </form>
 </div>
 
-<div class="form-group">
-<div class="form-group">
-<label>Image</label>
-<input type="file" name="pic" accept="image/*" class="form-control">
-</div>
-</div>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-<form class="custom-mt-form">
-<div class="form-group text-center custom-mt-form-group">
-<button class="btn btn-primary mr-2" type="submit">Soumettre</button>
-<button class="btn btn-secondary" type="reset">Annuler</button>
-</div>
-</form>
+
 </div>
 </div>
 </div>
