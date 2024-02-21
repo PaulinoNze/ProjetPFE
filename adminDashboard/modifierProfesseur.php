@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
 <!DOCTYPE html>
@@ -139,9 +139,14 @@
 </li>
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
 <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -183,7 +188,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
-<li><a class="active" href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -191,7 +195,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">

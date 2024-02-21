@@ -1,7 +1,26 @@
 <?php
     session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
-        
+    include "../database.php";
+    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
+        if(isset($_GET['id'])) {
+            $userId = $_GET['id'];
+            // Fetch user information from the database using the user ID
+            $sql = "SELECT * FROM etudiant WHERE etudId = $userId";
+            $result = mysqli_query($conn, $sql);
+            // Check if user exists
+            if(mysqli_num_rows($result) > 0) {
+                // User found, fetch user details
+                $user = mysqli_fetch_assoc($result);
+            } else {
+                // User not found
+                echo "Utilisateur non trouvé.";
+                exit();
+            }
+        } else {
+            // User ID not provided in URL
+            echo "ID de l'utilisateur non spécifié.";
+            exit();
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,9 +152,14 @@
 </li>
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
  <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -177,7 +201,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -185,7 +208,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -233,40 +255,44 @@
 <div class="profile-view">
 <div class="profile-img-wrap">
 <div class="profile-img">
-<a href=""><img class="avatar" src="../assets/img/user.jpg" alt=""></a>
+<a href=""><?php if(!empty($user['image'])): ?>
+                        <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($user['image']); ?>" alt="User Image">
+                    <?php else: ?>
+                        <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
+                    <?php endif; ?></a>
 </div>
 </div>
 <div class="profile-basic">
 <div class="row">
 <div class="col-md-5">
 <div class="profile-info-left">
-<h3 class="user-name m-t-0">Jeffrey M. Wong</h3>
+<h3 class="user-name m-t-0"><?php echo $user['prenom'] ." ". $user['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
 <small class="text-muted">Etudiant</small>
-<div class="staff-id">CIN : ETR202210</div>
+<div class="staff-id">CIN : <?php echo $user['cin']; ?></div>
 </div>
 </div>
 <div class="col-md-7">
 <ul class="personal-info">
 <li>
 <span class="title">Telephone:</span>
-<span class="text"><a href="">973-584-58700</a></span>
+<span class="text"><a href=""><?php echo $user['telephone']; ?></a></span>
 </li>
 <li>
 <span class="title">Email:</span>
-<span class="text"><a href=""><span class="__cf_email__" data-cfemail="422827242427303b2f352d2c2502273a232f322e276c212d2f">[email&#160;protege]</span></a></span>
+<span class="text"><a href=""><?php echo $user['email']; ?></a></span>
 </li>
 <li>
 <span class="title">Date Naissance:</span>
-<span class="text">2nd August</span>
+<span class="text"><?php echo $user['date_naissance']; ?></span>
 </li>
 <li>
-<span class="title">Adresse:</span>
-<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+<span class="title">Salle:</span>
+<span class="text"><?php echo $user['salle']; ?></span>
 </li>
 <li>
 <span class="title">Genre:</span>
-<span class="text">Homme</span>
+<span class="text"><?php echo $user['gender']; ?></span>
 </li>
 </ul>
 </div>
