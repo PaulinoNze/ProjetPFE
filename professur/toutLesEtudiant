@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des étudiants inscrits</title>
+</head>
+<body>
+    <h2>Liste des étudiants inscrits dans les formations</h2>
+    <table border="1">
+        <tr>
+            <th>Formation</th>
+            <th>Étudiant</th>
+            <th>Email</th>
+        </tr>
+        <?php
+        // Inclusion du fichier de connexion à la base de données
+        include '../connexion_bdd.php';
+
+        // Récupération des données depuis la base de données
+        $requete = "SELECT formations.titre AS formation, etudiants.nom AS etudiant, etudiants.email 
+                    FROM formations 
+                    INNER JOIN inscriptions ON formations.id = inscriptions.formation_id 
+                    INNER JOIN etudiants ON inscriptions.etudiant_id = etudiants.id";
+        $resultat = $connexion->query($requete);
+
+        // Affichage des données dans un tableau HTML
+        while ($row = $resultat->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['formation'] . "</td>";
+            echo "<td>" . $row['etudiant'] . "</td>";
+            echo "<td>" . $row['email'] . "</td>";
+            echo "</tr>";
+        }
+
+        // Libération des résultats et fermeture de la connexion à la base de données
+        $resultat->free();
+        $connexion->close();
+        ?>
+    </table>
+</body>
+</html>

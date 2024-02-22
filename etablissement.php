@@ -129,7 +129,7 @@
         
         <div class="row">
             <div class="col-md-12">
-                <h3>Images de l'établissement</h3>
+                
                 <div class="image-container">
                     <?php
                     $image_paths = [ "Img/e2.jpg", "Img/e3.jpg", "Img/e4.jpg", "Img/e5.jpg"];
@@ -173,7 +173,7 @@
         <h2>Mission de l'EST de Dakhla</h2>
         <p>L’EST de Dakhla est un établissement d’Enseignement Supérieur relevant de l’Université Ibn Zohr. Elle a pour mission la formation des cadres intermédiaires dans différents domaines technologiques pour le développement des entreprises marocaines. En effet, la mutation sociale et économique au Maroc passe principalement par l’émergence de la société de la connaissance. En vue de maintenir et d’entretenir les postulats sur lesquels sont fondées les réformes actuelles de l’enseignement supérieur, aujourd’hui, les acteurs et les parties prenantes supportent davantage la relation de cause à effet : ‘la connaissance favorise la croissance’. Les liens savoirs et compétitivité, savoirs et innovation, savoirs et bien-être des individus, notamment de la société, s’imposent comme une nécessité partagée par tous les intervenants du secteur.</p>
         <p>En dépit de son rôle classique comme espace propice de formation, l’EST de Dakhla vise à remplir de nouvelles missions dans les différentes dimensions de la vie des étudiants, en matière d’éducation sociale et du développement humain.</p>
-        <p>Dans cette perspective, et même s’il découle d’une vision évolutive à objectifs réalistes et réalisables, notre mission repose principalement sur l’opérationnalisation de la notion de l’innovation, à savoir innover pour proposer des :</p>
+        <p>Dans cette sperspective, et même s’il découle d’une vision évolutive à objectifs réalistes et réalisables, notre mission repose principalement sur l’opérationnalisation de la notion de l’innovation, à savoir innover pour proposer des :</p>
         <ol>
             <li>Favoriser l’offre de formation par un caractère professionnalisant dans la région Dakhla-Oued Eddahab.</li>
             <li>Doter la région du sud du Maroc des nouvelles disciplines territoriales en tenant par considération les aspects économiques et la richesse interculturelle.</li>

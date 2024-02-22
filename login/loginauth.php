@@ -72,7 +72,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 $_SESSION['cour_inscrits'] = isset($row['cour_inscrits']) ? $row['cour_inscrits'] : '';
                 $_SESSION['notes_obtenues'] = isset($row['notes_obtenues']) ? $row['notes_obtenues'] : '';
-                header("Location: ../prof.php");
+                header("Location: ../Etudiant/etudiantdashboard.php");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");
@@ -93,7 +93,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 $_SESSION['salle'] = isset($row['salle']) ? $row['salle'] : '';
-                header("Location: ../prof.php");
+                header("Location: ../professur/profDashboard.php");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");
