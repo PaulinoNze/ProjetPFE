@@ -12,6 +12,7 @@ function validate($data){
 if(isset($_POST['email']) && isset($_POST['password'])){
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
+    $statut = 0;
 
     if(empty($email) || empty($password)){
         header("Location: login.php?error=Email and password are required");
@@ -24,13 +25,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         mysqli_stmt_execute($stmtAdmin);
         $resultAdmin = mysqli_stmt_get_result($stmtAdmin);
 
-        $sqlEtud = "SELECT * FROM etudiant WHERE email = ?";
+        $sqlEtud = "SELECT * FROM etudiant WHERE statut = $statut and email = ?";
         $stmtEtud = mysqli_prepare($conn, $sqlEtud);
         mysqli_stmt_bind_param($stmtEtud, "s", $email);
         mysqli_stmt_execute($stmtEtud);
         $resultEtud = mysqli_stmt_get_result($stmtEtud);
 
-        $sqlProf = "SELECT * FROM professeur WHERE email = ?";
+        $sqlProf = "SELECT * FROM professeur WHERE statut = $statut and email = ?";
         $stmtProf = mysqli_prepare($conn, $sqlProf);
         mysqli_stmt_bind_param($stmtProf, "s", $email);
         mysqli_stmt_execute($stmtProf);
