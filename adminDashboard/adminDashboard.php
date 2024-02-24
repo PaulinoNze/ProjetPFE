@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "../database.php";
     if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
@@ -139,9 +140,14 @@
 </li>
  <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
 <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -183,7 +189,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -191,7 +196,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -241,7 +245,18 @@
 <span class="float-left"><img src="../assets/img/dash/dash-1.png" alt="" width="80"></span>
 <div class="dash-widget-info text-right">
 <span>Etudiants</span>
-<h3>60,000</h3>
+<?php
+$sqlEtud = "SELECT COUNT(*) AS student_count FROM etudiant";
+$resultEtud = mysqli_query($conn, $sqlEtud);
+$rowEtud = mysqli_fetch_assoc($resultEtud);
+if($rowEtud != 0){
+    $studentCount = $rowEtud['student_count'];;
+}else{
+    $studentCount = 0;
+}
+
+?>
+<h3><?php echo $studentCount; ?></h3>
 </div>
 </div>
 </div>
@@ -249,14 +264,25 @@
 <div class="dash-widget dash-widget5">
 <div class="dash-widget-info text-left d-inline-block">
 <span>Professeurs</span>
-<h3>12,000</h3>
+<?php
+    $sqlProf = "SELECT COUNT(*) AS professeur_count FROM professeur";
+    $resultProf = mysqli_query($conn, $sqlProf);
+    $rowProf = mysqli_fetch_assoc($resultProf);
+    if($rowProf != 0){
+        $professeurCount = $rowProf['professeur_count'];
+    }else{
+        $professeurCount = 0;
+    }
+    
+?>
+<h3><?php echo $professeurCount; ?></h3>
 </div>
 <span class="float-right"><img src="../assets/img/dash/dash-2.png" width="80" alt=""></span>
 </div>
 </div>
 <!--------------------------------------------tous les etudiants----------------------------------------------->
-<div class="row">
-<div class="col-lg-12">
+<div class="row" >
+<div class="col-lg-11">
 <div class="card">
 <div class="card-header">
 <div class="row align-items-center">
@@ -267,16 +293,17 @@ Tous Les Etudiants
 </div>
 <div class="col-sm-6 text-sm-right">
 <div class=" mt-sm-0 mt-2">
-<button class="btn btn-outline-primary mr-2"><img src="../assets/img/excel.png" alt=""><span class="ml-2">Excel</span></button>
-<button class="btn btn-outline-danger mr-2"><img src="../assets/img/pdf.png" alt="" height="18"><span class="ml-2">PDF</span></button>
-<button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Another action</a>
-<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Something else here</a>
-</div>
+<button class="btn btn-outline-danger mr-2" onclick="downloadPDF()">
+    <img src="../assets/img/pdf.png" alt="" height="18"><span class="ml-2">PDF</span>
+</button>
+<script>
+function downloadPDF() {
+    // Redirect to the PHP script that generates the PDF
+    window.location.href = 'generate_pdf.php';
+}
+</script>
+
+
 </div>
 </div>
 </div>
@@ -286,142 +313,100 @@ Tous Les Etudiants
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
+<th>Photo</th>
 <th>Nom</th>
+<th>Prenom</th>
 <th>CIN</th>
 <th>Salle</th>
-<th>Semester</th>
+<th>Filiere</th>
 <th>Telephone</th>
 <th>Date de Naissance</th>
 <th class="text-right">Action</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-1.jpg" alt=""></a><a href="adminInfo.php">Parker <span></span></a></h2>
-</td>
-<td>ST-0d001</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-2.jpg" alt=""></a><a href="adminInfo.php">Smith <span></span></a></h2>
-</td>
-<td>ST-0d002</td>
-<td>2</td>
-<td>B</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-3.jpg" alt=""></a><a href="adminInfo.php">Hensley<span></span></a></h2>
-</td>
-<td>ST-0d003</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-4.jpg" alt=""></a><a href="adminInfo.php">Friesen<span></span></a></h2>
-</td>
-<td>ST-0d004</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
- </button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-5.jpg" alt=""></a><a href="adminInfo.php">Jackson<span></span></a></h2>
-</td>
-<td>ST-0d005</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-6.jpg" alt=""></a><a href="adminInfo.php">Mason<span></span></a></h2>
-</td>
-<td>ST-0d006</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
-<tr>
-<td>
-<h2><a href="adminInfo.php" class="avatar text-white"><img src="../assets/img/profile/img-7.jpg" alt=""></a><a href="adminInfo.php">Garrett <span></span></a></h2>
-</td>
-<td>ST-0d007</td>
-<td>1</td>
-<td>A</td>
-<td>973-584-58700</td>
-<td>20/1/2021</td>
-<td class="text-right">
-<a href="edit-student.html" class="btn btn-primary btn-sm mb-1">
-<i class="far fa-edit"></i>
-</a>
-<button type="submit" data-toggle="modal" data-target="#delete_employee" class="btn btn-danger btn-sm mb-1">
-<i class="far fa-trash-alt"></i>
-</button>
-</td>
-</tr>
+<?php
+// Assuming you have already started the session and included the database connection
+
+// Fetch data from the etudiant table
+$sql = "SELECT * FROM etudiant";
+$result = mysqli_query($conn, $sql);
+
+// Check if there are any rows returned
+if (mysqli_num_rows($result) > 0) {
+    // Loop through each row and display the data in the table
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <tr>
+            <td>
+                <h2><a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                        <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
+                    <?php else: ?>
+                        <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
+                    <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
+            </td>
+            <td><?php echo $row['nom']; ?></td>
+            <td><?php echo $row['prenom']; ?></td>
+            <td><?php echo $row['cin']; ?></td>
+            <td><?php echo $row['salle']; ?></td>
+            <td><?php echo $row['filiere']; ?></td>
+            <td><?php echo $row['telephone']; ?></td>
+            <td><?php echo $row['date_naissance']; ?></td>
+            <td class="text-right">
+            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['etudId']; ?>">
+            <i class="far fa-trash-alt"></i>
+            </button>
+            <!-- Include jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('.delete-btn').click(function(){
+        var etudId = $(this).data('etudid');
+        // Send AJAX request to delete.php
+        $.ajax({
+            url: 'adminDashboard.php',
+            type: 'POST',
+            data: { etudId: etudId },
+            success: function(response){
+                // Redirect to the current page after successful deletion
+                window.location.reload();
+            },
+            error: function(xhr, status, error){
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+</script>
+<?php
+if(isset($_POST['etudId'])) {
+    $etudId = $_POST['etudId'];
+    
+    // SQL to delete a record
+    $sql = "DELETE FROM etudiant WHERE etudId = $etudId";
+    
+    if(mysqli_query($conn, $sql)) {
+        // Deletion successful
+        echo "Record deleted successfully";
+    } else {
+        // Error in deletion
+        echo "Error deleting record: " . mysqli_error($conn);
+    }
+}
+?>
+
+            </td>
+        </tr>
+        <?php
+    }
+} else {
+    // No rows returned from the database
+    echo "<tr><td colspan='7'>Aucun étudiant</td></tr>";
+}
+?>
+
+
 </tbody>
 </table>
 </div>

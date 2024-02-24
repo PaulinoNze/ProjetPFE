@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['userid']) && $_SESSION['nom']){
+    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
 <!DOCTYPE html>
@@ -133,9 +133,16 @@
 </li>
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../assets/img/user-06.jpg" width="30" alt="Admin">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
+</span>
+
  <span class="status online"></span></span>
-<span><?php echo $_SESSION['nom']; ?></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="adminInfo.php">Modifier le profil</a>
@@ -177,7 +184,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -185,7 +191,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
 <li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
-<li><a href="modifierEdutiant.php"><span>Modifier Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -233,7 +238,7 @@
 <div class="profile-view">
 <div class="profile-img-wrap">
 <div class="profile-img">
-<a href=""><img class="avatar" src="../assets/img/user.jpg" alt=""></a>
+<a href=""><img class="avatar" src="<?php echo !empty($_SESSION['image']) ? $_SESSION['image'] : '../assets/img/user.jpg'; ?>" alt=""></a>
 </div>
 </div>
 <div class="profile-basic">
@@ -242,15 +247,16 @@
 <div class="profile-info-left">
 <h3 class="user-name m-t-0"><?php echo $_SESSION['prenom']." ". $_SESSION['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
-<small class="text-muted">Admin</small>
-<div class="staff-id">Employee ID : HOD-0001</div>
+<small class="text-muted"><?php echo $_SESSION['designation'];?></small>
+
+<div class="staff-id">CIN: <?php echo $_SESSION['cin'];?></div>
 </div>
 </div>
 <div class="col-md-7">
 <ul class="personal-info">
 <li>
 <span class="title">Telephone</span>
-<span class="text"><a href="">973-584-58700</a></span>
+<span class="text"><a href=""><?php echo $_SESSION['telephone'];?></a></span>
 </li>
 <li>
 <span class="title">Email:</span>
@@ -258,15 +264,16 @@
 </li>
 <li>
 <span class="title">Date de Naissance</span>
-<span class="text">2nd August</span>
+<span class="text"><?php echo $_SESSION['dateNaissance'];?></span>
 </li>
 <li>
 <span class="title">Adresse:</span>
-<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+<span class="text"><?php echo $_SESSION['adresse'];?></span>
 </li>
+<br>
 <li>
 <span class="title">Genre:</span>
-<span class="text">Male</span>
+<span class="text"><?php echo $_SESSION['gender'];?></span>
 </li>
 </ul>
 </div>

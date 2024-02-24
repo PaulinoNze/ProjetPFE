@@ -41,13 +41,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['adminId'] = $row['adminId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
-                $_SESSION['designation'] = isset($row['designation']) ? $row['designation'] : '';
                 $_SESSION['gender'] = isset($row['gender']) ? $row['gender'] : '';
                 $_SESSION['dateNaissance'] = isset($row['dateNaissance']) ? $row['dateNaissance'] : '';
-                $_SESSION['cin'] = isset($row['cin']) ? $row['cin'] : '';
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 header("Location: ../adminDashboard/adminDashboard.php");
