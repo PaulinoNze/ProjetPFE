@@ -12,6 +12,7 @@ function validate($data){
 if(isset($_POST['email']) && isset($_POST['password'])){
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
+    $statut = 0;
 
     if(empty($email) || empty($password)){
         header("Location: login.php?error=Email and password are required");
@@ -24,13 +25,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         mysqli_stmt_execute($stmtAdmin);
         $resultAdmin = mysqli_stmt_get_result($stmtAdmin);
 
-        $sqlEtud = "SELECT * FROM etudiant WHERE email = ?";
+        $sqlEtud = "SELECT * FROM etudiant WHERE statut = $statut and email = ?";
         $stmtEtud = mysqli_prepare($conn, $sqlEtud);
         mysqli_stmt_bind_param($stmtEtud, "s", $email);
         mysqli_stmt_execute($stmtEtud);
         $resultEtud = mysqli_stmt_get_result($stmtEtud);
 
-        $sqlProf = "SELECT * FROM professeur WHERE email = ?";
+        $sqlProf = "SELECT * FROM professeur WHERE statut = $statut and email = ?";
         $stmtProf = mysqli_prepare($conn, $sqlProf);
         mysqli_stmt_bind_param($stmtProf, "s", $email);
         mysqli_stmt_execute($stmtProf);
@@ -40,13 +41,12 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             $row = mysqli_fetch_array($resultAdmin);
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
+                $_SESSION['adminId'] = $row['adminId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
-                $_SESSION['designation'] = isset($row['designation']) ? $row['designation'] : '';
                 $_SESSION['gender'] = isset($row['gender']) ? $row['gender'] : '';
                 $_SESSION['dateNaissance'] = isset($row['dateNaissance']) ? $row['dateNaissance'] : '';
-                $_SESSION['cin'] = isset($row['cin']) ? $row['cin'] : '';
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 header("Location: ../adminDashboard/adminDashboard.php");
@@ -71,7 +71,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 $_SESSION['cour_inscrits'] = isset($row['cour_inscrits']) ? $row['cour_inscrits'] : '';
                 $_SESSION['notes_obtenues'] = isset($row['notes_obtenues']) ? $row['notes_obtenues'] : '';
-                header("Location: ../prof.php");
+                header("Location: ../etudiantDashboard/etudiantDashboard.php");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");
@@ -84,15 +84,12 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
                 $_SESSION['userid'] = $row['userid'];
                 $_SESSION['nom'] = $row['nom'];
-                $_SESSION['cours'] = isset($row['cours']) ? $row['cours'] : '';
-                $_SESSION['designation'] = isset($row['designation']) ? $row['designation'] : '';
                 $_SESSION['gender'] = isset($row['gender']) ? $row['gender'] : '';
                 $_SESSION['dateNaissance'] = isset($row['dateNaissance']) ? $row['dateNaissance'] : '';
-                $_SESSION['cin'] = isset($row['cin']) ? $row['cin'] : '';
+                $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
-                $_SESSION['salle'] = isset($row['salle']) ? $row['salle'] : '';
-                header("Location: ../prof.php");
+                header("Location: ../professeurDashboard/professeurDashboard.php");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");
