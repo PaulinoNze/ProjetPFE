@@ -196,8 +196,8 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Approver Formation</span></a></li>
-<li><a href="ajouterEdutiant.php"><span>Ajouter Formation</span></a></li>
+<li><a href="approveformation.php"><span>Approver Formation</span></a></li>
+<li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
 <li>

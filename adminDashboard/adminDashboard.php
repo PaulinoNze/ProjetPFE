@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "../database.php";
-    if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
+    if(isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']){
         
 ?>
 <!DOCTYPE html>
@@ -142,7 +142,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -201,8 +201,8 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Approver Formation</span></a></li>
-<li><a href="ajouterEdutiant.php"><span>Ajouter Formation</span></a></li>
+<li><a href="approveformation.php"><span>Approver Formation</span></a></li>
+<li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
 <li>
@@ -316,9 +316,7 @@ function downloadPDF() {
 <th>Photo</th>
 <th>Nom</th>
 <th>Prenom</th>
-<th>CIN</th>
-<th>Salle</th>
-<th>Filiere</th>
+<th>Email</th>
 <th>Telephone</th>
 <th>Date de Naissance</th>
 <th class="text-right">Action</th>
@@ -326,15 +324,9 @@ function downloadPDF() {
 </thead>
 <tbody>
 <?php
-// Assuming you have already started the session and included the database connection
-
-// Fetch data from the etudiant table
-$sql = "SELECT * FROM etudiant";
+$sql = "SELECT * FROM etudiant WHERE statut = '0'";
 $result = mysqli_query($conn, $sql);
-
-// Check if there are any rows returned
 if (mysqli_num_rows($result) > 0) {
-    // Loop through each row and display the data in the table
     while ($row = mysqli_fetch_assoc($result)) {
         ?>
         <tr>
@@ -347,54 +339,48 @@ if (mysqli_num_rows($result) > 0) {
             </td>
             <td><?php echo $row['nom']; ?></td>
             <td><?php echo $row['prenom']; ?></td>
-            <td><?php echo $row['cin']; ?></td>
-            <td><?php echo $row['salle']; ?></td>
-            <td><?php echo $row['filiere']; ?></td>
+            <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['telephone']; ?></td>
             <td><?php echo $row['date_naissance']; ?></td>
             <td class="text-right">
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['etudId']; ?>">
-            <i class="far fa-trash-alt"></i>
-            </button>
-            <!-- Include jQuery library -->
+    <button onclick="updateStatus(<?php echo $row['etudId']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
+    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequest(<?php echo $row['etudId']; ?>)">
+        <i class="far fa-trash-alt"></i>
+    </button>
+</td>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-$(document).ready(function(){
-    $('.delete-btn').click(function(){
-        var etudId = $(this).data('etudid');
-        // Send AJAX request to delete.php
+    function updateStatus(etudId) {
         $.ajax({
-            url: 'adminDashboard.php',
+            url: 'updateStatus.php', 
             type: 'POST',
             data: { etudId: etudId },
-            success: function(response){
-                // Redirect to the current page after successful deletion
+            success: function(response) {
                 window.location.reload();
             },
-            error: function(xhr, status, error){
+            error: function(xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
-    });
-});
-</script>
-<?php
-if(isset($_POST['etudId'])) {
-    $etudId = $_POST['etudId'];
-    
-    // SQL to delete a record
-    $sql = "DELETE FROM etudiant WHERE etudId = $etudId";
-    
-    if(mysqli_query($conn, $sql)) {
-        // Deletion successful
-        echo "Record deleted successfully";
-    } else {
-        // Error in deletion
-        echo "Error deleting record: " . mysqli_error($conn);
     }
-}
-?>
+</script>
+<script>
+function deleteRequest(etudId) {
+        $.ajax({
+            url: 'deleteRequest.php', 
+            type: 'POST',
+            data: { etudId: etudId },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+
 
             </td>
         </tr>
