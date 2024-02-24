@@ -14,7 +14,7 @@
     <div class="col-md-6">
       <h2 class="mb-4" style="text-align: center;">Créer un compte</h2>
       <img class="mb-4" src="logo1.jpg" alt="" width="100" style="border-radius: 20px; margin-left: 120px;">
-      <form action="abonnerauth.php" method="POST">
+      <form action="abonnerauth.php" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col">
     <label for="nombre">Nom:</label>
@@ -126,8 +126,8 @@
       <input type="date" class="form-control" placeholder="dateNaissance" name="dateNaissance" require>
     </div>
     <div class="col">
-    <label for="nombre">CIN:</label>
-      <input type="text" class="form-control" placeholder="CIN" name="CIN" require>
+    <label for="nombre">Adresse:</label>
+      <input type="text" class="form-control" placeholder="adresse" name="adresse" require>
     </div>
   </div>
   <br>
@@ -168,95 +168,14 @@
         </div>
         <br>
 
-        <!-- Dynamic input field -->
 <div class="row">
   <div class="col">
-    <label id="dynamicInputLabel" for="dynamicInput">Filière:</label>
-    <div id="dynamicInput">
-    <select class="form-control" name="cours" id="dynamicInput">
-        <option value="Genie Informatique">Genie Informatique</option>
-        <option value="Genie Electrique">Genie Electrique</option>
-        <option value="Technique de Management">Technique de Management</option>
-        <option value="Genie des Procedes Alimentaires">Genie des Procedes Alimentaires</option>
-      </select>
-    </div>
+  <label>Image</label>
+    <input type="file" name="image" class="form-control" require>
   </div>
   
 </div><br>
 <button type="submit" class="btn btn-primary" name="submit" id="submitButton">Enregistrement</button>
-
-<br>
-<?php if(isset($_GET['error'])){ ?>
-      <p class = "error" style="color: red;"> <?php echo $_GET['error']; ?></p>
-    <?php } ?>
-<br>
-<br>
-
-<script>
-  // Function to create dynamic input fields
-  function createDynamicInput(type) {
-    // Get the dynamic input container and label
-    var dynamicInput = document.getElementById('dynamicInput');
-    var dynamicInputLabel = document.getElementById('dynamicInputLabel');
-    
-    // Clear previous dynamic input fields
-    dynamicInput.innerHTML = '';
-
-    // Create new input based on type
-    if (type === 'Etudiant') {
-      // Update label
-      dynamicInputLabel.textContent = 'Filière:';
-      // Create select element
-      var select = document.createElement('select');
-      select.classList.add('form-control');
-      select.setAttribute('name', 'cours');
-      // Create options
-      var option1 = document.createElement('option');
-      option1.setAttribute('value', 'Genie Informatique');
-      option1.textContent = 'Genie Informatique';
-      var option2 = document.createElement('option');
-      option2.setAttribute('value', 'Genie Electrique');
-      option2.textContent = 'Genie Electrique';
-      var option3 = document.createElement('option');
-      option3.setAttribute('value', 'Technique de Management');
-      option3.textContent = 'Technique de Management';
-      var option4 = document.createElement('option');
-      option4.setAttribute('value', 'Genie des Procedes Alimentaires');
-      option4.textContent = 'Genie des Procedes Alimentaires';
-      // Append options to select
-      select.appendChild(option1);
-      select.appendChild(option2);
-      select.appendChild(option3);
-      select.appendChild(option4);
-      // Append select to dynamic input container
-      dynamicInput.appendChild(select);
-    } else if (type === 'Professeur' || type === 'Administration') {
-      // Update label
-      dynamicInputLabel.textContent = type === 'Professeur' ? 'Cours (séparé par une virgule):' : 'Designation:';
-      // Create input element
-      var input = document.createElement('input');
-      input.classList.add('form-control');
-      input.setAttribute('type', 'text');
-      input.setAttribute('placeholder', type === 'Professeur' ? 'Cours (séparé par une virgule)' : 'Ecrire Votre Designation');
-      input.setAttribute('name', 'designation');
-      // Append input to dynamic input container
-      dynamicInput.appendChild(input);
-    }
-  }
-
-  // Add event listeners to radio buttons
-  document.getElementById('exampleRadios1').addEventListener('change', function() {
-    createDynamicInput('Etudiant');
-  });
-
-  document.getElementById('exampleRadios2').addEventListener('change', function() {
-    createDynamicInput('Professeur');
-  });
-
-  document.getElementById('exampleRadios3').addEventListener('change', function() {
-    createDynamicInput('Administration');
-  });
-</script>
 
 
       </form>
