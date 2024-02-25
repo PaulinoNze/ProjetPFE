@@ -4,20 +4,15 @@ include "../database.php";
 if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
     if (isset($_GET['id'])) {
         $userId = $_GET['id'];
-        // Fetch user information from the database using the user ID
-        $sql = "SELECT * FROM cours WHERE coursId = $userId";
+        $sql = "SELECT * FROM formation WHERE formationID = $userId";
         $result = mysqli_query($conn, $sql);
-        // Check if user exists
         if (mysqli_num_rows($result) > 0) {
-            // User found, fetch user details
             $user = mysqli_fetch_assoc($result);
         } else {
-            // User not found
             echo "Utilisateur non trouvé.";
             exit();
         }
     } else {
-        // User ID not provided in URL
         echo "ID de l'utilisateur non spécifié.";
         exit();
     }
@@ -72,7 +67,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="../adminDashboard/cours.php">Retour pour approuver le cour</a>
+                                <a class="nav-link " aria-current="page" href="../adminDashboard/approveformation.php">Retour pour approuver la formation</a>
                             </li>
                         </ul>
                     </div>
@@ -87,7 +82,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                         <div class="page-header" style="margin-right: 180px;">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h5 class="text-uppercase mb-0 mt-0 page-title">Description du cours</h5>
+                                    <h5 class="text-uppercase mb-0 mt-0 page-title">Description des Formations</h5>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +90,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                             <div class="col-md-10">
                                 <div class="blog-view">
                                     <article class="blog blog-single-post">
-                                        <h3 class="blog-title"><?php echo $user['nomCours'] ?></h3>
+                                        <h3 class="blog-title"><?php echo $user['titre'] ?></h3>
                                         <div class="blog-info clearfix">
                                             <div class="post-left">
                                                 <ul>

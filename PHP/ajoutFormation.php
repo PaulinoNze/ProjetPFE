@@ -11,13 +11,12 @@
     $description = validate(mysqli_real_escape_string($conn, $_POST['description']));
     $statut = validate($_POST['statut']);
     $datePublish = validate($_POST['datePublish']);
-    $autheur = validate(mysqli_real_escape_string($conn, $_POST['autheur']));
         if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK){
             $imgData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-            $sql = "INSERT INTO formation(titre, description, datePublish, autheur, image, statut) VALUES ('$nomFormation', '$description', '$datePublish', '$autheur', '$imgData','$statut')";
+            $sql = "INSERT INTO formation(titre, description, datePublish, image, statut) VALUES ('$nomFormation', '$description', '$datePublish', '$imgData','$statut')";
         } else {
             // Update query without image data
-            $sql = "INSERT INTO formation(titre, description, datePublish, autheur, statut) VALUES ('$nomFormation', '$description', '$datePublish', '$autheur', '$statut')";
+            $sql = "INSERT INTO formation(titre, description, datePublish, autheur, statut) VALUES ('$nomFormation', '$description', '$datePublish','$statut')";
         }
         
         // Perform update query

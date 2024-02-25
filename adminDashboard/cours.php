@@ -1,32 +1,13 @@
 <?php
     session_start();
-    include "../database.php";
     if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
-        if(isset($_GET['id'])) {
-            $userId = $_GET['id'];
-            // Fetch user information from the database using the user ID
-            $sql = "SELECT * FROM professeur WHERE ProfId = $userId";
-            $result = mysqli_query($conn, $sql);
-            // Check if user exists
-            if(mysqli_num_rows($result) > 0) {
-                // User found, fetch user details
-                $user = mysqli_fetch_assoc($result);
-            } else {
-                // User not found
-                echo "Utilisateur non trouvé.";
-                exit();
-            }
-        } else {
-            // User ID not provided in URL
-            echo "ID de l'utilisateur non spécifié.";
-            exit();
-        }
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ESTD Admin compte</title>
+<title>EST-D admin compte</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -37,6 +18,10 @@
 
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
+
+<link rel="stylesheet" href="../assets/plugins/datetimepicker/css/tempusdominus-bootstrap-4.min.css">
+
+<link rel="stylesheet" href="../assets/css/select2.min.css">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <!--[if lt IE 9]>
@@ -62,7 +47,7 @@
 <i class="fa fa-search"></i>
 </a>
 <form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
+<input class="form-control" type="text" placeholder="Recherche">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>
 </div>
@@ -92,7 +77,7 @@
 <div class="media-body">
 <p class="noti-details"><span class="noti-title">John Doe</span> is now following you </p>
 <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-</div>
+ </div>
 </div>
 </a>
 </li>
@@ -143,7 +128,7 @@
 </ul>
 </div>
 <div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
+<a href="activities.html">Voir Tous les Notifications</a>
 </div>
 </div>
 </li>
@@ -151,14 +136,14 @@
 <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img src="../assets/img/sidebar/icon-23.png" alt=""> </a>
 </li>
 <li class="nav-item dropdown has-arrow">
-<a href="#" class=" nav-link user-link" data-toggle="dropdown">
+ <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
         <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
- <span class="status online"></span></span>
+<span class="status online"></span></span>
 <span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
@@ -197,30 +182,31 @@
 <a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
+<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span>Professeurs</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
-<li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
+<li><a href="ajouterProfessur.php"><span>AJouter Professeur</span></a></li>
+
 </ul>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Etudiants</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
-<li><a href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
+<li><a  href="ajouterEdutiant.php"><span>Ajouter Etudiant</span></a></li>
 </ul>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-5.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="approveformation.php"><span>Approver Formation</span></a></li>
+<li><a  href="approveformation.php"><span>Approver Formation</span></a></li>
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+<li><a class="active" href="cours.php"><span>Approver Les Cours</span></a></li>
 </ul>
 </li>
 <li>
@@ -244,74 +230,146 @@
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Profil Du Professeur</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Cours</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-<li class="breadcrumb-item"><a href="tousProfessur.php">Professeur</a></li>
-<li class="breadcrumb-item"><span> Profil Du Professeur</span></li>
+<li class="breadcrumb-item"><a href="cours.php">Cours</a></li>
+<li class="breadcrumb-item"><span> Approver Les Cours</span></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="card-box m-b-0">
-<div class="row">
-<div class="col-md-12">
-<div class="profile-view">
-<div class="profile-img-wrap">
-<div class="profile-img">
-<a href="">
-<?php if(!empty($user['image'])): ?>
-                        <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($user['image']); ?>" alt="User Image">
-                    <?php else: ?>
-                        <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
-                    <?php endif; ?>
-</a>
+<!-------------------------------------------------content------------------------------------------------>
+<div class="row" >
+<div class="col-lg-11">
+<div class="card">
+<div class="card-header">
+<div class="row align-items-center">
+<div class="col-sm-6">
+<div class="page-title">
+Approver Les Cours
 </div>
 </div>
-<div class="profile-basic">
-<div class="row">
-<div class="col-md-5">
-<div class="profile-info-left">
-<h3 class="user-name m-t-0"><?php echo $user['prenom'] ." ". $user['nom']; ?></h3>
-<h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
-<small class="text-muted">Professeur</small>
+<div class="col-sm-6 text-sm-right">
+<div class=" mt-sm-0 mt-2">
+<button class="btn btn-outline-danger mr-2" onclick="downloadPDF()">
+    <img src="../assets/img/pdf.png" alt="" height="18"><span class="ml-2">PDF</span>
+</button>
+<script>
+function downloadPDF() {
+    // Redirect to the PHP script that generates the PDF
+    window.location.href = 'generate_pdf.php';
+}
+</script>
+
 
 </div>
 </div>
-<div class="col-md-7">
-<ul class="personal-info">
-<li>
-<span class="title">Telephone:</span>
-<span class="text"><a href=""><?php echo $user['telephone']; ?></a></span>
-</li>
-<li>
-<span class="title">Email:</span>
-<span class="text"><a href=""><?php echo $user['email']; ?></a></span>
-</li>
-<li>
-<span class="title">Date Naissance:</span>
-<span class="text"><?php echo $user['date_naissance']; ?></span>
-</li>
-<li>
-<span class="title">Adresse:</span>
-<span class="text"><?php echo $user['adresse']; ?></span>
-</li>
-<br>
-<li>
-<span class="title">Genre:</span>
-<span class="text"><?php echo $user['gender']; ?></span>
-</li>
-</ul>
+</div>
+</div>
+<div class="card-body">
+<div class="table-responsive">
+<table class="table custom-table">
+<thead class="thead-light">
+<tr>
+<th>Photo</th>
+<th>Nom de Cours</th>
+<th>Date Publish</th>
+<th>Statut</th>
+<th class="text-right">Action</th>
+</tr>
+</thead>
+<tbody>
+<?php
+include "../database.php";
+$sql = "SELECT * FROM cours";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <tr>
+            <td>
+                <h2><a href="../cours/coursInfo.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                        <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
+                    <?php else: ?>
+                        <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
+                    <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
+            </td>
+            <br>
+            <td><?php echo $row['nomCours']; ?></td>
+            <td><?php echo $row['datePublish']; ?></td>
+            <td><?php echo $row['statut']; ?></td>
+            <td class="text-right">
+            <button onclick="updateStatus(<?php echo $row['coursId']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
+            <button onclick="inActif(<?php echo $row['coursId']; ?>)" type="button" class="btn btn-outline-warning">✘</button>
+    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequest(<?php echo $row['coursId']; ?>)">
+        <i class="far fa-trash-alt"></i>
+    </button>
+            </td>
+        </tr>
+        <?php
+    }
+} else {
+    // No rows returned from the database
+    echo "<tr><td colspan='7'>Aucun Formation</td></tr>";
+}
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function updateStatus(coursId){
+        $.ajax({
+            url: 'updateStatus.php', 
+            type: 'POST',
+            data: { coursId: coursId },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+<script>
+    function inActif(coursId){
+        $.ajax({
+            url: 'inActif.php', 
+            type: 'POST',
+            data: { coursId: coursId },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+<script>
+    function deleteRequest(coursId){
+        $.ajax({
+            url: 'deleteRequest.php', 
+            type: 'POST',
+            data: { coursId: coursId },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+<!------------------------------------------------messages------------------------------------------------>
 <div class="notification-box">
 <div class="msg-sidebar notifications msg-noti">
 <div class="topnav-dropdown-header">
@@ -319,7 +377,7 @@
 </div>
 <div class="drop-scroll msg-list-scroll">
 <ul class="list-box">
- <li>
+<li>
 <a href="chat.html">
 <div class="list-item">
 <div class="list-left">
@@ -382,10 +440,10 @@
 <li>
 <a href="chat.html">
 <div class="list-item">
-<div class="list-left">
+ <div class="list-left">
 <span class="avatar">C</span>
 </div>
- <div class="list-body">
+<div class="list-body">
 <span class="message-author"> Catherine Manseau </span>
 <span class="message-time">12:28 AM</span>
 <div class="clearfix"></div>
@@ -510,12 +568,12 @@
 <span class="message-time">12:28 AM</span>
 <div class="clearfix"></div>
 <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-</div>
+ </div>
 </div>
 </a>
 </li>
 </ul>
- </div>
+</div>
 <div class="topnav-dropdown-footer">
 <a href="chat.html">See all messages</a>
 </div>
@@ -525,11 +583,16 @@
 
 </div>
 
-<script data-cfasync="false" src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="../assets/js/jquery.slimscroll.js"></script>
+
+<script src="../assets/js/select2.min.js"></script>
+<script src="../assets/js/moment.min.js"></script>
+
+<script src="../assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <script src="../assets/js/app.js"></script>
 </body>
