@@ -141,7 +141,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>

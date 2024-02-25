@@ -138,7 +138,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -199,6 +199,12 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="approveformation.php"><span>Approver Formation</span></a></li>
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a  href="cours.php"><span>Approver Les Cours</span></a></li>
 </ul>
 </li>
 <li>
