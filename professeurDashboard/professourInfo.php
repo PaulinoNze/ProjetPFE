@@ -109,7 +109,7 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Etudiants</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
+<li><a href="tousEtudiants.php"><span>Etudiants inscrits à la formation</span></a></li>
 </ul>
 </li>
 

@@ -110,14 +110,16 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Etudiants</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
+<li><a href="tousEtudiants.php"><span>Etudiants inscrits à la formation</span></a></li>
 </ul>
 </li>
 
 <li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
+<a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a  href="cours.php"><span>Cours</span></a></li>
+</ul>
 </li>
-
 </ul>
 </li>
 
@@ -131,13 +133,13 @@
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Tous L'Etudiants</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Etudiants inscrits à la formation</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="professeurDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><a href="professeurDashboard.php">Etudiants</a></li>
-<li class="breadcrumb-item"> <span>Tous L'Etudiants</span></li>
+<li class="breadcrumb-item"> <span>Etudiants inscrits à la formation</span></li>
 </ul>
 </div>
 </div>
@@ -145,43 +147,12 @@
 <div class="row">
 <div class="col-sm-4 col-12">
 </div>
-<div class="col-sm-8 col-12 text-right add-btn-col">
-<a href="ajouterEdutiant.php" class="btn btn-primary btn-rounded float-right"><i class="fas fa-plus"></i> Ajouter Etudent</a>
-<div class="view-icons">
-<a href="tousEtudiants.php" class="grid-view btn btn-link active"><i class="fas fa-th"></i></a>
-<a href="tousEtudiants.php" class="list-view btn btn-link"><i class="fas fa-bars"></i></a>
-</div>
-</div>
 </div>
 <div class="row filter-row">
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus">
 <input type="text" class="form-control floating">
-<label class="focus-label">CIN</label>
-</div>
-</div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus">
-<input type="text" class="form-control floating">
 <label class="focus-label">Nom</label>
-</div>
-</div>
-<div class="col-sm-6 col-md-3">
-<div class="form-group form-focus select-focus">
-<select class="select form-control">
-<option>Selectionner</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-</select>
-<label class="focus-label">Salle</label>
 </div>
 </div>
 <div class="col-sm-6 col-md-3">
@@ -214,18 +185,12 @@ if (mysqli_num_rows($result) > 0) {
                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item delete-etudiant" href="#" data-etudiant-id="<?php echo $row['etudId']; ?>">
-                            <i class="fas fa-trash-alt m-r-5"></i> Supprimer
-                        </a>
-                    </div>
                 </div>
                 <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
                     <a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>">
                         <?php echo $row['nom']; ?>
                     </a>
                 </h4>
-                <div class="small text-muted"><?php echo $row['filiere']; ?></div>
             </div>
         </div>
         <?php
@@ -281,23 +246,7 @@ if(isset($_POST['etudId'])) {
 </div>
 </div>
 
-<div id="delete_employee" class="modal" role="dialog">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content modal-md">
-<div class="modal-header">
-<h4 class="modal-title">Supprimer Employee</h4>
-</div>
-<form>
-<div class="modal-body">
-<p>Are you sure want to delete this?</p>
-<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-<button type="submit" class="btn btn-danger">Supprimer</button>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
+
 </div>
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>

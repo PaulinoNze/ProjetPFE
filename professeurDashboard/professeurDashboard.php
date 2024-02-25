@@ -111,13 +111,16 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Etudiants</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a  href="tousEtudiants.php"><span>Tous L'Etudiants</span></a></li>
+<li><a  href="tousEtudiants.php"><span>Etudiants inscrits à la formation</span></a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a  href="cours.php"><span>Cours</span></a></li>
 </ul>
 </li>
 
-<li class="submenu">
-<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
-</li>
 
 
 
@@ -173,7 +176,7 @@ if($rowEtud != 0){
 <div class="row align-items-center">
 <div class="col-sm-6">
  <div class="page-title">
-Tous Les Etudiants
+ Etudiants inscrits à la formation
 </div>
 </div>
 <div class="col-sm-6 text-sm-right">

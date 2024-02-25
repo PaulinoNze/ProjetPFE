@@ -27,9 +27,6 @@ if (mysqli_num_rows($result) > 0) {
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(30, 10, 'Nom', 1);
     $pdf->Cell(30, 10, 'Prenom', 1);
-    $pdf->Cell(30, 10, 'CIN', 1);
-    $pdf->Cell(30, 10, 'Salle', 1);
-    $pdf->Cell(30, 10, 'Filiere', 1);
     $pdf->Cell(30, 10, 'Telephone', 1);
     $pdf->Cell(40, 10, 'Date de Naissance', 1);
     $pdf->Ln();
@@ -41,9 +38,6 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $pdf->Cell(30, 10, $row['nom'], 1);
         $pdf->Cell(30, 10, $row['prenom'], 1);
-        $pdf->Cell(30, 10, $row['cin'], 1);
-        $pdf->Cell(30, 10, $row['salle'], 1);
-        $pdf->Cell(30, 10, $row['filiere'], 1);
         $pdf->Cell(30, 10, $row['telephone'], 1);
         $pdf->Cell(40, 10, $row['date_naissance'], 1);
         $pdf->Ln();
