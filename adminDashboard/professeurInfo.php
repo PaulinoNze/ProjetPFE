@@ -154,7 +154,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -217,6 +217,12 @@
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+</ul>
+</li>
 <li>
 <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
 </li>
@@ -271,7 +277,7 @@
 <h3 class="user-name m-t-0"><?php echo $user['prenom'] ." ". $user['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
 <small class="text-muted">Professeur</small>
-<div class="staff-id">CIN : <?php echo $user['cin']; ?></div>
+
 </div>
 </div>
 <div class="col-md-7">

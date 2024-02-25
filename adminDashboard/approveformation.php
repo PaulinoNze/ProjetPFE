@@ -139,7 +139,7 @@
  <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -201,6 +201,12 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a class="active" href="approveformation.php"><span>Approver Formation</span></a></li>
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cour</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
 </ul>
 </li>
 <li>
@@ -271,7 +277,6 @@ function downloadPDF() {
 <th>Photo</th>
 <th>Nom</th>
 <th>Date Publish</th>
-<th>Autheur</th>
 <th>Statut</th>
 <th class="text-right">Action</th>
 </tr>
@@ -291,7 +296,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <td>
-                <h2><a href="viewcours.php?id=<?php echo $row['formationID']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                <h2><a href="viewFormation.php?id=<?php echo $row['formationID']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
@@ -300,15 +305,13 @@ if (mysqli_num_rows($result) > 0) {
             <br>
             <td><?php echo $row['titre']; ?></td>
             <td><?php echo $row['datePublish']; ?></td>
-            <td><?php echo $row['autheur']; ?></td>
             <td><?php echo $row['statut']; ?></td>
             <td class="text-right">
-
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-formationID="<?php echo $row['formationID']; ?>">
-            <i class="far fa-trash-alt"></i>
-            </button>
-
-
+            <button onclick="updateStatus(<?php echo $row['formationID']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
+            <button onclick="inActif(<?php echo $row['formationID']; ?>)" type="button" class="btn btn-outline-warning">✘</button>
+    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequest(<?php echo $row['formationID']; ?>)">
+        <i class="far fa-trash-alt"></i>
+    </button>
             </td>
         </tr>
         <?php
@@ -320,45 +323,50 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-    $('.delete-btn').click(function(e){
-        e.preventDefault();
-        var formationID = $(this).data('formationID');
-        if (confirm("Êtes-vous sûr de vouloir supprimer ce professeur ?")) {
-            $.ajax({
-                url: 'approveformation.php',
-                type: 'POST',
-                data: { formationID: formationID },
-                success: function(response){
-                    // Reload the page after successful deletion
-                    window.location.reload();
-                },
-                error: function(xhr, status, error){
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-    });
-});
-</script>
-
-<?php
-include "../database.php";
-if(isset($_POST['formationID'])) {
-    $formationID = $_POST['formationID'];
-    
-    // SQL to delete a record
-    $sql = "DELETE FROM `formation` WHERE formationID = '$formationID'";
-    
-    if(mysqli_query($conn, $sql)) {
-        // Deletion successful
-        echo "Record deleted successfully";
-    } else {
-        // Error in deletion
-        echo "Error deleting record: " . mysqli_error($conn);
+    function updateStatus(formationID){
+        $.ajax({
+            url: 'updateStatus.php', 
+            type: 'POST',
+            data: { formationID: formationID },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
     }
-}
-?>
+</script>
+<script>
+    function inActif(formationID){
+        $.ajax({
+            url: 'inActif.php', 
+            type: 'POST',
+            data: { formationID: formationID },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+<script>
+    function deleteRequest(formationID){
+        $.ajax({
+            url: 'deleteRequest.php', 
+            type: 'POST',
+            data: { formationID: formationID },
+            success: function(response) {
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
 </tbody>
 </table>
 </div>

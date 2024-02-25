@@ -12,7 +12,7 @@ function validate($data){
 if(isset($_POST['email']) && isset($_POST['password'])){
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
-    $statut = 0;
+    $statut = 1;
 
     if(empty($email) || empty($password)){
         header("Location: login.php?error=Email and password are required");

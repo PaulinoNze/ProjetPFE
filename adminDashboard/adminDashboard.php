@@ -205,6 +205,13 @@
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cour</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+
+</ul>
+</li>
 <li>
 <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
 </li>
@@ -288,7 +295,7 @@ if($rowEtud != 0){
 <div class="row align-items-center">
 <div class="col-sm-6">
  <div class="page-title">
-Tous Les Etudiants
+ Demandes des étudiants
 </div>
 </div>
 <div class="col-sm-6 text-sm-right">
@@ -344,6 +351,7 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $row['date_naissance']; ?></td>
             <td class="text-right">
     <button onclick="updateStatus(<?php echo $row['etudId']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
+
     <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequest(<?php echo $row['etudId']; ?>)">
         <i class="far fa-trash-alt"></i>
     </button>

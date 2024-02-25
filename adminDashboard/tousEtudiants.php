@@ -138,7 +138,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -185,7 +185,6 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
 <li><a href="ajouterProfessur.php"><span>Add Teacher</span></a></li>
-<li><a href="modifierProfesseur.php"><span>Modifier Professeur</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -200,6 +199,12 @@
 <ul class="list-unstyled" style="display: none;">
 <li><a href="approveformation.php"><span>Approver Formation</span></a></li>
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
 </ul>
 </li>
 <li>
@@ -307,8 +312,14 @@ if (mysqli_num_rows($result) > 0) {
                         <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item delete-etudiant" href="#" onclick="updateStatus(<?php echo $row['etudId']; ?>)">
+                            <i>✔ </i>  Activer
+                        </a>
                         <a class="dropdown-item delete-etudiant" href="#" data-etudiant-id="<?php echo $row['etudId']; ?>">
-                            <i class="fas fa-trash-alt m-r-5"></i> Supprimer
+                        <i class="fas fa-trash-alt m-r-5"></i> Désactiver
+                        </a>
+                        <a class="dropdown-item delete-etudiant" href="#" data-etudiant-id="<?php echo $row['etudId']; ?>">
+                        <i class="fas fa-trash-alt m-r-5"></i> Supprimer
                         </a>
                     </div>
                 </div>
@@ -317,7 +328,13 @@ if (mysqli_num_rows($result) > 0) {
                         <?php echo $row['nom']; ?>
                     </a>
                 </h4>
-                <div class="small text-muted"><?php echo $row['filiere']; ?></div>
+                <div class="small text-muted"><?php
+    if($row['statut'] != 0){
+        echo "statut: Actif ";
+ }else{
+    echo "statut: Inactif ";
+ }
+?></div>
             </div>
         </div>
         <?php
