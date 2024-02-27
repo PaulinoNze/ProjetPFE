@@ -143,144 +143,277 @@
 
 
 <div class="page-wrapper">
-      <!-- partial -->
-          
-  <?php include('msj.php'); 
+    <!-- partial -->
+    <?php
+include('msj.php'); 
 
+// Suponiendo que tienes el ID del profesor almacenado en $_SESSION['profId']
+$professor_id = $_SESSION['profId'];
 
-  $sqlCours   = ("SELECT * FROM cours ");
-  $queryCours = mysqli_query($conn, $sqlCours);
-  ?>
+// Consulta SQL para seleccionar solo los cursos del profesor actual
+$sqlCours = "SELECT * FROM cours WHERE profId = $professor_id";
+$queryCours = mysqli_query($conn, $sqlCours);
+?>
 
-<div class="col-12 grid-margin">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-nomCours text-center">LISTE DES COURS</h4>
-      <p>
-        <a href="#" data-toggle="modal" data-target="#editChildres" class="btn btn-danger" style="float: right;">
-        <i class="zmdi zmdi-crop-free" style='color: black; font-size: 20px;'></i>
-        Ajouter un cours</a>
-      </p>
-      <br>
-              <div class="row text-center mt-5">
-                <?php
-                while ($dataCours = mysqli_fetch_array( $queryCours)) { ?>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group" id="marcoborder">
-                          <h5 class="text-center" id="nomCours">
-                          Cours: <?php echo  $dataCours['nomCours']; ?>
-                        </h5>
-                          <hr>
-                            <p style='float:right;'><?php echo $dataCours['description']; ?></p>
-                        
-                          <img src="<?php echo $dataCours['image']; ?>" id="imgLogo">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-nomCours text-center">LISTE DES COURS</h4>
+                <p>
+                    <a href="#" data-toggle="modal" data-target="#editChildres" class="btn btn-danger" style="float: right;">
+                        <i class="zmdi zmdi-crop-free" style='color: black; font-size: 20px;'></i>
+                        Ajouter un cours</a>
+                </p>
+                <br>
+                <br><br>
 
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificar<?php echo $dataCours['coursId']; ?>">
-                            Modifier
-                            </button>
-                            <a href="deleteCours.php?id=<?php echo $dataCours['coursId']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cours ?');">Supprimer</a>
+        <!--- ventana modal para editar Registro --->
+        <div class="row text-center mt-7">
+            <?php
+               while ($dataCours = mysqli_fetch_array($queryCours)) {
+                   ?>
+                <div class="row text-center mt-7">
+                    <?php
+                    while ($dataCours = mysqli_fetch_array($queryCours)) { ?>
+                        <div class="col-10 col-md-4">
+                            <div class="form-group" id="marcoborder">
+                                <h5 class="text-center" id="nomCours">
+                                    Cours: <?php echo  $dataCours['nomCours']; ?>
+                                </h5>
+                                <hr>
+                                <p ><?php echo $dataCours['description']; ?></p>
+
+                                <img src="<?php echo $dataCours['image']; ?>" id="imgLogo">
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificar<?php echo $dataCours['coursId']; ?>">
+                                    Modifier
+                                </button>
+                                <a href="deleteCours.php?id=<?php echo $dataCours['coursId']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cours ?');">Supprimer</a>
+                            </div>
                         </div>
-                    </div>
+
+                        <!--- ventana modal para editar Registro --->
+                        <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #0190e0  !important;">
+                                        <h6 class="modal-nomCours" style="color: #fff; text-align: center;">
+                                            Modifier les informations du cours
+                                        </h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
+                                        <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+                                        <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>"> <!-- Añadir datePublish -->
+                                        <div class="modal-body" id="cont_modal">
+                                            <div class="form-group">
+                                                <label for="recipient-name">Nom du cours</label>
+                                                <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Description du cours</label>
+                                                <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="formation">Sélectionner la formation</label>
+                                                <select name="formation" class="form-control">
+                                                    <?php
+                                                    // Consulta SQL para obtener todas las formaciones disponibles
+                                                    $sqlFormations = "SELECT * FROM formation";
+                                                    $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                                                    // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                                                    while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                                        $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
+                                                        echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="image" style="float:left;">Photo</label>
+                                                <br>
+                                                <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
+                                                <br><br>
+                                                <label style="float:left;">Changer Photo</label>
+                                                <br>
+                                                <input type="file" name="image" accept="image/*">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="video" style="float:left;">Vidéo</label>
+                                                <br>
+                                                <video controls style="width:100%;">
+                                                    <source src="<?php echo $dataCours['video']; ?>" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                <br><br>
+                                                <label style="float:left;">Changer Vidéo</label>
+                                                <br>
+                                                <input type="file" name="video" accept="video/*">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pdf" style="float:left;">PDF</label>
+                                                <br>
+                                                <embed src="<?php echo $dataCours['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
+                                                <br><br>
+                                                <label style="float:left;">Changer PDF</label>
+                                                <br>
+                                                <input type="file" name="pdf" accept=".pdf">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+                                        </div>
+                                    </form>
 
 
-            <!--- ventana modal para editar Registro --->
-            <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header" style="background-color: #0190e0  !important;">
-                      <h6 class="modal-nomCours" style="color: #fff; text-align: center;">
-                      Modifier les informations du cours
-                      </h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
 
-
-                    <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
-                      <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
-                          <div class="modal-body" id="cont_modal">
-                              <div class="form-group">
-                                <label for="recipient-name">Nom du cours</label>
-                                <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Description du cours</label>
-                                <textarea class="form-control" name="description" rows="8">
-                                  <?php echo $dataCours['description']; ?>
-                                </textarea>
-                              </div>
-                              <div class="form-group">
-                                <label for="image" style="float:left;">Photo</label>
-                                <br>
-                                <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
-                                <br><br>
-
-                                <label style="float:left;">Changer Photo</label>
-                                <br>
-                                <input type="file" name="image" accept="image/*">
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-                          </div>
-                     </form>
-
-                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin de editar en ventana modal -->
+                    <?php } ?>
                 </div>
-              </div>
-              <!-- fin de editar en ventana modal -->
-            <?php } ?>
-          </div> 
 
-
-
-              <!--ventana Modal Nuevo Destino--->
-              <div class="modal fade" id="editChildres" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header" style="background-color: #0190e0  !important;">
-                      <h6 class="modal-nomCours" style="color: #fff; text-align: center;">
-                      Enregistrer un nouveau cours
-                      </h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-
-                    <form method="POST" action="recibNouvelleCours.php" enctype="multipart/form-data">
-                          <div class="modal-body" id="cont_modal">
-                              <div class="form-group">
-                                <label for="recipient-name">Nom du cours</label>
-                                <input type="text" name="nomCours" class="form-control" required="true">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Description du cours</label>
-                                <textarea class="form-control" name="description" rows="3"></textarea>
-                              </div>
-                              <div class="form-group">
-                                <label for="foto">Photo</label>
-                                <br>
-                                <input type="file" name="image" accept="image/*" required="true">
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                          </div>
-                     </form>
-
-                  </div>
-                </div>
-              </div>
-
-
+        <!--- ventana modal para editar Registro --->
+        <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0190e0 !important;">
+                <h6 class="modal-nomCours" style="color: #fff; text-align: center;">Modifier les informations du cours</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </div>
+            <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
+                <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+                <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
+                <div class="modal-body" id="cont_modal">
+                    <div class="form-group">
+                        <label for="nomCours">Nom du cours</label>
+                        <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description du cours</label>
+                        <textarea class="form-control" name="description" rows="3"><?php echo $dataCours['description']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Photo</label><br>
+                        <input type="file" name="image" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="video">Vidéo</label><br>
+                        <input type="file" name="video" accept="video/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="pdf">PDF</label><br>
+                        <input type="file" name="pdf" accept=".pdf">
+                    </div>
+                    <div class="form-group">
+                        <label for="datePublish">Date de publication</label>
+                        <input type="date" name="datePublish" class="form-control" value="<?php echo $dataCours['datePublish']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="formation">Sélectionner la formation</label>
+                        <select name="formation" class="form-control">
+                            <?php
+                            // Consulta SQL para obtener todas las formaciones disponibles
+                            $sqlFormations = "SELECT * FROM formation";
+                            $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                            // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                            while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+                </div>
+            </form>
         </div>
-      
+    </div>
+</div>
+
+ </div>
+        <!-- fin de editar en ventana modal -->
+    <?php } ?>
+</div>
+
+ 
+
+                <!--ventana Modal Nuevo Destino--->
+ <div class="modal fade" id="editChildres" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0190e0  !important;">
+                <h6 class="modal-nomCours" style="color: #fff; text-align: center;">Enregistrer un nouveau cours</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="POST" action="recibNouvelleCours.php" enctype="multipart/form-data">
+                <div class="modal-body" id="cont_modal">
+                    <div class="form-group">
+                        <label for="recipient-name">Nom du cours</label>
+                        <input type="text" name="nomCours" class="form-control" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Description du cours</label>
+                        <textarea class="form-control" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="formation">Sélectionner la formation</label>
+                        <input type="hidden" name="formationID" value="<?php echo isset($_POST['formation']) ? $_POST['formation'] : ''; ?>">
+                        <select name="formation" class="form-control">
+                            <?php
+                            // Consulta SQL para obtener todas las formaciones disponibles
+                            $sqlFormations = "SELECT * FROM formation";
+                            $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                            // Itera sobre cada formación y muestra como opción en el campo de selección
+                            while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="foto">Photo</label><br>
+                        <input type="file" name="image" accept="image/*" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="video">Vidéo</label><br>
+                        <input type="file" name="video" accept="video/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="pdf">PDF</label><br>
+                        <input type="file" name="pdf" accept=".pdf">
+                    </div>
+                    <div class="form-group">
+                        <label for="datePublish">Date de publication</label>
+                        <input type="date" name="datePublish" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
     
  
 

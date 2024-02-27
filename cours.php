@@ -42,10 +42,17 @@ $queryCours = mysqli_query($conn, $sqlCours);
             while ($dataCours = mysqli_fetch_array($queryCours)) { ?>
                 <div class="col-md-4">
                     <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
-                        <img src="professeurDashboard/<?php echo $dataCours['image']; ?>" class="card-img-top" alt="<?php echo $dataCours['nomCours']; ?>" style="max-height: 200px; object-fit: cover;">
+                    <img src="professeurDashboard/<?php echo $dataCours['image']; ?>" class="card-img-top" alt="<?php echo $dataCours['nomCours']; ?>" style="max-height: 300px;">
                         <div class="card-body">
                             <h2 class="card-title course-title"><?php echo $dataCours['nomCours']; ?></h2>
                             <p class="card-text"><?php echo $dataCours['description']; ?></p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <i class="fas fa-calendar-alt mr-2"></i> <!-- Icono de calendario -->
+                                    <?php echo $dataCours['datePublish']; ?> <!-- Fecha de publicación -->
+                                </div>
+                                <a href="#" class="btn btn-link text-white bg-primary" style="text-decoration: none;">Suivre</a> <!-- Enlace -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,13 +61,16 @@ $queryCours = mysqli_query($conn, $sqlCours);
     </div>
 </section>
 
+<!-- Bootstrap y Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 <style>
     .course-title {
         font-size: 24px; /* Ajusta el tamaño del texto según sea necesario */
         margin-bottom: 15px; /* Espacio inferior para separar el título de la descripción */
     }
 </style>
-
 
 <script>
     function zoomIn(element) {

@@ -82,7 +82,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['profId'] = $row['profId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['gender'] = isset($row['gender']) ? $row['gender'] : '';
                 $_SESSION['dateNaissance'] = isset($row['dateNaissance']) ? $row['dateNaissance'] : '';
