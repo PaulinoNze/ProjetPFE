@@ -158,12 +158,6 @@
                 Professeur
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Administration">
-              <label class="form-check-label" for="exampleRadios3">
-                Administration
-              </label>
-            </div>
           </div>
         </div>
         <br>
