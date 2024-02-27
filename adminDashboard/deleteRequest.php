@@ -29,4 +29,13 @@ if(isset($_POST['profId'])) {
         echo "Error deleting record: " . mysqli_error($conn);
     }
 }
+if(isset($_POST['coursId'])) {
+    $coursId = $_POST['coursId'];
+    $sql = "DELETE FROM `cours` WHERE coursId = '$coursId'";
+    if(mysqli_query($conn, $sql)) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . mysqli_error($conn);
+    }
+}
 ?>

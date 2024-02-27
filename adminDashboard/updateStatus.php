@@ -19,10 +19,19 @@ if(isset($_POST['formationID'])) {
         echo "Error updating status: " . mysqli_error($conn);
     }
 }
+if(isset($_POST['coursId'])) {
+    $profId = $_POST['coursId'];
+    $sql = "UPDATE cours SET statut = 'Actif' WHERE coursId = $profId";
+    if(mysqli_query($conn, $sql)) {
+        echo "Status updated successfully";
+    } else {
+        echo "Error updating status: " . mysqli_error($conn);
+    }
+}
 
 if(isset($_POST['profId'])) {
     $profId = $_POST['profId'];
-    $sql = "UPDATE cours SET statut = 'Actif' WHERE profId = $profId";
+    $sql = "UPDATE professeur SET statut = 'Actif' WHERE profId = $profId";
     if(mysqli_query($conn, $sql)) {
         echo "Status updated successfully";
     } else {

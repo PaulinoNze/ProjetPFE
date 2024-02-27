@@ -207,6 +207,12 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
                                 </ul>
                             </li>
+                            <li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cour</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+</ul>
+</li>
                             <li>
                                 <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
                             </li>
