@@ -187,8 +187,8 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="../cours/Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
-<li><a href="../cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
+<li><a href="Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
+<li><a href="cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
 
 </ul>
 </li>
