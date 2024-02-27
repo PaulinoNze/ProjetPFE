@@ -20,9 +20,9 @@ if(isset($_POST['formationID'])) {
     }
 }
 
-if(isset($_POST['coursId'])) {
-    $coursId = $_POST['coursIs'];
-    $sql = "DELETE FROM `cours` WHERE coursId = '$coursId'";
+if(isset($_POST['profId'])) {
+    $profId = $_POST['profId'];
+    $sql = "DELETE FROM `professeur` WHERE profId = '$profId'";
     if(mysqli_query($conn, $sql)) {
         echo "Record deleted successfully";
     } else {

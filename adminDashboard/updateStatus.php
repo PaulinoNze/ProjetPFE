@@ -20,9 +20,9 @@ if(isset($_POST['formationID'])) {
     }
 }
 
-if(isset($_POST['coursId'])) {
-    $coursId = $_POST['coursId'];
-    $sql = "UPDATE cours SET statut = 'Actif' WHERE coursId = $coursId";
+if(isset($_POST['profId'])) {
+    $profId = $_POST['profId'];
+    $sql = "UPDATE cours SET statut = 'Actif' WHERE profId = $profId";
     if(mysqli_query($conn, $sql)) {
         echo "Status updated successfully";
     } else {
