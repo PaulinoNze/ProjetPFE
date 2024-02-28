@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
 
 ?>
 <!DOCTYPE html>
@@ -82,31 +82,34 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
 </nav>
     </header>
     <main">
-
-        <div class="main-wrapper">
-            <div class="page-wrapper" style="margin-left: 150px;">
-                <div class="content container-fluid">
-                    <div class="page-header" style="margin-right: 150px;">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h5 class="text-uppercase mb-0 mt-0 page-title">Description des Formations</h5>
-                            </div>
-                        </div>
+    <div class="main-wrapper">
+    <div class="page-wrapper" style="margin-left: 1px;">
+        <div class="content container-fluid">
+            <div class="page-header" >
+                <div class="row">
+                    <div class="col-md-5">
+                        <h5 class="text-uppercase mb-0 mt-0 page-title">Description des Formations</h5>
                     </div>
-                    <?php
-                    if (isset($_GET['id'])) {
-                        $userId = $_GET['id'];
-                        $statut = "Actif";
-                        $sql = "SELECT nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
-                        $result = mysqli_query($conn, $sql);
-                        // Check if user exists
-                        if (mysqli_num_rows($result) > 0) {
-                            
-                            while($user = mysqli_fetch_assoc($result)){
-                                
-                                ?>
-                                <div class="row">
-                        <div class="col-md-10">
+                </div>
+            </div>
+
+            <?php
+            if (isset($_GET['id'])) {
+                $userId = $_GET['id'];
+                $statut = "Actif";
+                $sql = "SELECT nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
+                $result = mysqli_query($conn, $sql);
+                // Comprobar si existen cursos
+                if (mysqli_num_rows($result) > 0) {
+                    $counter = 0; // Inicializar contador
+                    while($user = mysqli_fetch_assoc($result)){
+                        if ($counter % 2 == 0) {
+                            // Abre una nueva fila para cada dos elementos
+                            echo '<div class="row">';
+                        }
+                        ?>
+
+                        <div class="col-md-6">
                             <div class="blog-view">
                                 <article class="blog blog-single-post">
                                     <h3 class="blog-title"><?php echo $user['nomCours'] ?></h3>
@@ -117,12 +120,14 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="blog-image" style="height: 500px;">
-                                        <a href="#"><?php if (!empty($user['image'])) : ?>
-                                                <img class="img-fluid" src="../professeurDashboard/<?php echo $user['image']; ?>" style="height: 500px;">
+                                    <div class="blog-image" style="height: 400px;">
+                                        <a href="#">
+                                            <?php if (!empty($user['image'])) : ?>
+                                                <img class="img-fluid" src="../professeurDashboard/<?php echo $user['image']; ?>" >
                                             <?php else : ?>
                                                 <img class="img-fluid" src="../Img/logo2.png" alt="Default Image">
-                                            <?php endif; ?></a>
+                                            <?php endif; ?>
+                                        </a>
                                     </div>
                                     <div id="curso">
                                         <div class="container">
@@ -130,35 +135,41 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 <h2>Introduction</h2>
                                                 <p><?php echo $user['description'] ?></p>
                                                 <br>
-                                                
                                                 <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1" href=".php?id=<?php echo $dataCours['formationID']; ?>">Suivre Le Cours</button>
                                             </div>
                                         </div>
+                                    </div>
                                 </article>
-
-
                             </div>
                         </div>
 
-                    </div>
-                    <?php
-                            }
-                            
-                        } else {
-                            // User not found
-                            echo "formation non trouvé.";
-                            exit();
+                        <?php
+                        $counter++; // Incrementar contador
+                        if ($counter % 2 == 0) {
+                            // Cierra la fila después de dos elementos
+                            echo '</div>';
                         }
-                    } else {
-                        // User ID not provided in URL
-                        echo "ID de l'formation non spécifié.";
-                        exit();
                     }
-                    ?>
-                    
-                </div>
-            </div>
+                    if ($counter % 2 != 0) {
+                        // Si hay un número impar de elementos, cerrar la fila
+                        echo '</div>';
+                    }
+                } else {
+                    // Formación no encontrada
+                    echo "Formation non trouvé.";
+                    exit();
+                }
+            } else {
+                // ID de formación no especificado en la URL
+                echo "ID de l'formation non spécifié.";
+                exit();
+            }
+            ?>
+            
         </div>
+    </div>
+</div>
+
 
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
