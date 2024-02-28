@@ -97,7 +97,7 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
             if (isset($_GET['id'])) {
                 $userId = $_GET['id'];
                 $statut = "Actif";
-                $sql = "SELECT nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
+                $sql = "SELECT coursId, nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
                 $result = mysqli_query($conn, $sql);
                 // Comprobar si existen cursos
                 if (mysqli_num_rows($result) > 0) {
@@ -135,10 +135,10 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 <h2>Introduction</h2>
                                                 <p><?php echo $user['description'] ?></p>
                                                 <br>
-                                                <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1" href=".php?id=<?php echo $dataCours['formationID']; ?>">Suivre Le Cours</button>
+                                                
+                                                <a href="add_course.php?coursId=<?php echo $user['coursId']; ?>&etudId=<?php echo $_SESSION['etudId']; ?>"><button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre Le Cours</button></a>
                                             </div>
                                         </div>
-                                    </div>
                                 </article>
                             </div>
                         </div>
