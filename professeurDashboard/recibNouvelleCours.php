@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    include "../database.php";
+    if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']){
+        
+?>
+
+<?php
 session_start();
 include "../database.php";
 
@@ -70,4 +77,10 @@ if(isset($_SESSION['profId']) && isset($_SESSION['nom']) && isset($_SESSION['ema
     header("Location: index.php");
     exit();
 }
+?>
+<?php
+    }else{
+        header("Location: index.php");
+        exit();
+    }
 ?>

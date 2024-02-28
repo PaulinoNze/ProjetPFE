@@ -67,7 +67,7 @@ if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 }
 ?>
 
-?>
+
 <?php
     }else{
         header("Location: index.php");

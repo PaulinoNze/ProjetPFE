@@ -45,7 +45,7 @@
                     while ($dataCours = mysqli_fetch_array($queryCours)) { ?>
                         <div class="col-md-4">
                             <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
-                                <img src="professeurDashboard/<?php echo 'data:image;base64,' . base64_encode($dataCours['image']); ?>" class="card-img-top" alt="<?php echo $dataCours['titre']; ?>" style="max-height: 300px;">
+                                <img src="<?php echo 'data:image;base64,' . base64_encode($dataCours['image']); ?>" class="card-img-top" alt="<?php echo $dataCours['titre']; ?>" style="max-height: 300px;">
                                 <div class="card-body">
                                     <h2 class="card-title course-title"><?php echo $dataCours['titre']; ?></h2>
                                     <p class="card-text"><?php echo $dataCours['description']; ?></p>

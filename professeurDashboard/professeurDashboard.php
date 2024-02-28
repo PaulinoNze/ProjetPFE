@@ -75,7 +75,6 @@
 <div class="dropdown-menu">
 <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
 <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="professeurSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
@@ -85,7 +84,6 @@
 <div class="dropdown-menu dropdown-menu-right">
 <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
 <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="professeurSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/index.php">Logout</a>
 </div>
 </div>

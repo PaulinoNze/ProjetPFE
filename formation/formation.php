@@ -50,10 +50,10 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="../index.php"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-link" href="../index.php"><i class="fas fa-home text-white"></i><strong>Home</strong> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../cours.php"><i class="fas fa-book-open"></i> Cours</a>
+                <a class="nav-link" href="../cours.php"><i class="fas fa-book-open text-white"></i> <strong>Cours</strong></a>
             </li>
         </ul>
     </div>
@@ -65,7 +65,6 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <li class="nav-item dropdown has-arrow">
                                         <a href="#" class=" nav-link user-link" data-toggle="dropdown">
                                             <span class="user-img">
-                                                admin
                                                 <?php if (!empty($_SESSION['image'])) : ?>
                             <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
                         <?php else : ?>
@@ -85,9 +84,9 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
     <main">
 
         <div class="main-wrapper">
-            <div class="page-wrapper" style="margin-left: 170px;">
+            <div class="page-wrapper" style="margin-left: 150px;">
                 <div class="content container-fluid">
-                    <div class="page-header" style="margin-right: 180px;">
+                    <div class="page-header" style="margin-right: 150px;">
                         <div class="row">
                             <div class="col-md-10">
                                 <h5 class="text-uppercase mb-0 mt-0 page-title">Description des Formations</h5>
@@ -97,8 +96,8 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <?php
                     if (isset($_GET['id'])) {
                         $userId = $_GET['id'];
-                        $statut = "Inactif";
-                        $sql = "SELECT nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = $statut AND formationID = $userId ";
+                        $statut = "Actif";
+                        $sql = "SELECT nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
                         $result = mysqli_query($conn, $sql);
                         // Check if user exists
                         if (mysqli_num_rows($result) > 0) {
