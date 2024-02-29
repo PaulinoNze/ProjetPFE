@@ -6,7 +6,7 @@ if (isset($_GET['coursId']) && isset($_GET['etudId'])) {
     $etudId = $_GET['etudId'];
     $sql = "INSERT INTO coursinscrit(coursId, etudId) VALUES ('$coursId', '$etudId')";
     if(mysqli_query($conn, $sql)) {
-        header("Location: suivreCours.php?coursId=" . $coursId . "&etudId=" . $etudId);
+        header("Location: cours_contenue1/contenuCours.php?coursId=" . $coursId . "&etudId=" . $etudId);
         exit();
     } else {
         echo "Error updating record: " . mysqli_error($conn);

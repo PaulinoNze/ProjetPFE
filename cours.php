@@ -58,7 +58,7 @@
                                         <!-- Enlace -->
                                         <!-- Agregar el atributo data-curso-id con el ID del curso -->
                                         <!-- Botón "Ajouter Cours" -->
-                                        <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre Le Cours
+                                        <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre La formation
                                         </button>
 
                                         <!-- Modal de Inicio de Sesión -->

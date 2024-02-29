@@ -1,20 +1,21 @@
-<?php
-session_start();
-include "../database.php";
-if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
-?>
 
 <?php
 session_start();
 include "../database.php";
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 if(isset($_SESSION['profId']) && isset($_SESSION['nom']) && isset($_SESSION['email'])){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar si la variable de sesión profId está definida y no está vacía
         if (isset($_SESSION['profId']) && !empty($_SESSION['profId'])) {
             $profId = $_SESSION['profId']; // Obtener el ID del profesor de la sesión
-            $nomCours = $_POST['nomCours'];
-            $description = $_POST['description'];
+            $nomCours = validate(mysqli_real_escape_string($conn, $_POST['nomCours']));
+            $description = validate(mysqli_real_escape_string($conn, $_POST['description']));
             $datePublish = $_POST['datePublish']; // Recibo la fecha de publicación
             $formationID = $_POST['formation']; // Obtener el ID de la formación seleccionada
             $numChapitres = $_POST['numChapitres']; // Obtener el número de capítulos a agregar
@@ -84,13 +85,6 @@ if(isset($_SESSION['profId']) && isset($_SESSION['nom']) && isset($_SESSION['ema
     } else {
         echo "Error: Método de solicitud incorrecto.";
     }
-} else {
-    header("Location: index.php");
-    exit();
-}
-?>
-
-<?php
 } else {
     header("Location: index.php");
     exit();

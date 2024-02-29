@@ -11,7 +11,7 @@
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cours.php">Cours</a>
+            <a class="nav-link" href="cours.php">Formation</a>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="etablissement.php">Établissement</a>
