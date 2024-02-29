@@ -60,7 +60,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['userid'] = $row['etudId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['filiere'] = isset($row['filiere']) ? $row['filiere'] : '';
