@@ -4,24 +4,36 @@ require_once('config.php');
 if(isset($_GET['id'])) {
     $coursId = $_GET['id'];
 
-    $sqlDeleteChapitres = "DELETE FROM chapitre WHERE coursId = '$coursId'";
-    $resultChapitres = mysqli_query($conn, $sqlDeleteChapitres);
+    try {
+        // Iniciar una transacción
+        mysqli_begin_transaction($conn);
 
-    if($resultChapitres) {
-        // Ahora que se han eliminado los capítulos asociados, procedemos a eliminar el curso
-        $sqlDeleteCours = "DELETE FROM cours WHERE coursId = '$coursId'";
-        $resultCours = mysqli_query($conn, $sqlDeleteCours);
+        // Eliminar los capítulos asociados al curso
+        $sqlDeleteChapitres = "DELETE FROM chapitre WHERE coursId = '$coursId'";
+        $resultChapitres = mysqli_query($conn, $sqlDeleteChapitres);
 
-        if($resultCours) {
-            header("Location: cours.php?cbe=cbe");
+        if($resultChapitres !== false) {
+            // Ahora que se han eliminado los capítulos asociados, procedemos a eliminar el curso
+            $sqlDeleteCours = "DELETE FROM cours WHERE coursId = '$coursId'";
+            $resultCours = mysqli_query($conn, $sqlDeleteCours);
+
+            if($resultCours !== false) {
+                // Confirmar la transacción
+                mysqli_commit($conn);
+                header("Location: cours.php?cbe=cbe");
+                exit(); // Salir del script después de redirigir
+            } else {
+                throw new Exception("Error al intentar eliminar el curso.");
+            }
         } else {
-            echo "Error al intentar eliminar el curso.";
+            throw new Exception("Error al intentar eliminar los capítulos del curso.");
         }
-    } else {
-        echo "Error al intentar eliminar los capítulos del curso.";
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de error
+        mysqli_rollback($conn);
+        echo "Error: " . $e->getMessage();
     }
 } else {
     echo "ID de curso no proporcionado.";
 }
 ?>
-
