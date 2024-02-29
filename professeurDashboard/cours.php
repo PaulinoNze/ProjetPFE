@@ -201,71 +201,95 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-
                                                         <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
-                                                            <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
-                                                            <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>"> <!-- Añadir datePublish -->
-                                                            <div class="modal-body" id="cont_modal">
-                                                                <div class="form-group">
-                                                                    <label for="recipient-name">Nom du cours</label>
-                                                                    <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="exampleFormControlTextarea1">Description du cours</label>
-                                                                    <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="formation">Sélectionner la formation</label>
-                                                                    <select name="formation" class="form-control">
-                                                                        <?php
-                                                                        // Consulta SQL para obtener todas las formaciones disponibles
-                                                                        $sqlFormations = "SELECT * FROM formation";
-                                                                        $queryFormations = mysqli_query($conn, $sqlFormations);
+    <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+    <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
 
-                                                                        // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
-                                                                        while ($formation = mysqli_fetch_assoc($queryFormations)) {
-                                                                            $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
-                                                                            echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="image" style="float:left;">Photo</label>
-                                                                    <br>
-                                                                    <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
-                                                                    <br><br>
-                                                                    <label style="float:left;">Changer Photo</label>
-                                                                    <br>
-                                                                    <input type="file" name="image" accept="image/*">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="video" style="float:left;">Vidéo</label>
-                                                                    <br>
-                                                                    <video controls style="width:100%;">
-                                                                        <source src="<?php echo $dataCours['video']; ?>" type="video/mp4">
-                                                                        Your browser does not support the video tag.
-                                                                    </video>
-                                                                    <br><br>
-                                                                    <label style="float:left;">Changer Vidéo</label>
-                                                                    <br>
-                                                                    <input type="file" name="video" accept="video/*">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="pdf" style="float:left;">PDF</label>
-                                                                    <br>
-                                                                    <embed src="<?php echo $dataCours['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
-                                                                    <br><br>
-                                                                    <label style="float:left;">Changer PDF</label>
-                                                                    <br>
-                                                                    <input type="file" name="pdf" accept=".pdf">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                                <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-                                                            </div>
-                                                        </form>
+    <!-- Contenido del curso -->
+    <div class="modal-body" id="cont_modal">
+        <div class="form-group">
+            <label for="recipient-name">Nom du cours</label>
+            <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description du cours</label>
+            <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image" style="float:left;">Photo</label>
+            <br>
+            <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
+            <br><br>
+            <label style="float:left;">Changer Photo</label>
+            <br>
+            <input type="file" name="image" accept="image/*">
+        </div>
+
+        <!-- Contenido de los capítulos -->
+        <?php
+        // Consulta SQL para obtener los capítulos asociados a este curso
+        $sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
+        $queryChapitres = mysqli_query($conn, $sqlChapitres);
+
+        // Verificar si hay capítulos asociados
+        if (mysqli_num_rows($queryChapitres) > 0) {
+            while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
+                ?>
+                <div class="form-group">
+                    <label for="nomChapitre">Nom du chapitre</label>
+                    <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="video">Vidéo du chapitre</label>
+                    <video controls style="width:100%;">
+                        <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <br><br>
+                    <label style="float:left;">Changer Vidéo</label>
+                    <br>
+                    <input type="file" name="video[]" accept="video/*">
+                </div>
+                <div class="form-group">
+                    <label for="pdf">PDF du chapitre</label>
+                    <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
+                    <br><br>
+                    <label style="float:left;">Changer PDF</label>
+                    <br>
+                    <input type="file" name="pdf[]" accept=".pdf">
+                </div>
+        <?php
+            }
+        } else {
+            echo "<p>Aucun chapitre trouvé.</p>";
+        }
+        ?>
+
+        <!-- Campo de formación -->
+        <div class="form-group">
+            <label for="formation">Sélectionner la formation</label>
+            <select name="formation" class="form-control">
+                <?php
+                // Consulta SQL para obtener todas las formaciones disponibles
+                $sqlFormations = "SELECT * FROM formation";
+                $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                    $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
+                    echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+    </div>
+</form>
+
 
 
 
@@ -358,52 +382,52 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     </div>
 
                                     <form method="POST" action="recibNouvelleCours.php" enctype="multipart/form-data">
-    <div class="modal-body" id="cont_modal">
-        <!-- Resto del formulario -->
-        <div class="form-group">
-            <label for="recipient-name">Nom du cours</label>
-            <input type="text" name="nomCours" class="form-control" required="true">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Description du cours</label>
-            <textarea class="form-control" name="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="foto">Photo</label><br>
-            <input type="file" name="image" accept="image/*" required="true">
-        </div>
-        <div class="form-group">
-            <label for="datePublish">Date de publication</label>
-            <input type="date" name="datePublish" class="form-control" required="true">
-        </div>
-        <div class="form-group">
-            <label for="formation">Sélectionner la formation</label>
-            <select name="formation" class="form-control">
-                <?php
-                // Consulta SQL para obtener todas las formaciones disponibles
-                $sqlFormations = "SELECT * FROM formation";
-                $queryFormations = mysqli_query($conn, $sqlFormations);
+                                        <div class="modal-body" id="cont_modal">
+                                            <!-- Resto del formulario -->
+                                            <div class="form-group">
+                                                <label for="recipient-name">Nom du cours</label>
+                                                <input type="text" name="nomCours" class="form-control" required="true">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Description du cours</label>
+                                                <textarea class="form-control" name="description" rows="3"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="foto">Photo</label><br>
+                                                <input type="file" name="image" accept="image/*" required="true">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="datePublish">Date de publication</label>
+                                                <input type="date" name="datePublish" class="form-control" required="true">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="formation">Sélectionner la formation</label>
+                                                <select name="formation" class="form-control">
+                                                    <?php
+                                                    // Consulta SQL para obtener todas las formaciones disponibles
+                                                    $sqlFormations = "SELECT * FROM formation";
+                                                    $queryFormations = mysqli_query($conn, $sqlFormations);
 
-                // Itera sobre cada formación y muestra como opción en el campo de selección
-                while ($formation = mysqli_fetch_assoc($queryFormations)) {
-                    echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <!-- Sección de Chapitres -->
-        <div class="form-group">
-            <label for="numChapitres">Nombre de chapitres à ajouter</label>
-            <input type="number" name="numChapitres" id="numChapitres" class="form-control">
-        </div>
-        <!-- Contenedor de los campos de los capítulos -->
-        <div id="chapitres-container"></div>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-    </div>
-</form>
+                                                    // Itera sobre cada formación y muestra como opción en el campo de selección
+                                                    while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                                        echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <!-- Sección de Chapitres -->
+                                            <div class="form-group">
+                                                <label for="numChapitres">Nombre de chapitres à ajouter</label>
+                                                <input type="number" name="numChapitres" id="numChapitres" class="form-control">
+                                            </div>
+                                            <!-- Contenedor de los campos de los capítulos -->
+                                            <div id="chapitres-container"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </form>
 
                                 </div>
                             </div>
