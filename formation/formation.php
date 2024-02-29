@@ -97,7 +97,7 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
             if (isset($_GET['id'])) {
                 $userId = $_GET['id'];
                 $statut = "Actif";
-                $sql = "SELECT coursId, nomCours, description, datePublish, image, video, pdf FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
+                $sql = "SELECT coursId, nomCours, description, datePublish, image FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
                 $result = mysqli_query($conn, $sql);
                 // Comprobar si existen cursos
                 if (mysqli_num_rows($result) > 0) {
