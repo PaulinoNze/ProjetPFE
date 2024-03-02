@@ -268,11 +268,14 @@ function downloadPDF() {
 </thead>
 <tbody>
 <?php
-// Assuming you have already started the session and included the database connection
 
-// Fetch data from the etudiant table
-$sql = "SELECT nomCours ,
-description FROM cours ";
+$etudId = $_SESSION['userid'];
+
+$sql = "SELECT c.coursId, c.nomCours, c.description
+FROM cours c
+JOIN coursinscrit ci ON c.coursId = ci.coursId
+JOIN etudiant e ON ci.etudId = e.etudId
+WHERE e.etudId = $etudId;";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
@@ -288,11 +291,11 @@ if (mysqli_num_rows($result) > 0) {
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
                     <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
             </td>
-            <td><?php echo $row['Nom du cours ']; ?></td>
-            <td><?php echo $row['Description']; ?></td>
+            <td><?php echo $row['nomCours']; ?></td>
+            <td><?php echo $row['description']; ?></td>
            
             <td class="text-right">
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['etudId']; ?>">
+            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['coursId']; ?>">
             <i class="far fa-trash-alt"></i>
             </button>
             <!-- Include jQuery library -->

@@ -141,8 +141,8 @@
  <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
-    <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+<?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -258,7 +258,7 @@ function downloadPDF() {
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
-
+<th>Image</th>
 <th>Nom du Cours</th>
 <th>description</th>
 
@@ -268,11 +268,14 @@ function downloadPDF() {
 </thead>
 <tbody>
 <?php
-// Assuming you have already started the session and included the database connection
 
-// Fetch data from the etudiant table
-$sql = "SELECT nomCours ,
-description FROM cours ";
+$etudId = $_SESSION['userid'];
+
+$sql = "SELECT c.coursId, c.nomCours, c.description
+FROM cours c
+JOIN coursinscrit ci ON c.coursId = ci.coursId
+JOIN etudiant e ON ci.etudId = e.etudId
+WHERE e.etudId = $etudId;";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
@@ -282,17 +285,17 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <td>
-                <h2><a href="Cours_inscrit_info.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
                     <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
             </td>
-            <td><?php echo $row['Nom du cours ']; ?></td>
-            <td><?php echo $row['Description']; ?></td>
+            <td><?php echo $row['nomCours']; ?></td>
+            <td><?php echo $row['description']; ?></td>
            
             <td class="text-right">
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['etudId']; ?>">
+            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['coursId']; ?>">
             <i class="far fa-trash-alt"></i>
             </button>
             <!-- Include jQuery library -->

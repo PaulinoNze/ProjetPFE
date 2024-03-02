@@ -101,14 +101,17 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
     <div class="main-wrapper">
       <!-------------------------------------------------- nav ------------------------------------->
       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <?php if (!empty($_SESSION['image'])) : ?>
-          <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
-        <?php else : ?>
-          <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
-        <?php endif; ?>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <a href="../../Etudiant/etudiantdashboard.php" class="btn btn-outline-light bg- text-dark" >
+    <?php if (!empty($_SESSION['image'])) : ?>
+      <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
+    <?php else : ?>
+      <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
+    Etudiant Dashboard
+ 
+</a>
+
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -229,7 +232,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                         }
                       } else {
                         // No rows returned from the database
-                        echo "<tr><td colspan='7'>Aucun étudiant</td></tr>";
+                        echo "<tr><td colspan='7'></td></tr>";
                       }
                       ?>
                       <li class="submenu">
