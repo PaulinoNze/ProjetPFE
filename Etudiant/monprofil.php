@@ -134,8 +134,8 @@
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
-    <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+<?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -177,7 +177,24 @@
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
 <li>
-<a href="adminDashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
+<a href="etudiantdashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
+</li>
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="../cours/Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
+<li><a href="../cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
+
+</ul>
+</li>
+
+<li class="submenu">
+<a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
+<ul class="list-unstyled" style="display: none;">
+<li><a href="forum.php"><span>Forum</span></a></li>
+<li><a href="forum.php"><span> Forum Integrer</span></a></li>
+
+</ul>
 </li>
 
 </div>
@@ -207,7 +224,7 @@
 <div class="profile-view">
 <div class="profile-img-wrap">
 <div class="profile-img">
-<a href=""><img class="avatar" src="<?php echo !empty($_SESSION['image']) ? $_SESSION['image'] : '../assets/img/user.jpg'; ?>" alt=""></a>
+<a href=""><img class="avatar" src="<?php echo !empty($_SESSION['image']) ? 'data:image;base64,' . base64_encode($_SESSION['image']) : '../assets/img/user.jpg'; ?>" alt=""></a>
 </div>
 </div>
 <div class="profile-basic">
@@ -216,9 +233,7 @@
 <div class="profile-info-left">
 <h3 class="user-name m-t-0"><?php echo $_SESSION['prenom']." ". $_SESSION['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
-<small class="text-muted"><?php echo $_SESSION['designation'];?></small>
-
-<div class="staff-id">CIN: <?php echo $_SESSION['cin'];?></div>
+<small class="text-muted">Etudiant(e)</small>
 </div>
 </div>
 <div class="col-md-7">

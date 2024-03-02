@@ -65,7 +65,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['filiere'] = isset($row['filiere']) ? $row['filiere'] : '';
                 $_SESSION['gender'] = isset($row['gender']) ? $row['gender'] : '';
-                $_SESSION['dateNaissance'] = isset($row['dateNaissance']) ? $row['dateNaissance'] : '';
+                $_SESSION['dateNaissance'] = isset($row['date_naissance']) ? $row['date_naissance'] : '';
                 $_SESSION['cin'] = isset($row['cin']) ? $row['cin'] : '';
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
