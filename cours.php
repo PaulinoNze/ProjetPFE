@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="./Css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Css/stileCours.css">
-    <link rel="stylesheet" href="CSS/bulma.min.css">
 </head>
 
 <body>
@@ -22,7 +21,7 @@
         <?php
         require 'header/header.php';
         ?>
-        
+
     </header>
 
     <main>
@@ -36,7 +35,7 @@
         <section class="awe-section">
             <div class="container">
                 <div class="title title__style-02">
-                    <h2 class="title__title text-center">Nuestros Cursos</h2>
+                    <h2 class="title__title text-center">Notres Formation</h2>
                     <hr>
                 </div>
 
@@ -68,22 +67,22 @@
                             </div>
                         </div>
                         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Authentifiez-Vous</h5>
-                        <ul class="navbar-nav ml-auto" style="display:inline-block;">
-                            <li class="nav-item d-inline" style="margin-right: 10px;">
-                                <a class="btn btn-success" href="formation/loginFormation.php?id=<?php echo $dataCours['formationID']; ?>">Conectar</a>
-                            </li>
-                            <li class="nav-item d-inline">
-                                <a class="btn btn-danger" href="s_abonner/inscritp.php">S'abonner</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="loginModalLabel">Authentifiez-Vous</h5>
+                                        <ul class="navbar-nav ml-auto" style="display:inline-block;">
+                                            <li class="nav-item d-inline" style="margin-right: 10px;">
+                                                <a class="btn btn-success" href="formation/loginFormation.php?id=<?php echo $dataCours['formationID']; ?>">Conectar</a>
+                                            </li>
+                                            <li class="nav-item d-inline">
+                                                <a class="btn btn-danger" href="s_abonner/inscritp.php">S'abonner</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                 </div>
             </div>

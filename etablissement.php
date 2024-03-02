@@ -6,6 +6,13 @@
     <title>Ecole Supérieure de Technologie Dakhla</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="./Css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Css/stileCours.css">
     <style>
         /* Réutilisation du CSS précédent */
         body {
@@ -15,12 +22,6 @@
             padding: 0;
         }
         header {
-            background-color: #007bff; /* Bleu */
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        footer {
             background-color: #007bff; /* Bleu */
             color: white;
             padding: 20px 0;
@@ -238,13 +239,18 @@
 </main>
 
 
-<footer class="bg-dark text-white text-center py-4">
-    <p>&copy; 2023 ESTD</p>
-</footer>
+<footer class="container">
+    <?php
+    require './Footer/footer.php';
+    ?>
+    <a href="#" id="scrollToTop" class="btn">↑</a>
+  </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./Js/bootstrap.bundle.min.js"></script>
+
+
 <script>
     document.getElementById('scrollToTop').addEventListener('click', function() {
         window.scrollTo({
