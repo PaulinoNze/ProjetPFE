@@ -181,14 +181,14 @@
 </div>
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
-<li class="active">
-<a><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
+<li>
+<a href="../Etudiant/etudiantdashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
-<li><a href="cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
+<li><a class="active" href="Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
+<li><a href="Cours_terminer.php"><span>Cours terminés</span></a></li>
 
 </ul>
 </li>

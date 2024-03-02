@@ -141,8 +141,8 @@
  <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
-    <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="Admin">
+<?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -181,14 +181,14 @@
 </div>
 <ul class="sidebar-ul">
 <li class="menu-title">Menu</li>
-<li class="active">
-<a ><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
+<li>
+<a href="../Etudiant/etudiantdashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
 <li><a href="../cours/Cours_inscrit_info.php"><span>Cours actuels  </span></a></li>
-<li><a href="../cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
+<li><a class="active" href="../cours/Cours_terminer.php"><span>Cours terminés</span></a></li>
 
 </ul>
 </li>
@@ -271,7 +271,7 @@ function downloadPDF() {
 // Assuming you have already started the session and included the database connection
 
 // Fetch data from the etudiant table
-$sql = "SELECT nomCours ,
+$sql = "SELECT coursId, nomCours ,
 description FROM cours ";
 $result = mysqli_query($conn, $sql);
 
@@ -288,11 +288,11 @@ if (mysqli_num_rows($result) > 0) {
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
                     <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
             </td>
-            <td><?php echo $row['Nom du cours ']; ?></td>
-            <td><?php echo $row['Description']; ?></td>
+            <td><?php echo $row['nomCours']; ?></td>
+            <td><?php echo $row['description']; ?></td>
            
             <td class="text-right">
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['etudId']; ?>">
+            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['coursId']; ?>">
             <i class="far fa-trash-alt"></i>
             </button>
             <!-- Include jQuery library -->
