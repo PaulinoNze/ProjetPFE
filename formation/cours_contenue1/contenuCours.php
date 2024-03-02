@@ -204,7 +204,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
 
                       <a href="#"><img src="../../assets/img/sidebar/icon-17.png" alt="icon"> <span>introduction</span> <span class="menu-arrow"></span></a>
                       <ul class="list-unstyled" style="display: none;">
-                        <li><a href="#" class="btn btn-primary cargar-pagina" data-url="introductio.php?coursId=<?php echo $coursId; ?>  "><span>introduction au cours</span></a></li>
+                        <li><a href="#" class="btn btn-primary cargar-pagina" data-url="introductio.php?coursId=<?php echo $_GET['coursId']; ?>  "><span>introduction au cours</span></a></li>
                       </ul>
                     </li>
                     <?php
