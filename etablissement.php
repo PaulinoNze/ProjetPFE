@@ -169,6 +169,7 @@
             </div>
         </div>
     </div>
+    <div id="contenidoAdicional" style="display: none;">
     <section id="mission">
     <div class="container">
         <h2>Mission de l'EST de Dakhla</h2>
@@ -195,6 +196,13 @@
         <p>Prof. Zouhir Mahani<br>Directeur de l’Ecole Supérieure de Technologie – Dakhla.</p>
     </div>
 </section>
+
+</div>
+<center>
+<button id="botonLeerMas" class="btn btn-primary">Leer más</button>
+</center>
+
+
     <section id="filieres" style="margin-top: 50px;">
         <h2 style="text-align: center; margin-bottom: 30px;">Filières enseignées :</h2>
         <table class="table table-bordered">
@@ -250,6 +258,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./Js/bootstrap.bundle.min.js"></script>
 
+<script>
+    // Obtener referencias al botón y al contenido adicional
+    var botonLeerMas = document.getElementById('botonLeerMas');
+    var contenidoAdicional = document.getElementById('contenidoAdicional');
+
+    // Agregar un event listener al botón
+    botonLeerMas.addEventListener('click', function() {
+        // Alternar la visibilidad del contenido adicional cuando se hace clic en el botón
+        if (contenidoAdicional.style.display === 'none') {
+            contenidoAdicional.style.display = 'block';
+            botonLeerMas.textContent = 'Leer menos'; // Cambiar el texto del botón
+        } else {
+            contenidoAdicional.style.display = 'none';
+            botonLeerMas.textContent = 'Leer más'; // Cambiar el texto del botón
+        }
+    });
+</script>
 
 <script>
     document.getElementById('scrollToTop').addEventListener('click', function() {

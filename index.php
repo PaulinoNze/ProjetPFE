@@ -63,7 +63,11 @@
           <div class="container">
             <div class="carousel-caption text-start">
               <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime! Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                 Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime!
+                  Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
+                  <a href="#" class="btn btn-primary me-2">S'abonner</a>
+        <a href="#" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -73,7 +77,11 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime! Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                 Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime! 
+                 Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
+                 <a href="#" class="btn btn-primary me-2">S'abonner</a>
+        <a href="#" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -82,7 +90,11 @@
           <div class="container">
             <div class="carousel-caption text-end">
               <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime! Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe cumque quae libero, 
+                porro aliquam nesciunt, commodi sed dolores maxime! Ratione voluptatum error magni mollitia
+                 soluta eaque nemo impedit, cum nulla.</p>
+                 <a href="#" class="btn btn-primary me-2">S'abonner</a>
+        <a href="#" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -101,7 +113,7 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img src="Img/mundo (1).png" alt="">
+          <img src="Img/aprender-en-linea.png" alt="" class="img-fluid" style="max-width: 100px;">
           <title>Placeholder</title>
           </svg>
 
@@ -109,7 +121,7 @@
           <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img src="Img/mundo (2).png" alt="">
+        <img src="Img/libro.png" alt="" class="img-fluid" style="max-width: 100px;">
           <title>Placeholder</title>
           </svg>
 
@@ -117,7 +129,7 @@
           <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img src="Img/mundo (3).png" alt="">
+          <img src="Img/leccion-en-linea.png" alt="" class="img-fluid" style="max-width: 100px;">
           <title>Placeholder</title>
           </svg>
 
@@ -188,14 +200,14 @@
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
           <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Reprehenderit aliquid odit mollitia atque ipsam, adipisci sit quaerat nulla a,
             hic repellendus amet culpa cum.
             Minima odio dolores odit. Illum, nobis.</p>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7">
           <img src="Img/index.png" class="w-100 h-100" alt="">
           <title>Placeholder</title>
           </svg>
@@ -206,15 +218,13 @@
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7 order-md-2">
+        <div class="col-md-5 order-md-2">
           <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
           <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
         </div>
-        <div class="col-md-5 order-md-1">
-          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-          </svg>
+        <div class="col-md-7 order-md-1">
+        <img src="Img/caracteristicas-plataforma-elearning-2.jpg" class="w-100 h-200" alt="">
+
 
         </div>
       </div>

@@ -21,11 +21,34 @@
         <?php
         require 'header/header.php';
         ?>
-
     </header>
 
     <main>
-        <br><br><br><br><br>
+    <br><br><br>
+
+    <section class="container-fluid bg-while text-light-black py-4">
+  <div class="container">
+    <div class="row align-items-center">
+              <!-- Imagen a la derecha -->
+      <div class="col-md-7 text-md-end">    <br>
+        <img src="Img/klipartz.com-26.png" alt="Imagen" class="img-fluid">
+      </div>
+      <!-- Contenido a la izquierda -->
+      <div class="col-md-5">
+        <!-- Título y descripción -->
+        <h2>Notre Formation</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, 
+            architecto mollitia! Non corrupti debitis officia. Corrupti rerum amet hic cumque laboriosam,
+             commodi nihil a tenetur impedit possimus fuga esse similique.</p>
+        <!-- Enlaces -->
+        <a href="#" class="btn btn-primary me-2">S'abonner</a>
+        <a href="#" class="btn btn-outline-success">Connect</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+       
         <?php
         include('config.php');
         $sqlCours = "SELECT * FROM formation where statut = 'Actif'";
@@ -35,7 +58,6 @@
         <section class="awe-section">
             <div class="container">
                 <div class="title title__style-02">
-                    <h2 class="title__title text-center">Notres Formation</h2>
                     <hr>
                 </div>
 

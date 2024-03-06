@@ -471,9 +471,9 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                                                     <input type="text" name="questions[0][reponses][]" class="form-control"><br>
                                                     <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
                                                     <select name="questions[0][correct]" class="form-control">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
+                                                        <option value="a">1</option>
+                                                        <option value="b">2</option>
+                                                        <option value="c">3</option>
                                                     </select><br>
                                                 </div>
                                             </div>
@@ -491,21 +491,21 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                                             var nouvelleQuestion = document.createElement('div');
                                             nouvelleQuestion.classList.add('question');
                                             nouvelleQuestion.innerHTML = `
-                                                        <hr>
-                                                        <label for="question">Question :</label><br>
-                                                        <input type="text" name="questions[][question]" class="form-control"><br>
-                                                        <label for="r1">Réponse 1 :</label><br>
-                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
-                                                        <label for="r2">Réponse 2 :</label><br>
-                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
-                                                        <label for="r3">Réponse 3 :</label><br>
-                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
-                                                        <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
-                                                        <select name="questions[][correct]" class="form-control">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                        </select><br>
+                                            <hr>
+                                                    <label for="question">Question :</label><br>
+                                                    <input type="text" name="questions[0][question]" class="form-control"><br>
+                                                    <label for="r1">Réponse 1 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="r2">Réponse 2 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="r3">Réponse 3 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
+                                                    <select name="questions[0][correct]" class="form-control">
+                                                        <option value="a">1</option>
+                                                        <option value="b">2</option>
+                                                        <option value="c">3</option>
+                                                    </select><br>
                                                     `;
                                             questions.appendChild(nouvelleQuestion);
                                         });
@@ -534,11 +534,11 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                         for (var i = 1; i <= numChapitres; i++) {
                             html += '<div class="form-group">';
                             html += '<label for="chapitre' + i + '">Chapitre ' + i + '</label>';
-                            html += '<input type="text" name="nomChapitre' + i + '" class="form-control">';
+                            html += '<input type="text" name="nomChapitre' + i + '" class="form-control" >';
                             html += '<label for="video' + i + '">Vidéo</label>';
-                            html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control">';
+                            html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control" required>';
                             html += '<label for="pdf' + i + '">PDF</label>';
-                            html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control">';
+                            html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control" required>';
                             // Puedes agregar más campos aquí según sea necesario
                             html += '</div>';
                         }
