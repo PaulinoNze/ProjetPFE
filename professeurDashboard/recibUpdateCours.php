@@ -37,7 +37,7 @@ if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
         exit;
     }
 
-    // Procesar la información de los capítulos
+    // Procesar la información del chapitre
     if (isset($_POST['nomChapitre']) && isset($_FILES['video']['name']) && isset($_FILES['pdf']['name'])) {
         $nombresChapitres = $_POST['nomChapitre'];
         $videosChapitres = $_FILES['video'];
@@ -78,6 +78,26 @@ if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                     echo "Error al actualizar el capítulo. Por favor, inténtalo de nuevo.";
                     exit;
                 }
+            }
+        }
+    }
+
+    // Procesar la información del quiz
+    if(isset($_POST['questions'])) {
+        $questions = $_POST['questions'];
+
+        foreach ($questions as $index => $questionData) {
+            $question = mysqli_real_escape_string($conn, $questionData['question']);
+            $reponses = $questionData['reponses'];
+            $correct = (int) $questionData['correct'];
+
+            // Update the quiz question
+            $updateQuizQuery = "UPDATE quiz SET question='$question', reponse_1='{$reponses[0]}', reponse_2='{$reponses[1]}', reponse_3='{$reponses[2]}', num_reponse_correcte=$correct WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='$coursId') LIMIT 1";
+            $updateQuizResult = mysqli_query($conn, $updateQuizQuery);
+
+            if(!$updateQuizResult) {
+                echo "Error al actualizar la pregunta del quiz. Por favor, inténtalo de nuevo.";
+                exit;
             }
         }
     }

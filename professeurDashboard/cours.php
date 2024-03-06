@@ -225,45 +225,46 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             <input type="file" name="image" accept="image/*">
         </div>
 
-        <!-- Contenido de los capítulos -->
-        <?php
-        // Consulta SQL para obtener los capítulos asociados a este curso
-        $sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
-        $queryChapitres = mysqli_query($conn, $sqlChapitres);
+<!-- Contenido de los capítulos -->
+<?php
+// Consulta SQL para obtener los capítulos asociados a este curso
+$sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
+$queryChapitres = mysqli_query($conn, $sqlChapitres);
 
-        // Verificar si hay capítulos asociados
-        if (mysqli_num_rows($queryChapitres) > 0) {
-            while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
-                ?>
-                <div class="form-group">
-                    <label for="nomChapitre">Nom du chapitre</label>
-                    <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="video">Vidéo du chapitre</label>
-                    <video controls style="width:100%;">
-                        <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <br><br>
-                    <label style="float:left;">Changer Vidéo</label>
-                    <br>
-                    <input type="file" name="video[]" accept="video/*">
-                </div>
-                <div class="form-group">
-                    <label for="pdf">PDF du chapitre</label>
-                    <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
-                    <br><br>
-                    <label style="float:left;">Changer PDF</label>
-                    <br>
-                    <input type="file" name="pdf[]" accept=".pdf">
-                </div>
-        <?php
-            }
-        } else {
-            echo "<p>Aucun chapitre trouvé.</p>";
-        }
-        ?>
+// Verificar si hay capítulos asociados
+if (mysqli_num_rows($queryChapitres) > 0) {
+    while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
+?>
+        <div class="form-group">
+            <label for="nomChapitre">Nom du chapitre</label>
+            <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="video">Vidéo du chapitre</label>
+            <video controls style="width:100%;">
+                <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br><br>
+            <label style="float:left;">Changer Vidéo</label>
+            <br>
+            <input type="file" name="video[]" accept="video/*">
+        </div>
+        <div class="form-group">
+            <label for="pdf">PDF du chapitre</label>
+            <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
+            <br><br>
+            <label style="float:left;">Changer PDF</label>
+            <br>
+            <input type="file" name="pdf[]" accept=".pdf">
+        </div>
+<?php
+    }
+} else {
+    echo "<p>Aucun chapitre trouvé.</p>";
+}
+?>
+
 
         <!-- Campo de formación -->
         <div class="form-group">
@@ -281,6 +282,39 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                 }
                 ?>
             </select>
+        </div>
+
+        <!-- Sección de preguntas del quiz -->
+        <div class="form-group">
+            <label for="questions">Questions du quiz :</label><br>
+            <?php
+            // Consulta SQL para obtener las preguntas asociadas a este curso
+            $sqlQuestions = "SELECT * FROM quiz WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='" . $dataCours['coursId'] . "')";
+            $queryQuestions = mysqli_query($conn, $sqlQuestions);
+            
+            // Iterar sobre cada pregunta y mostrarla en el formulario
+            $index = 1;
+            while ($questionData = mysqli_fetch_assoc($queryQuestions)) {
+                echo "<div class='question'>";
+                echo "<label for='question$index'>Question $index :</label><br>";
+                echo "<input type='text' name='questions[$index][question]' class='form-control' value='{$questionData['question']}'><br>";
+                echo "<label for='r1'>Réponse 1 :</label><br>";
+                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_1']}'><br>";
+                echo "<label for='r2'>Réponse 2 :</label><br>";
+                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_2']}'><br>";
+                echo "<label for='r3'>Réponse 3 :</label><br>";
+                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_3']}'><br>";
+                echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+                echo "<select name='questions[$index][correct]' class='form-control'>";
+                for ($i = 1; $i <= 3; $i++) {
+                    $selected = ($questionData['num_reponse_correcte'] == $i) ? 'selected' : '';
+                    echo "<option value='$i' $selected>$i</option>";
+                }
+                echo "</select><br>";
+                echo "</div>";
+                $index++;
+            }
+            ?>
         </div>
     </div>
 
@@ -415,6 +449,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                     ?>
                                                 </select>
                                             </div>
+
                                             <!-- Sección de Chapitres -->
                                             <div class="form-group">
                                                 <label for="numChapitres">Nombre de chapitres à ajouter</label>
@@ -422,13 +457,59 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             </div>
                                             <!-- Contenedor de los campos de los capítulos -->
                                             <div id="chapitres-container"></div>
+                                            <div id="questions">
+                                                <!-- Aquí se agregarán las preguntas dinámicamente -->
+                                                <div class="question">
+                                                    <hr>
+                                                    <label for="question">Question :</label><br>
+                                                    <input type="text" name="questions[0][question]" class="form-control"><br>
+                                                    <label for="r1">Réponse 1 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="r2">Réponse 2 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="r3">Réponse 3 :</label><br>
+                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
+                                                    <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
+                                                    <select name="questions[0][correct]" class="form-control">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select><br>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" id="ajouter_Question" class="btn btn-primary">Ajouter une Question au Quiz</button>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         </div>
                                     </form>
-
+                                    <script>
+                                        document.getElementById('ajouter_Question').addEventListener('click', function() {
+                                            var questions = document.getElementById('questions');
+                                            var nouvelleQuestion = document.createElement('div');
+                                            nouvelleQuestion.classList.add('question');
+                                            nouvelleQuestion.innerHTML = `
+                                                        <hr>
+                                                        <label for="question">Question :</label><br>
+                                                        <input type="text" name="questions[][question]" class="form-control"><br>
+                                                        <label for="r1">Réponse 1 :</label><br>
+                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
+                                                        <label for="r2">Réponse 2 :</label><br>
+                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
+                                                        <label for="r3">Réponse 3 :</label><br>
+                                                        <input type="text" name="questions[][reponses][]" class="form-control"><br>
+                                                        <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
+                                                        <select name="questions[][correct]" class="form-control">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                        </select><br>
+                                                    `;
+                                            questions.appendChild(nouvelleQuestion);
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
