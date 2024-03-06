@@ -150,8 +150,8 @@
 <span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="monprofil.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierprofil.php">Modifier le profil</a>
+<a class="dropdown-item" href="../Etudiant/monprofil.php">Mon Profil</a>
+<a class="dropdown-item" href="../Etudiant/modifierEdutiant.php">Modifier le profil</a>
 
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
@@ -160,10 +160,10 @@
 <div class="dropdown mobile-user-menu float-right"> 
 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 <div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="../monprofil.php">Mon Profil</a>
-<a class="dropdown-item" href="../modifierprofil.php">Modifier le profil</a>
+<a class="dropdown-item" href="../Etudiant/monprofil.php">Mon Profil</a>
+<a class="dropdown-item" href="../Etudiant/modifierprofil.php">Modifier le profil</a>
 
-<a class="dropdown-item" href="../PHP/index.php">Logout</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
 </div>

@@ -31,7 +31,7 @@ if(isset($_POST['coursId'])) {
 
 if(isset($_POST['profId'])) {
     $profId = $_POST['profId'];
-    $sql = "UPDATE professeur SET statut = 'Actif' WHERE profId = $profId";
+    $sql = "UPDATE professeur SET statut = 1 WHERE profId = $profId";
     if(mysqli_query($conn, $sql)) {
         echo "Status updated successfully";
     } else {
