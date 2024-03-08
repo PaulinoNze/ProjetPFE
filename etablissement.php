@@ -39,7 +39,7 @@
             justify-content: space-around;
         }
         .image-container img {
-            max-width: 45%;
+            max-width: 30%;
             margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -246,7 +246,7 @@
     </section>
 </main>
 
-
+<br><br>
 <footer class="container">
     <?php
     require './Footer/footer.php';

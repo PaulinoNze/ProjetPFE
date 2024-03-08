@@ -40,7 +40,7 @@
             <a class="nav-link" href="cours.php">Cours</a>
           </li>
          <li class="nav-item">
-            <a class="nav-link" href="#">Établissement</a>
+            <a class="nav-link" href="etablissement.php">Établissement</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="conctat.php">Contact</a>
@@ -64,38 +64,49 @@
 <br>
 <br>
 <br>
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6" >
-      <!-- Imagen del establecimiento -->
+
+<section class="container-fluid bg-while text-light-black py-4">
+  <div class="container">
+    <div class="row align-items-center">
+              <!-- Imagen a la derecha -->
+      <div class="col-md-7 text-md-end">    <br>
       <a href="https://www.google.com/maps/place/High+School+of+Technologie+Dakhla/@23.7614356,-15.9155645,19.07z/data=!4m6!3m5!1s0xc2249374281fd6f:0x6fbdf2dd10080a9!8m2!3d23.7611875!4d-15.9148125!16s%2Fg%2F11pb15200j?entry=ttu" target="_blank">
-        <img src="Img/img-map.jpg" alt="Establecimiento" class="location-image img-fluid mb-4" style="height:295px">
+      <img src="Img/map-with-location-pin-vector.jpg" alt="Imagen" class="img-fluid">
       </a>
-    </div>
-    <div class="col-md-6">
-     <h1><b>Lorem ipsum</b></h1>
-      <!-- Párrafo a la derecha de la imagen -->
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora mollitia quis, necessitatibus soluta nulla quibusdam corporis atque in, eum iusto ut. Voluptatum magni, omnis excepturi non delectus numquam vitae illo.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur minus, ullam aliquam quis dolores, odio ipsa voluptates, ratione adipisci consequuntur nostrum. Eligendi voluptates deserunt ex, ullam, voluptate excepturi dicta ducimus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, expedita, dolorum. Consequatur quae, necessitatibus molestiae numquam voluptate, cum nemo doloribus a modi magnam obcaecati vitae eveniet harum repellendus. Autem, consectetur..</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
+      </div>
+      <!-- Contenido a la izquierda -->
+      <div class="col-md-5">
+        <!-- Título y descripción -->
+        <h2>Contactez-Nous Pour Plus D'informations</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, 
+            architecto mollitia! Non corrupti debitis officia. Corrupti rerum amet hic cumque laboriosam,
+             commodi nihil a tenetur impedit possimus fuga esse similique.</p>
+             <div class="row">
+    <div class="col-md-4">
       <!-- Detalles de contacto -->
       <div>
-        <i class="fas fa-map-marker-alt contact-icon"></i>
-        Q36P+F3F, Dakhla 73000
+        <i class="fas fa-map-marker-alt contact-icon"></i><p style="font-size: 11px;">Q36P+F3F, Dakhla 73000</p>
+        
       </div>
       <div>
         <i class="fas fa-phone contact-icon"></i>
-        Téléphone: +123456789
+        <p style="font-size: 11px;">Téléphone: +123456789</p>
       </div>
       <div>
         <i class="fas fa-envelope contact-icon"></i>
-        Courrier électronique: info@tuestablecimiento.com
+        <p style="font-size: 11px;">Courrier électronique: info@tuestablecimiento.com</p>
       </div>
     </div>
   </div>
-</div>
+        <!-- Enlaces -->
+        <a href="#" class="btn btn-primary me-2">S'abonner</a>
+        <a href="#" class="btn btn-outline-success">Connect</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <hr>
 
 <footer class="text-muted py-5">

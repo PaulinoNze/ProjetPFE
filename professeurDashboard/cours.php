@@ -457,28 +457,20 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                                             </div>
                                             <!-- Contenedor de los campos de los capítulos -->
                                             <div id="chapitres-container"></div>
+                                            <button type="button" id="ajouter_Question" class="btn btn-primary">Ajouter une Question au Quiz</button><br>
                                             <div id="questions">
                                                 <!-- Aquí se agregarán las preguntas dinámicamente -->
-                                                <div class="question">
-                                                    <hr>
-                                                    <label for="question">Question :</label><br>
-                                                    <input type="text" name="questions[0][question]" class="form-control"><br>
-                                                    <label for="r1">Réponse 1 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="r2">Réponse 2 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="r3">Réponse 3 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
-                                                    <select name="questions[0][correct]" class="form-control">
-                                                        <option value="a">1</option>
-                                                        <option value="b">2</option>
-                                                        <option value="c">3</option>
-                                                    </select><br>
-                                                </div>
+
                                             </div>
 
-                                            <button type="button" id="ajouter_Question" class="btn btn-primary">Ajouter une Question au Quiz</button>
+                                            <hr>
+                                            <div id="questionsExamen">
+                                                <!-- Aquí se agregarán las preguntas dinámicamente -->
+
+                                            </div>
+
+                                            <button type="button" id="ajouter_Question_examen" class="btn btn-primary">Ajouter une Question au Examen finale</button>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">S'inscrire au cours</button>
@@ -486,30 +478,67 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                                         </div>
                                     </form>
                                     <script>
-                                        document.getElementById('ajouter_Question').addEventListener('click', function() {
-                                            var questions = document.getElementById('questions');
-                                            var nouvelleQuestion = document.createElement('div');
-                                            nouvelleQuestion.classList.add('question');
-                                            nouvelleQuestion.innerHTML = `
-                                            <hr>
-                                                    <label for="question">Question :</label><br>
-                                                    <input type="text" name="questions[0][question]" class="form-control"><br>
-                                                    <label for="r1">Réponse 1 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="r2">Réponse 2 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="r3">Réponse 3 :</label><br>
-                                                    <input type="text" name="questions[0][reponses][]" class="form-control"><br>
-                                                    <label for="num_rep_correct">Numéro de la réponse correcte :</label><br>
-                                                    <select name="questions[0][correct]" class="form-control">
-                                                        <option value="a">1</option>
-                                                        <option value="b">2</option>
-                                                        <option value="c">3</option>
-                                                    </select><br>
-                                                    `;
-                                            questions.appendChild(nouvelleQuestion);
-                                        });
-                                    </script>
+    let questionIndex = 0; // Contador para preguntas
+    let questionExamenIndex = 0; // Contador para preguntas de examen
+
+    document.getElementById('ajouter_Question').addEventListener('click', function() {
+        var questions = document.getElementById('questions');
+        var nouvelleQuestion = document.createElement('div');
+        nouvelleQuestion.classList.add('question');
+
+        nouvelleQuestion.innerHTML = `
+            <!-- Contenido de la pregunta del quiz -->
+            <hr>
+            <label for="question">Question du Quiz:</label><br>
+            <input type="text" name="questions[${questionIndex}][question]" class="form-control"><br>
+            <label for="r1">Réponse du Quiz 1 :</label><br>
+            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+            <label for="r2">Réponse du Quiz 2 :</label><br>
+            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+            <label for="r3">Réponse du Quiz 3 :</label><br>
+            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+            <label for="num_rep_correct">Lettre de la réponse correcte du Quiz :</label><br>
+            <select name="questions[${questionIndex}][correct]" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select><br>
+        `;
+        questions.appendChild(nouvelleQuestion);
+        questionIndex++;
+    });
+
+    document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
+        var questionsExamen = document.getElementById('questionsExamen');
+        var nouvelleQuestion = document.createElement('div');
+        nouvelleQuestion.classList.add('question');
+
+        nouvelleQuestion.innerHTML = `
+            <!-- Contenido de la pregunta de examen final -->
+            <hr>
+            <label for="question">Question de l'examen :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][questionFinale]" class="form-control"><br>
+            <label for="r1">Réponse de l'examen 1 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r2">Réponse de l'examen 2 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r3">Réponse de l'examen 3 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r4">Réponse de l'examen 4 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="num_rep_correct">Lettre de la réponse correcte de l'examen :</label><br>
+            <select name="questionsFinale[${questionExamenIndex}][correctFinale]" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select><br>
+        `;
+        questionsExamen.appendChild(nouvelleQuestion);
+        questionExamenIndex++;
+    });
+</script>
+
                                 </div>
                             </div>
                         </div>
