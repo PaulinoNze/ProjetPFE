@@ -229,20 +229,20 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                           </li>
 
 
-                      <?php
-                        }
-                      } else {
-                        // No rows returned from the database
-                        echo "<tr><td colspan='7'></td></tr>";
-                      }
-                      ?>
+                      
                       <li class="submenu">
                         <a href="#"><img src="../../assets/img/sidebar/icon-17.png" alt="icon"> <span>exame finale</span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled" style="display: none;">
                           <li><a href="#" class="btn btn-primary cargar-pagina" data-url="exameFinale.php?coursId=<?php echo $coursId; ?>"><span>question de examen finale</span></a></li>
                         </ul>
                       </li>
-
+                          <?php
+                        }
+                      } else {
+                        // No rows returned from the database
+                        echo "<tr><td colspan='7'></td></tr>";
+                      }
+                      ?>
                       <li class="submenu">
                         <a href="#"><img src="../../assets/img/sidebar/icon-8.png" alt="icon"> <span>Attestation</span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled" style="display: none;">
