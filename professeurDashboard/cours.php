@@ -266,44 +266,44 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                                 ?>
 
                                                                 <!-- Sección de preguntas del examen final -->
-<div class="form-group">
-    <label for="questions">Questions de l'examen final :</label><br>
-    <?php
-    // Consulta SQL para obtener las preguntas del examen final asociadas a este curso
-    $sqlQuestionsFinale = "SELECT * FROM examefinale WHERE coursId = " . $dataCours['coursId'];
-    $queryQuestionsFinale = mysqli_query($conn, $sqlQuestionsFinale);
+                                                                <div class="form-group">
+                                                                    <label for="questions">Questions de l'examen final :</label><br>
+                                                                    <?php
+                                                                    // Consulta SQL para obtener las preguntas del examen final asociadas a este curso
+                                                                    $sqlQuestionsFinale = "SELECT * FROM examefinale WHERE coursId = " . $dataCours['coursId'];
+                                                                    $queryQuestionsFinale = mysqli_query($conn, $sqlQuestionsFinale);
 
-    // Iterar sobre cada pregunta y mostrarla en el formulario
-    $index = 1;
-    while ($questionData = mysqli_fetch_assoc($queryQuestionsFinale)) {
-        echo "<div class='question'>";
-        echo "<label for='question$index'>Question $index :</label><br>";
-        echo "<input type='text' name='questionsFinale[$index][questionFinale]' class='form-control' value='{$questionData['question']}'>";
-        echo "<br>";
-        echo "<label for='r1'>Réponse 1 :</label><br>";
-        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_1']}'>";
-        echo "<br>";
-        echo "<label for='r2'>Réponse 2 :</label><br>";
-        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_2']}'>";
-        echo "<br>";
-        echo "<label for='r3'>Réponse 3 :</label><br>";
-        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_3']}'>";
-        echo "<br>";
-        echo "<label for='r4'>Réponse 4 :</label><br>";
-        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_4']}'>";
-        echo "<br>";
-        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
-        echo "<select name='questionsFinale[$index][correctFinale]' class='form-control'>";
-        for ($i = 1; $i <= 4; $i++) {
-            $selected = ($questionData['reponse_correcte'] == $i) ? 'selected' : '';
-            echo "<option value='$i' $selected>$i</option>";
-        }
-        echo "</select>";
-        echo "</div>";
-        $index++;
-    }
-    ?>
-</div>
+                                                                    // Iterar sobre cada pregunta y mostrarla en el formulario
+                                                                    $index = 1;
+                                                                    while ($questionData = mysqli_fetch_assoc($queryQuestionsFinale)) {
+                                                                        echo "<div class='question'>";
+                                                                        echo "<label for='question$index'>Question $index :</label><br>";
+                                                                        echo "<input type='text' name='questionsFinale[$index][questionFinale]' class='form-control' value='{$questionData['question']}'>";
+                                                                        echo "<br>";
+                                                                        echo "<label for='r1'>Réponse 1 :</label><br>";
+                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_1']}'>";
+                                                                        echo "<br>";
+                                                                        echo "<label for='r2'>Réponse 2 :</label><br>";
+                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_2']}'>";
+                                                                        echo "<br>";
+                                                                        echo "<label for='r3'>Réponse 3 :</label><br>";
+                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_3']}'>";
+                                                                        echo "<br>";
+                                                                        echo "<label for='r4'>Réponse 4 :</label><br>";
+                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_4']}'>";
+                                                                        echo "<br>";
+                                                                        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+                                                                        echo "<select name='questionsFinale[$index][correctFinale]' class='form-control'>";
+                                                                        for ($i = 1; $i <= 4; $i++) {
+                                                                            $selected = ($questionData['reponse_correcte'] == $i) ? 'selected' : '';
+                                                                            echo "<option value='$i' $selected>$i</option>";
+                                                                        }
+                                                                        echo "</select>";
+                                                                        echo "</div>";
+                                                                        $index++;
+                                                                    }
+                                                                    ?>
+                                                                </div>
 
 
                                                                 <!-- Campo de formación -->
@@ -324,7 +324,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                                     </select>
                                                                 </div>
 
-                                                                
+
 
                                                                 <!-- Sección de preguntas del quiz -->
                                                                 <div class="form-group">
@@ -357,12 +357,12 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                                         $index++;
                                                                     }
                                                                     ?>
-                                                                    
-                                                                    
+
+
                                                                 </div>
 
 
-                                                          
+
                                                             </div>
 
                                                             <div class="modal-footer">

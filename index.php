@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="Paulino nze, Jacob Thornton, and Bootstrap contributors">
+  <meta name="author" content="Paulino nze, syabonga, and edmon evens">
   <meta name="generator" content="Hugo 0.84.0">
   <title>EST'D E-learning</title>
 
