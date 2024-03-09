@@ -81,6 +81,25 @@ if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             }
         }
     }
+// Procesar la información del examen final
+if(isset($_POST['questionsFinale'])) {
+    $questionsFinale = $_POST['questionsFinale'];
+
+    foreach ($questionsFinale as $index => $questionData) {
+        $questionFinale = mysqli_real_escape_string($conn, $questionData['questionFinale']);
+        $reponsesFinale = $questionData['reponsesFinale'];
+        $correctFinale = (int) $questionData['correctFinale'];
+
+        // Update the final exam question
+        $updateExamQuery = "UPDATE examefinale SET question='$questionFinale', reponse_1='{$reponsesFinale[0]}', reponse_2='{$reponsesFinale[1]}', reponse_3='{$reponsesFinale[2]}', reponse_4='{$reponsesFinale[3]}', reponse_correcte=$correctFinale WHERE coursId='$coursId' ";
+        $updateExamResult = mysqli_query($conn, $updateExamQuery);
+
+        if(!$updateExamResult) {
+            echo "Error al actualizar la pregunta del examen final. Por favor, inténtalo de nuevo.";
+            exit;
+        }
+    }
+}
 
     // Procesar la información del quiz
     if(isset($_POST['questions'])) {
@@ -92,7 +111,7 @@ if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             $correct = (int) $questionData['correct'];
 
             // Update the quiz question
-            $updateQuizQuery = "UPDATE quiz SET question='$question', reponse_1='{$reponses[0]}', reponse_2='{$reponses[1]}', reponse_3='{$reponses[2]}', num_reponse_correcte=$correct WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='$coursId') LIMIT 1";
+            $updateQuizQuery = "UPDATE quiz SET question='$question', reponse_1='{$reponses[0]}', reponse_2='{$reponses[1]}', reponse_3='{$reponses[2]}', num_reponse_correcte=$correct WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='$coursId') ";
             $updateQuizResult = mysqli_query($conn, $updateQuizQuery);
 
             if(!$updateQuizResult) {
