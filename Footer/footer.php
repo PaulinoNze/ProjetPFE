@@ -1,4 +1,4 @@
-<footer class="footer " >
+<footer class="footer" >
   <div class="container">
     <div class="row">
      <img src="Img/logo.png" alt="Imagen" style="float: left; margin-right: 10px; width: 200px; height: 80px;">

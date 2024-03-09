@@ -218,7 +218,7 @@
 
 </div>
 <center>
-<button id="botonLeerMas" class="btn btn-primary">Leer más</button>
+<button id="botonLeerMas" class="btn btn-primary">Lire Plus</button>
 </center>
 
 
