@@ -42,5 +42,11 @@ for ($i = 1; $i <= $totalQues; $i++) {
         }
     }
 }
-echo "<p>Résultat: <strong style='font-size: 1.5em;'>$totalMarks</strong>/$totalQues</p>";
+$percent = (($totalMarks / $totalQues)) * 100;
+$percent = round($percent, 2);
+    if($percent >= 60){
+    echo "<p style='color: green;'><strong style='font-size: 1.5em;'>Résultat: $percent%, Félicitation vous avez validé le cours!</strong></p>";
+}else{
+    echo "<p style='color: red;'><strong style='font-size: 1.5em;'>Résultat: $percent%, Malheureusement vous n'avez pas validé le cours </strong></p>";
+}
 ?>
