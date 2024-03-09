@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="author" content="Paulino nze, syabonga, and edmon evens">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Cours</title>
 
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="./Css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Css/stileCours.css">
+    
 </head>
 
 <body>

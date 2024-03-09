@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Paulino nze, syabonga, and edmon evens">
   <title>Contacto</title>
   <!-- Incluimos Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -37,7 +38,7 @@
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cours.php">Cours</a>
+            <a class="nav-link" href="cours.php">Formation</a>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="etablissement.php">Établissement</a>
@@ -127,6 +128,7 @@
         });
     });
 </script>
+
 
 <!-- Incluimos FontAwesome para los iconos -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>

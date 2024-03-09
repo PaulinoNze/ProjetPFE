@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Paulino nze, syabonga, and edmon evens">
     <title>Ecole Supérieure de Technologie Dakhla</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
@@ -13,6 +14,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="./Css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="Css/stileCours.css">
+  <style>
+    /* Estilos para las imágenes redondas */
+    .customer-logos .slick-slide img {
+      border-radius: 50%;
+      width: 150px;
+      /* Ancho de las imágenes */
+      height: 150px;
+      /* Alto de las imágenes */
+      object-fit: cover;
+      /* Para mantener el aspecto circular */
+    }
+
+    /* Estilo para el contenedor del slider */
+    .customer-logos .slick-track {
+      display: flex;
+      /* Flexbox para alinear las imágenes en filas */
+    }
+  </style>
     <style>
         /* Réutilisation du CSS précédent */
         body {
@@ -246,6 +265,55 @@
     </section>
 </main>
 
+<div class="container">
+    <div class="title title__style-02">
+      <h2 class="title__title text-center">Nos créateurs de cours</h2>
+      <hr>
+    </div>
+
+
+    <section class="customer-logos slider mb-5">
+      <div class="slide">
+        <img src="Img/e2.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e2.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e2.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/Salle.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e2.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/logo1.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e2.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/logo1.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/logo1.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e5.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e4.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/e3.jpg">
+      </div>
+    </section>
+    <br><br>
+
+  </div>
+  <hr>
 <br><br>
 <footer class="container">
     <?php
@@ -257,7 +325,42 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./Js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('.customer-logos').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        arrows: false,
+        dots: false,
+        pauseOnHover: false,
+        responsive: [{
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 4
+          }
+        }, {
+          breakpoint: 520,
+          settings: {
+            slidesToShow: 3
+          }
+        }]
+      });
+    });
+  </script>
+   <!---slider de Marcas -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+   <script>
+    function zoomIn(element) {
+      element.style.transform = "scale(1.05)";
+      element.style.transition = "transform 0.3s ease";
+    }
 
+    function zoomOut(element) {
+      element.style.transform = "scale(1)";
+    }
+  </script>
 <script>
     // Obtener referencias al botón y al contenido adicional
     var botonLeerMas = document.getElementById('botonLeerMas');

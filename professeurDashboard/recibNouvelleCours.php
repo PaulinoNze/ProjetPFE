@@ -88,38 +88,36 @@ if (isset($_SESSION['profId']) && isset($_SESSION['nom']) && isset($_SESSION['em
 
                                     // Verificar si se pudo insertar la pregunta correctamente
                                     if (!$resultQuiz) {
-                                        echo "Error al insertar la pregunta en la base de datos.";
+                                        echo "Erreur lors de l'insertion de la question dans la base de données.";
                                     }
                                 }
-                                                                // Insertar datos del quiz en la base de datos
-                                                                $idQuiz = mysqli_insert_id($conn);
-                                                                $num_questions = $_POST['nb_questions']; // Obtener el número de preguntas del quiz
-                                                                foreach ($_POST['questionsFinale'] as $questionData) {
-                                                                    // Obtener los datos de cada pregunta
-                                                                    $question = validate(mysqli_real_escape_string($conn, $questionData['questionFinale']));
-                                                                    $reponses = $questionData['reponsesFinale'];
-                                                                    $correct = $questionData['correctFinale'];
-                                
-                                                                    // Verificar si las respuestas están definidas y no están vacías
-                                                                    $reponse_10 = isset($reponses[0]) ? validate(mysqli_real_escape_string($conn, $reponses[0])) : null;
-                                                                    $reponse_12 = isset($reponses[1]) ? validate(mysqli_real_escape_string($conn, $reponses[1])) : null;
-                                                                    $reponse_13 = isset($reponses[2]) ? validate(mysqli_real_escape_string($conn, $reponses[2])) : null;
-                                                                    $reponse_14 = isset($reponses[3]) ? validate(mysqli_real_escape_string($conn, $reponses[3])) : null;
-                                
-                                                                    // Insertar la pregunta en la tabla quiz
-                                                                    $queryExamen = "INSERT INTO examefinale( question, reponse_1, reponse_2, reponse_3, reponse_4, reponse_correcte, coursId, idQuiz) VALUES ( '$question', '$reponse_10', '$reponse_12', '$reponse_13','$reponse_14', '$correct', '$coursId', '$idQuiz')";
-                                                                    $resultExamen = mysqli_query($conn,  $queryExamen);
-                                
-                                                                    // Verificar si se pudo insertar la pregunta correctamente
-                                                                    if (!$resultExamen) {
-                                                                        echo "Error al insertar la pregunta en la base de datos.";
-                                                                    }
-                                                                }
-                                                            
+                                // Insertar datos del quiz en la base de datos
+                                $idQuiz = mysqli_insert_id($conn);
+                                $num_questions = $_POST['nb_questions']; // Obtener el número de preguntas del quiz
+                                foreach ($_POST['questionsFinale'] as $questionData) {
+                                    // Obtener los datos de cada pregunta
+                                    $question = validate(mysqli_real_escape_string($conn, $questionData['questionFinale']));
+                                    $reponses = $questionData['reponsesFinale'];
+                                    $correct = $questionData['correctFinale'];
+
+                                    // Verificar si las respuestas están definidas y no están vacías
+                                    $reponse_10 = isset($reponses[0]) ? validate(mysqli_real_escape_string($conn, $reponses[0])) : null;
+                                    $reponse_12 = isset($reponses[1]) ? validate(mysqli_real_escape_string($conn, $reponses[1])) : null;
+                                    $reponse_13 = isset($reponses[2]) ? validate(mysqli_real_escape_string($conn, $reponses[2])) : null;
+                                    $reponse_14 = isset($reponses[3]) ? validate(mysqli_real_escape_string($conn, $reponses[3])) : null;
+
+                                    // Insertar la pregunta en la tabla quiz
+                                    $queryExamen = "INSERT INTO examefinale( question, reponse_1, reponse_2, reponse_3, reponse_4, reponse_correcte, coursId, idQuiz) VALUES ( '$question', '$reponse_10', '$reponse_12', '$reponse_13','$reponse_14', '$correct', '$coursId', '$idQuiz')";
+                                    $resultExamen = mysqli_query($conn,  $queryExamen);
+
+                                    // Verificar si se pudo insertar la pregunta correctamente
+                                    if (!$resultExamen) {
+                                        echo "Erreur lors de l'insertion de la question dans la base de données.";
+                                    }
+                                }
                             }
-                            
                         } else {
-                            echo "Error al subir los archivos del capítulo $nomChapitre.";
+                            echo "Erreur lors du téléchargement des fichiers de chapitre $nomChapitre.";
                         }
                     }
 
@@ -127,16 +125,16 @@ if (isset($_SESSION['profId']) && isset($_SESSION['nom']) && isset($_SESSION['em
                     header("Location: cours.php?cr=cr");
                     exit;
                 } else {
-                    echo "Error al registrar el curso. Por favor, inténtalo de nuevo.";
+                    echo "Erreur lors de l'inscription du cours. Veuillez réessayer.";
                 }
             } else {
-                echo "Error al subir la imagen del curso. Por favor, verifica que el archivo sea una imagen válida.";
+                echo "Erreur lors du téléchargement de l'image du cours. Veuillez vérifier que le fichier est une image valide.";
             }
         } else {
-            echo "Error: ID del profesor no definido en la sesión.";
+            echo "Erreur : ID d'enseignant non défini dans la session.";
         }
     } else {
-        echo "Error: Método de solicitud incorrecto.";
+        echo "Erreur : méthode de demande incorrecte.";
     }
 } else {
     header("Location: index.php");
