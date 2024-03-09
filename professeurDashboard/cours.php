@@ -202,127 +202,174 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                             </button>
                                                         </div>
                                                         <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
-    <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
-    <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
+                                                            <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+                                                            <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
 
-    <!-- Contenido del curso -->
-    <div class="modal-body" id="cont_modal">
-        <div class="form-group">
-            <label for="recipient-name">Nom du cours</label>
-            <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Description du cours</label>
-            <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
-        </div>
-        <div class="form-group">
-            <label for="image" style="float:left;">Photo</label>
-            <br>
-            <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
-            <br><br>
-            <label style="float:left;">Changer Photo</label>
-            <br>
-            <input type="file" name="image" accept="image/*">
-        </div>
+                                                            <!-- Contenido del curso -->
+                                                            <div class="modal-body" id="cont_modal">
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name">Nom du cours</label>
+                                                                    <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleFormControlTextarea1">Description du cours</label>
+                                                                    <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="image" style="float:left;">Photo</label>
+                                                                    <br>
+                                                                    <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
+                                                                    <br><br>
+                                                                    <label style="float:left;">Changer Photo</label>
+                                                                    <br>
+                                                                    <input type="file" name="image" accept="image/*">
+                                                                </div>
 
-<!-- Contenido de los capítulos -->
-<?php
-// Consulta SQL para obtener los capítulos asociados a este curso
-$sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
-$queryChapitres = mysqli_query($conn, $sqlChapitres);
+                                                                <!-- Contenido de los capítulos -->
+                                                                <?php
+                                                                // Consulta SQL para obtener los capítulos asociados a este curso
+                                                                $sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
+                                                                $queryChapitres = mysqli_query($conn, $sqlChapitres);
 
-// Verificar si hay capítulos asociados
-if (mysqli_num_rows($queryChapitres) > 0) {
-    while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
-?>
-        <div class="form-group">
-            <label for="nomChapitre">Nom du chapitre</label>
-            <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
-        </div>
-        <div class="form-group">
-            <label for="video">Vidéo du chapitre</label>
-            <video controls style="width:100%;">
-                <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <br><br>
-            <label style="float:left;">Changer Vidéo</label>
-            <br>
-            <input type="file" name="video[]" accept="video/*">
-        </div>
-        <div class="form-group">
-            <label for="pdf">PDF du chapitre</label>
-            <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
-            <br><br>
-            <label style="float:left;">Changer PDF</label>
-            <br>
-            <input type="file" name="pdf[]" accept=".pdf">
-        </div>
-<?php
+                                                                // Verificar si hay capítulos asociados
+                                                                if (mysqli_num_rows($queryChapitres) > 0) {
+                                                                    while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
+                                                                ?>
+                                                                        <div class="form-group">
+                                                                            <label for="nomChapitre">Nom du chapitre</label>
+                                                                            <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="video">Vidéo du chapitre</label>
+                                                                            <video controls style="width:100%;">
+                                                                                <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
+                                                                                Your browser does not support the video tag.
+                                                                            </video>
+                                                                            <br><br>
+                                                                            <label style="float:left;">Changer Vidéo</label>
+                                                                            <br>
+                                                                            <input type="file" name="video[]" accept="video/*">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="pdf">PDF du chapitre</label>
+                                                                            <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
+                                                                            <br><br>
+                                                                            <label style="float:left;">Changer PDF</label>
+                                                                            <br>
+                                                                            <input type="file" name="pdf[]" accept=".pdf">
+                                                                        </div>
+                                                                <?php
+                                                                    }
+                                                                } else {
+                                                                    echo "<p>Aucun chapitre trouvé.</p>";
+                                                                }
+                                                                ?>
+
+                                                                <!-- Sección de preguntas del examen final -->
+<div class="form-group">
+    <label for="questions">Questions de l'examen final :</label><br>
+    <?php
+    // Consulta SQL para obtener las preguntas del examen final asociadas a este curso
+    $sqlQuestionsFinale = "SELECT * FROM examefinale WHERE coursId = " . $dataCours['coursId'];
+    $queryQuestionsFinale = mysqli_query($conn, $sqlQuestionsFinale);
+
+    // Iterar sobre cada pregunta y mostrarla en el formulario
+    $index = 1;
+    while ($questionData = mysqli_fetch_assoc($queryQuestionsFinale)) {
+        echo "<div class='question'>";
+        echo "<label for='question$index'>Question $index :</label><br>";
+        echo "<input type='text' name='questionsFinale[$index][questionFinale]' class='form-control' value='{$questionData['question']}'>";
+        echo "<br>";
+        echo "<label for='r1'>Réponse 1 :</label><br>";
+        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_1']}'>";
+        echo "<br>";
+        echo "<label for='r2'>Réponse 2 :</label><br>";
+        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_2']}'>";
+        echo "<br>";
+        echo "<label for='r3'>Réponse 3 :</label><br>";
+        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_3']}'>";
+        echo "<br>";
+        echo "<label for='r4'>Réponse 4 :</label><br>";
+        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_4']}'>";
+        echo "<br>";
+        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+        echo "<select name='questionsFinale[$index][correctFinale]' class='form-control'>";
+        for ($i = 1; $i <= 4; $i++) {
+            $selected = ($questionData['reponse_correcte'] == $i) ? 'selected' : '';
+            echo "<option value='$i' $selected>$i</option>";
+        }
+        echo "</select>";
+        echo "</div>";
+        $index++;
     }
-} else {
-    echo "<p>Aucun chapitre trouvé.</p>";
-}
-?>
+    ?>
+</div>
 
 
-        <!-- Campo de formación -->
-        <div class="form-group">
-            <label for="formation">Sélectionner la formation</label>
-            <select name="formation" class="form-control">
-                <?php
-                // Consulta SQL para obtener todas las formaciones disponibles
-                $sqlFormations = "SELECT * FROM formation";
-                $queryFormations = mysqli_query($conn, $sqlFormations);
+                                                                <!-- Campo de formación -->
+                                                                <div class="form-group">
+                                                                    <label for="formation">Sélectionner la formation</label>
+                                                                    <select name="formation" class="form-control">
+                                                                        <?php
+                                                                        // Consulta SQL para obtener todas las formaciones disponibles
+                                                                        $sqlFormations = "SELECT * FROM formation";
+                                                                        $queryFormations = mysqli_query($conn, $sqlFormations);
 
-                // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
-                while ($formation = mysqli_fetch_assoc($queryFormations)) {
-                    $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
-                    echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
-                }
-                ?>
-            </select>
-        </div>
+                                                                        // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                                                                        while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                                                            $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
+                                                                            echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
 
-        <!-- Sección de preguntas del quiz -->
-        <div class="form-group">
-            <label for="questions">Questions du quiz :</label><br>
-            <?php
-            // Consulta SQL para obtener las preguntas asociadas a este curso
-            $sqlQuestions = "SELECT * FROM quiz WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='" . $dataCours['coursId'] . "')";
-            $queryQuestions = mysqli_query($conn, $sqlQuestions);
-            
-            // Iterar sobre cada pregunta y mostrarla en el formulario
-            $index = 1;
-            while ($questionData = mysqli_fetch_assoc($queryQuestions)) {
-                echo "<div class='question'>";
-                echo "<label for='question$index'>Question $index :</label><br>";
-                echo "<input type='text' name='questions[$index][question]' class='form-control' value='{$questionData['question']}'><br>";
-                echo "<label for='r1'>Réponse 1 :</label><br>";
-                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_1']}'><br>";
-                echo "<label for='r2'>Réponse 2 :</label><br>";
-                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_2']}'><br>";
-                echo "<label for='r3'>Réponse 3 :</label><br>";
-                echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_3']}'><br>";
-                echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
-                echo "<select name='questions[$index][correct]' class='form-control'>";
-                for ($i = 1; $i <= 3; $i++) {
-                    $selected = ($questionData['num_reponse_correcte'] == $i) ? 'selected' : '';
-                    echo "<option value='$i' $selected>$i</option>";
-                }
-                echo "</select><br>";
-                echo "</div>";
-                $index++;
-            }
-            ?>
-        </div>
-    </div>
+                                                                
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-    </div>
-</form>
+                                                                <!-- Sección de preguntas del quiz -->
+                                                                <div class="form-group">
+                                                                    <label for="questions">Questions du quiz :</label><br>
+                                                                    <?php
+                                                                    // Consulta SQL para obtener las preguntas asociadas a este curso
+                                                                    $sqlQuestions = "SELECT * FROM quiz WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='" . $dataCours['coursId'] . "')";
+                                                                    $queryQuestions = mysqli_query($conn, $sqlQuestions);
+
+                                                                    // Iterar sobre cada pregunta y mostrarla en el formulario
+                                                                    $index = 1;
+                                                                    while ($questionData = mysqli_fetch_assoc($queryQuestions)) {
+                                                                        echo "<div class='question'>";
+                                                                        echo "<label for='question$index'>Question $index :</label><br>";
+                                                                        echo "<input type='text' name='questions[$index][question]' class='form-control' value='{$questionData['question']}'><br>";
+                                                                        echo "<label for='r1'>Réponse 1 :</label><br>";
+                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_1']}'><br>";
+                                                                        echo "<label for='r2'>Réponse 2 :</label><br>";
+                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_2']}'><br>";
+                                                                        echo "<label for='r3'>Réponse 3 :</label><br>";
+                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_3']}'><br>";
+                                                                        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+                                                                        echo "<select name='questions[$index][correct]' class='form-control'>";
+                                                                        for ($i = 1; $i <= 3; $i++) {
+                                                                            $selected = ($questionData['num_reponse_correcte'] == $i) ? 'selected' : '';
+                                                                            echo "<option value='$i' $selected>$i</option>";
+                                                                        }
+                                                                        echo "</select><br>";
+                                                                        echo "</div>";
+                                                                        $index++;
+                                                                    }
+                                                                    ?>
+                                                                    
+                                                                    
+                                                                </div>
+
+
+                                                          
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+                                                            </div>
+                                                        </form>
 
 
 
@@ -478,66 +525,66 @@ if (mysqli_num_rows($queryChapitres) > 0) {
                                         </div>
                                     </form>
                                     <script>
-    let questionIndex = 0; // Contador para preguntas
-    let questionExamenIndex = 0; // Contador para preguntas de examen
+                                        let questionIndex = 0; // Contador para preguntas
+                                        let questionExamenIndex = 0; // Contador para preguntas de examen
 
-    document.getElementById('ajouter_Question').addEventListener('click', function() {
-        var questions = document.getElementById('questions');
-        var nouvelleQuestion = document.createElement('div');
-        nouvelleQuestion.classList.add('question');
+                                        document.getElementById('ajouter_Question').addEventListener('click', function() {
+                                            var questions = document.getElementById('questions');
+                                            var nouvelleQuestion = document.createElement('div');
+                                            nouvelleQuestion.classList.add('question');
 
-        nouvelleQuestion.innerHTML = `
-            <!-- Contenido de la pregunta del quiz -->
-            <hr>
-            <label for="question">Question du Quiz:</label><br>
-            <input type="text" name="questions[${questionIndex}][question]" class="form-control"><br>
-            <label for="r1">Réponse du Quiz 1 :</label><br>
-            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-            <label for="r2">Réponse du Quiz 2 :</label><br>
-            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-            <label for="r3">Réponse du Quiz 3 :</label><br>
-            <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-            <label for="num_rep_correct">Lettre de la réponse correcte du Quiz :</label><br>
-            <select name="questions[${questionIndex}][correct]" class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select><br>
-        `;
-        questions.appendChild(nouvelleQuestion);
-        questionIndex++;
-    });
+                                            nouvelleQuestion.innerHTML = `
+                                                    <!-- Contenido de la pregunta del quiz -->
+                                                    <hr>
+                                                    <label for="question">Question du Quiz:</label><br>
+                                                    <input type="text" name="questions[${questionIndex}][question]" class="form-control"><br>
+                                                    <label for="r1">Réponse du Quiz 1 :</label><br>
+                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+                                                    <label for="r2">Réponse du Quiz 2 :</label><br>
+                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+                                                    <label for="r3">Réponse du Quiz 3 :</label><br>
+                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
+                                                    <label for="num_rep_correct">Num de la réponse correcte du Quiz :</label><br>
+                                                    <select name="questions[${questionIndex}][correct]" class="form-control">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select><br>
+                                                `;
+                                            questions.appendChild(nouvelleQuestion);
+                                            questionIndex++;
+                                        });
 
-    document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
-        var questionsExamen = document.getElementById('questionsExamen');
-        var nouvelleQuestion = document.createElement('div');
-        nouvelleQuestion.classList.add('question');
+                                        document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
+                                            var questionsExamen = document.getElementById('questionsExamen');
+                                            var nouvelleQuestion = document.createElement('div');
+                                            nouvelleQuestion.classList.add('question');
 
-        nouvelleQuestion.innerHTML = `
-            <!-- Contenido de la pregunta de examen final -->
-            <hr>
-            <label for="question">Question de l'examen :</label><br>
-            <input type="text" name="questionsFinale[${questionExamenIndex}][questionFinale]" class="form-control"><br>
-            <label for="r1">Réponse de l'examen 1 :</label><br>
-            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-            <label for="r2">Réponse de l'examen 2 :</label><br>
-            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-            <label for="r3">Réponse de l'examen 3 :</label><br>
-            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-            <label for="r4">Réponse de l'examen 4 :</label><br>
-            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-            <label for="num_rep_correct">Lettre de la réponse correcte de l'examen :</label><br>
-            <select name="questionsFinale[${questionExamenIndex}][correctFinale]" class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select><br>
-        `;
-        questionsExamen.appendChild(nouvelleQuestion);
-        questionExamenIndex++;
-    });
-</script>
+                                            nouvelleQuestion.innerHTML = `
+                                                        <!-- Contenido de la pregunta de examen final -->
+                                                        <hr>
+                                                        <label for="question">Question de l'examen :</label><br>
+                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][questionFinale]" class="form-control"><br>
+                                                        <label for="r1">Réponse de l'examen 1 :</label><br>
+                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+                                                        <label for="r2">Réponse de l'examen 2 :</label><br>
+                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+                                                        <label for="r3">Réponse de l'examen 3 :</label><br>
+                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+                                                        <label for="r4">Réponse de l'examen 4 :</label><br>
+                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+                                                        <label for="num_rep_correct">Num de la réponse correcte de l'examen :</label><br>
+                                                        <select name="questionsFinale[${questionExamenIndex}][correctFinale]" class="form-control">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select><br>
+                                                    `;
+                                            questionsExamen.appendChild(nouvelleQuestion);
+                                            questionExamenIndex++;
+                                        });
+                                    </script>
 
                                 </div>
                             </div>
