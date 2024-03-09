@@ -37,7 +37,7 @@
             if(mysqli_query($conn, $sqlEtud)) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['userid'] = $row['etudId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['filiere'] = isset($row['filiere']) ? $row['filiere'] : '';
@@ -59,7 +59,7 @@
             if(mysqli_query($conn, $sqlProf)) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['prenom'] = isset($row['prenom']) ? $row['prenom'] : '';
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['userid'] = $row['profId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['cours'] = isset($row['cours']) ? $row['cours'] : '';
                 $_SESSION['designation'] = isset($row['designation']) ? $row['designation'] : '';
@@ -79,7 +79,7 @@
             $sqlAdmin = "INSERT INTO admin(nom, prenom, email, password, telephone, designation, gender, dateNaissance, cin) VALUES ('$nom', '$prenom', '$email', '$hash', '$telephone', '$designation', '$genre', '$dateNaissance', '$CIN')";
             if(mysqli_query($conn, $sqlAdmin)) {
                 $_SESSION['email'] = $row['email'];
-                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['userid'] = $row['adminId'];
                 $_SESSION['nom'] = $row['nom'];
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['designation'] = isset($row['designation']) ? $row['designation'] : '';

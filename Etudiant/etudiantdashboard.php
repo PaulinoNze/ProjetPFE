@@ -285,7 +285,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <td>
-                <h2><a href="Cours_inscrit_info.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>&etudId=<?php echo $_SESSION['userid']?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">

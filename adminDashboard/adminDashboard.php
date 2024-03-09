@@ -411,7 +411,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
 
                         <div class="row">
