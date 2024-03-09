@@ -17,8 +17,12 @@ $pdf->Cell(40, 10, 'Etudiant Table PDF');
 // Add a line break
 $pdf->Ln(10);
 
-// Fetch data from the etudiant table
-$sql = "SELECT * FROM etudiant";
+$profId = $_GET['profId'];
+$sql = "SELECT e.*
+FROM etudiant e
+JOIN coursInscrit ci ON e.etudId = ci.etudId
+JOIN cours c ON ci.coursId = c.coursId
+WHERE c.profId = $profId;";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned

@@ -191,7 +191,7 @@ if($rowEtud != 0){
 <script>
 function downloadPDF() {
     // Redirect to the PHP script that generates the PDF
-    window.location.href = 'generate_pdf.php';
+    window.location.href = 'generate_pdf.php?profId=<?php echo $_SESSION['profId']; ?>';
 }
 </script>
 
