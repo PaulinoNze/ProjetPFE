@@ -10,7 +10,7 @@ foreach ($_POST as $key => $value) {
 }
 
 $coursId = $_POST['coursId'];
-
+$etudId = $_POST['etudId'];
 $ans = array();
 $sql = "SELECT reponse_correcte FROM examefinale WHERE coursId = $coursId";
 $result = mysqli_query($conn, $sql);
@@ -43,5 +43,13 @@ for ($i = 1; $i <= $totalQues; $i++) {
         }
     }
 }
-echo "<p>Résultat: <strong style='font-size: 1.5em;'>$totalMarks</strong>/$totalQues</p>";
+$percent = (($totalMarks / $totalQues)) * 100;
+$sqlNote = "UPDATE coursinscrit SET note = '$percent' WHERE coursId = '$coursId' AND etudId = '$etudId'";
+    mysqli_query($conn, $sqlNote);
+    if($percent >= 60){
+    echo "<p style='color: green;'><strong style='font-size: 1.5em;'>Résultat: $percent%, Félicitation vous avez validé le cours!</strong></p>";
+}else{
+    echo "<p style='color: red;'><strong style='font-size: 1.5em;'>Résultat: $percent%, Malheureusement vous n'avez pas validé le cours </strong></p>";
+}
+
 ?>

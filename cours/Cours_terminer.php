@@ -258,21 +258,25 @@ function downloadPDF() {
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
-
+<th>Image du cours</th>
 <th>Nom du Cours</th>
 <th>description</th>
 
 
-<th class="text-right">Action</th>
+<th class="text-right">Résultat</th>
 </tr>
 </thead>
 <tbody>
 <?php
 // Assuming you have already started the session and included the database connection
 
-// Fetch data from the etudiant table
-$sql = "SELECT coursId, nomCours ,
-description FROM cours ";
+$etudId = $_SESSION['userid'];
+
+$sql = "SELECT c.coursId, c.nomCours, c.description, ci.note
+FROM cours c
+JOIN coursinscrit ci ON c.coursId = ci.coursId
+JOIN etudiant e ON ci.etudId = e.etudId
+WHERE e.etudId = $etudId AND ci.note IS NOT NULL";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
@@ -282,7 +286,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <td>
-                <h2><a href="Cours_inscrit_info.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>&etudId=<?php echo $_SESSION['userid']?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
@@ -292,8 +296,14 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $row['description']; ?></td>
            
             <td class="text-right">
-            <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['coursId']; ?>">
-            <i class="far fa-trash-alt"></i>
+                <?php
+                if($row['note'] >= 60){
+                    echo "<p style='color: green;'>Validé  avec ".$row['note']."%</p>";
+                }else{
+                    echo "<p style='color: red;'>Pas validé avec ".$row['note']."%</p>";
+                }
+                ?>
+            
             </button>
             <!-- Include jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

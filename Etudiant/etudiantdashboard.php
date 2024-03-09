@@ -258,7 +258,7 @@ function downloadPDF() {
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
-
+<th>Image du Cours</th>
 <th>Nom du Cours</th>
 <th>description</th>
 
@@ -275,7 +275,7 @@ $sql = "SELECT c.coursId, c.nomCours, c.description
 FROM cours c
 JOIN coursinscrit ci ON c.coursId = ci.coursId
 JOIN etudiant e ON ci.etudId = e.etudId
-WHERE e.etudId = $etudId;";
+WHERE e.etudId = $etudId AND ci.note IS NULL";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned

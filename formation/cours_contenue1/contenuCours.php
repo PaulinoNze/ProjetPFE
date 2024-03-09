@@ -233,7 +233,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                       <li class="submenu">
                         <a href="#"><img src="../../assets/img/sidebar/icon-17.png" alt="icon"> <span>exame finale</span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled" style="display: none;">
-                          <li><a href="#" class="btn btn-primary cargar-pagina" data-url="exameFinale.php?coursId=<?php echo $coursId; ?>"><span>question de examen finale</span></a></li>
+                          <li><a href="#" class="btn btn-primary cargar-pagina" data-url="exameFinale.php?coursId=<?php echo $coursId; ?>&etudId=<?php echo $_GET['etudId']; ?>"><span>question de examen finale</span></a></li>
                         </ul>
                       </li>
                           <?php

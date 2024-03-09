@@ -258,7 +258,7 @@ function downloadPDF() {
 <table class="table custom-table">
 <thead class="thead-light">
 <tr>
-<th>Image</th>
+<th>Image du Cours</th>
 <th>Nom du Cours</th>
 <th>description</th>
 
@@ -275,7 +275,7 @@ $sql = "SELECT c.coursId, c.nomCours, c.description
 FROM cours c
 JOIN coursinscrit ci ON c.coursId = ci.coursId
 JOIN etudiant e ON ci.etudId = e.etudId
-WHERE e.etudId = $etudId;";
+WHERE e.etudId = $etudId AND ci.note IS NULL";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
@@ -285,7 +285,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <td>
-                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
+                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>&etudId=<?php echo $_SESSION['userid']?>" class="avatar text-white"><?php if(!empty($row['image'])): ?>
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
