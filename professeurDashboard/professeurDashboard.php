@@ -151,7 +151,13 @@
 <div class="dash-widget-info text-right">
 <span>Etudiants</span>
 <?php
-$sqlEtud = "SELECT COUNT(*) AS student_count FROM etudiant";
+$profId = $_SESSION['profId'];
+// Fetch data from the etudiant table
+$sqlEtud = "SELECT COUNT(e.etudId) AS student_count
+FROM etudiant e
+JOIN coursInscrit ci ON e.etudId = ci.etudId
+JOIN cours c ON ci.coursId = c.coursId
+WHERE c.profId = $profId;";
 $resultEtud = mysqli_query($conn, $sqlEtud);
 $rowEtud = mysqli_fetch_assoc($resultEtud);
 if($rowEtud != 0){
@@ -210,9 +216,13 @@ function downloadPDF() {
 <tbody>
 <?php
 // Assuming you have already started the session and included the database connection
-
+$profId = $_SESSION['profId'];
 // Fetch data from the etudiant table
-$sql = "SELECT * FROM etudiant";
+$sql = "SELECT e.*, ci.*
+FROM etudiant e
+JOIN coursInscrit ci ON e.etudId = ci.etudId
+JOIN cours c ON ci.coursId = c.coursId
+WHERE c.profId = $profId;";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned

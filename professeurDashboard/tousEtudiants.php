@@ -160,10 +160,12 @@
 </div>
 </div>
 <?php
-// Assuming you have already started the session and included the database connection
-
-// Fetch data from the database (example query)
-$sql = "SELECT * FROM etudiant";
+$profId = $_SESSION['profId'];
+$sql = "SELECT e.*, ci.*
+FROM etudiant e
+JOIN coursInscrit ci ON e.etudId = ci.etudId
+JOIN cours c ON ci.coursId = c.coursId
+WHERE c.profId = $profId;";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
