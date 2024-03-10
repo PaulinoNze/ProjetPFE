@@ -1,7 +1,5 @@
 <?php
-    session_start();
-    if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']){
-        
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -206,8 +204,5 @@
 </body>
 </html>
 <?php
-    }else{
-        header("Location: index.php");
-        exit();
-    }
+
 ?>

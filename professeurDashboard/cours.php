@@ -140,19 +140,11 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
 
             <div class="page-wrapper">
-                <!-- partial -->
-                <?php
-                include('msj.php');
-
-                // Suponiendo que tienes el ID del profesor almacenado en $_SESSION['profId']
-                $professor_id = $_SESSION['profId'];
-
-                // Consulta SQL para seleccionar solo los cursos del profesor actual
-                $sqlCours = "SELECT * FROM cours WHERE profId = $professor_id";
-                $queryCours = mysqli_query($conn, $sqlCours);
-                ?>
-
                 <div class="col-12 grid-margin">
+                    <?php
+                    include('msj.php');
+
+                    ?>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-nomCours text-center">LISTE DES COURS</h4>
@@ -166,287 +158,294 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
                             <!--- ventana modal para editar Registro --->
                             <div class="row text-center mt-7">
-                                <?php
-                                while ($dataCours = mysqli_fetch_array($queryCours)) {
-                                ?>
-                                    <div class="row text-center mt-7">
-                                        <?php
-                                        while ($dataCours = mysqli_fetch_array($queryCours)) { ?>
-                                            <div class="col-10 col-md-4">
-                                                <div class="form-group" id="marcoborder">
-                                                    <h5 class="text-center" id="nomCours">
-                                                        Cours: <?php echo  $dataCours['nomCours']; ?>
-                                                    </h5>
-                                                    <hr>
-                                                    <p><?php echo $dataCours['description']; ?></p>
 
-                                                    <img src="<?php echo $dataCours['image']; ?>" id="imgLogo">
-
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificar<?php echo $dataCours['coursId']; ?>">
-                                                        Modifier
-                                                    </button>
-                                                    <a href="deleteCours.php?id=<?php echo $dataCours['coursId']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cours ?');">Supprimer</a>
-                                                </div>
-                                            </div>
-
-                                            <!--- ventana modal para editar Registro --->
-                                            <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="background-color: #0190e0  !important;">
-                                                            <h6 class="modal-nomCours" style="color: #fff; text-align: center;">
-                                                                Modifier les informations du cours
-                                                            </h6>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
-                                                            <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
-                                                            <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
-
-                                                            <!-- Contenido del curso -->
-                                                            <div class="modal-body" id="cont_modal">
-                                                                <div class="form-group">
-                                                                    <label for="recipient-name">Nom du cours</label>
-                                                                    <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="exampleFormControlTextarea1">Description du cours</label>
-                                                                    <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="image" style="float:left;">Photo</label>
-                                                                    <br>
-                                                                    <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
-                                                                    <br><br>
-                                                                    <label style="float:left;">Changer Photo</label>
-                                                                    <br>
-                                                                    <input type="file" name="image" accept="image/*">
-                                                                </div>
-
-                                                                <!-- Contenido de los capítulos -->
-                                                                <?php
-                                                                // Consulta SQL para obtener los capítulos asociados a este curso
-                                                                $sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
-                                                                $queryChapitres = mysqli_query($conn, $sqlChapitres);
-
-                                                                // Verificar si hay capítulos asociados
-                                                                if (mysqli_num_rows($queryChapitres) > 0) {
-                                                                    while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
-                                                                ?>
-                                                                        <div class="form-group">
-                                                                            <label for="nomChapitre">Nom du chapitre</label>
-                                                                            <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="video">Vidéo du chapitre</label>
-                                                                            <video controls style="width:100%;">
-                                                                                <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
-                                                                                Your browser does not support the video tag.
-                                                                            </video>
-                                                                            <br><br>
-                                                                            <label style="float:left;">Changer Vidéo</label>
-                                                                            <br>
-                                                                            <input type="file" name="video[]" accept="video/*">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="pdf">PDF du chapitre</label>
-                                                                            <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
-                                                                            <br><br>
-                                                                            <label style="float:left;">Changer PDF</label>
-                                                                            <br>
-                                                                            <input type="file" name="pdf[]" accept=".pdf">
-                                                                        </div>
-                                                                <?php
-                                                                    }
-                                                                } else {
-                                                                    echo "<p>Aucun chapitre trouvé.</p>";
-                                                                }
-                                                                ?>
-
-                                                                <!-- Sección de preguntas del examen final -->
-                                                                <div class="form-group">
-                                                                    <label for="questions">Questions de l'examen final :</label><br>
-                                                                    <?php
-                                                                    // Consulta SQL para obtener las preguntas del examen final asociadas a este curso
-                                                                    $sqlQuestionsFinale = "SELECT * FROM examefinale WHERE coursId = " . $dataCours['coursId'];
-                                                                    $queryQuestionsFinale = mysqli_query($conn, $sqlQuestionsFinale);
-
-                                                                    // Iterar sobre cada pregunta y mostrarla en el formulario
-                                                                    $index = 1;
-                                                                    while ($questionData = mysqli_fetch_assoc($queryQuestionsFinale)) {
-                                                                        echo "<div class='question'>";
-                                                                        echo "<label for='question$index'>Question $index :</label><br>";
-                                                                        echo "<input type='text' name='questionsFinale[$index][questionFinale]' class='form-control' value='{$questionData['question']}'>";
-                                                                        echo "<br>";
-                                                                        echo "<label for='r1'>Réponse 1 :</label><br>";
-                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_1']}'>";
-                                                                        echo "<br>";
-                                                                        echo "<label for='r2'>Réponse 2 :</label><br>";
-                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_2']}'>";
-                                                                        echo "<br>";
-                                                                        echo "<label for='r3'>Réponse 3 :</label><br>";
-                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_3']}'>";
-                                                                        echo "<br>";
-                                                                        echo "<label for='r4'>Réponse 4 :</label><br>";
-                                                                        echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_4']}'>";
-                                                                        echo "<br>";
-                                                                        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
-                                                                        echo "<select name='questionsFinale[$index][correctFinale]' class='form-control'>";
-                                                                        for ($i = 1; $i <= 4; $i++) {
-                                                                            $selected = ($questionData['reponse_correcte'] == $i) ? 'selected' : '';
-                                                                            echo "<option value='$i' $selected>$i</option>";
-                                                                        }
-                                                                        echo "</select>";
-                                                                        echo "</div>";
-                                                                        $index++;
-                                                                    }
-                                                                    ?>
-                                                                </div>
+                                <div class="row text-center mt-6">
+                                    <?php
 
 
-                                                                <!-- Campo de formación -->
-                                                                <div class="form-group">
-                                                                    <label for="formation">Sélectionner la formation</label>
-                                                                    <select name="formation" class="form-control">
-                                                                        <?php
-                                                                        // Consulta SQL para obtener todas las formaciones disponibles
-                                                                        $sqlFormations = "SELECT * FROM formation";
-                                                                        $queryFormations = mysqli_query($conn, $sqlFormations);
+                                    // Suponiendo que tienes el ID del profesor almacenado en $_SESSION['profId']
+                                    $professor_id = $_SESSION['profId'];
+                                    $statut = "Actif";
+                                    // Consulta SQL para seleccionar solo los cursos del profesor actual
+                                    $sqlCours = "SELECT * FROM cours WHERE profId = $professor_id AND statut = '$statut'";
+                                    $queryCours = mysqli_query($conn, $sqlCours);
+                                    while ($dataCours = mysqli_fetch_array($queryCours)) {
+                                    ?>
+                                        <div class="col-10 col-md-4">
+                                            <div class="form-group" id="marcoborder">
+                                                <h5 class="text-center" id="nomCours">
+                                                    Cours: <?php echo  $dataCours['nomCours']; ?>
+                                                </h5>
+                                                <hr>
+                                                <p><?php echo $dataCours['description']; ?></p>
 
-                                                                        // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
-                                                                        while ($formation = mysqli_fetch_assoc($queryFormations)) {
-                                                                            $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
-                                                                            echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
+                                                <img src="<?php echo $dataCours['image']; ?>" id="imgLogo">
 
-
-
-                                                                <!-- Sección de preguntas del quiz -->
-                                                                <div class="form-group">
-                                                                    <label for="questions">Questions du quiz :</label><br>
-                                                                    <?php
-                                                                    // Consulta SQL para obtener las preguntas asociadas a este curso
-                                                                    $sqlQuestions = "SELECT * FROM quiz WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='" . $dataCours['coursId'] . "')";
-                                                                    $queryQuestions = mysqli_query($conn, $sqlQuestions);
-
-                                                                    // Iterar sobre cada pregunta y mostrarla en el formulario
-                                                                    $index = 1;
-                                                                    while ($questionData = mysqli_fetch_assoc($queryQuestions)) {
-                                                                        echo "<div class='question'>";
-                                                                        echo "<label for='question$index'>Question $index :</label><br>";
-                                                                        echo "<input type='text' name='questions[$index][question]' class='form-control' value='{$questionData['question']}'><br>";
-                                                                        echo "<label for='r1'>Réponse 1 :</label><br>";
-                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_1']}'><br>";
-                                                                        echo "<label for='r2'>Réponse 2 :</label><br>";
-                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_2']}'><br>";
-                                                                        echo "<label for='r3'>Réponse 3 :</label><br>";
-                                                                        echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_3']}'><br>";
-                                                                        echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
-                                                                        echo "<select name='questions[$index][correct]' class='form-control'>";
-                                                                        for ($i = 1; $i <= 3; $i++) {
-                                                                            $selected = ($questionData['num_reponse_correcte'] == $i) ? 'selected' : '';
-                                                                            echo "<option value='$i' $selected>$i</option>";
-                                                                        }
-                                                                        echo "</select><br>";
-                                                                        echo "</div>";
-                                                                        $index++;
-                                                                    }
-                                                                    ?>
-
-
-                                                                </div>
-
-
-
-                                                            </div>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                                <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-                                                            </div>
-                                                        </form>
-
-
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- fin de editar en ventana modal -->
-                                        <?php } ?>
-                                    </div>
-
-                                    <!--- ventana modal para editar Registro --->
-                                    <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="background-color: #0190e0 !important;">
-                                                    <h6 class="modal-nomCours" style="color: #fff; text-align: center;">Modifier les informations du cours</h6>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
-                                                    <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
-                                                    <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
-                                                    <div class="modal-body" id="cont_modal">
-                                                        <div class="form-group">
-                                                            <label for="nomCours">Nom du cours</label>
-                                                            <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="description">Description du cours</label>
-                                                            <textarea class="form-control" name="description" rows="3"><?php echo $dataCours['description']; ?></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="image">Photo</label><br>
-                                                            <input type="file" name="image" accept="image/*">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="video">Vidéo</label><br>
-                                                            <input type="file" name="video" accept="video/*">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="pdf">PDF</label><br>
-                                                            <input type="file" name="pdf" accept=".pdf">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="datePublish">Date de publication</label>
-                                                            <input type="date" name="datePublish" class="form-control" value="<?php echo $dataCours['datePublish']; ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="formation">Sélectionner la formation</label>
-                                                            <select name="formation" class="form-control">
-                                                                <?php
-                                                                // Consulta SQL para obtener todas las formaciones disponibles
-                                                                $sqlFormations = "SELECT * FROM formation";
-                                                                $queryFormations = mysqli_query($conn, $sqlFormations);
-
-                                                                // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
-                                                                while ($formation = mysqli_fetch_assoc($queryFormations)) {
-                                                                    echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                        <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-                                                    </div>
-                                                </form>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificar<?php echo $dataCours['coursId']; ?>">
+                                                    Modifier
+                                                </button>
+                                                <a href="deleteCours.php?id=<?php echo $dataCours['coursId']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cours ?');">Supprimer</a>
                                             </div>
                                         </div>
+
+                                        <!--- ventana modal para editar Registro --->
+                                        <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #0190e0  !important;">
+                                                        <h6 class="modal-nomCours" style="color: #fff; text-align: center;">
+                                                            Modifier les informations du cours
+                                                        </h6>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
+                                                        <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+                                                        <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
+
+                                                        <!-- Contenido del curso -->
+                                                        <div class="modal-body" id="cont_modal">
+                                                            <div class="form-group">
+                                                                <label for="recipient-name">Nom du cours</label>
+                                                                <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlTextarea1">Description du cours</label>
+                                                                <textarea class="form-control" name="description" rows="8"><?php echo $dataCours['description']; ?></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="image" style="float:left;">Photo</label>
+                                                                <br>
+                                                                <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
+                                                                <br><br>
+                                                                <label style="float:left;">Changer Photo</label>
+                                                                <br>
+                                                                <input type="file" name="image" accept="image/*">
+                                                            </div>
+
+                                                            <!-- Contenido de los capítulos -->
+                                                            <?php
+                                                            // Consulta SQL para obtener los capítulos asociados a este curso
+                                                            $sqlChapitres = "SELECT * FROM chapitre WHERE coursId = " . $dataCours['coursId'];
+                                                            $queryChapitres = mysqli_query($conn, $sqlChapitres);
+
+                                                            // Verificar si hay capítulos asociados
+                                                            if (mysqli_num_rows($queryChapitres) > 0) {
+                                                                while ($dataChapitre = mysqli_fetch_assoc($queryChapitres)) {
+                                                            ?>
+                                                                    <div class="form-group">
+                                                                        <label for="nomChapitre">Nom du chapitre</label>
+                                                                        <input type="text" name="nomChapitre[]" class="form-control" value="<?php echo $dataChapitre['nomChapitre']; ?>">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="video">Vidéo du chapitre</label>
+                                                                        <video controls style="width:100%;">
+                                                                            <source src="<?php echo $dataChapitre['video']; ?>" type="video/mp4">
+                                                                            Your browser does not support the video tag.
+                                                                        </video>
+                                                                        <br><br>
+                                                                        <label style="float:left;">Changer Vidéo</label>
+                                                                        <br>
+                                                                        <input type="file" name="video[]" accept="video/*">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="pdf">PDF du chapitre</label>
+                                                                        <embed src="<?php echo $dataChapitre['pdf']; ?>" type="application/pdf" width="100%" height="600px" />
+                                                                        <br><br>
+                                                                        <label style="float:left;">Changer PDF</label>
+                                                                        <br>
+                                                                        <input type="file" name="pdf[]" accept=".pdf">
+                                                                    </div>
+                                                            <?php
+                                                                }
+                                                            } else {
+                                                                echo "<p>Aucun chapitre trouvé.</p>";
+                                                            }
+                                                            ?>
+
+                                                            <!-- Sección de preguntas del examen final -->
+                                                            <div class="form-group">
+                                                                <label for="questions">Questions de l'examen final :</label><br>
+                                                                <?php
+                                                                // Consulta SQL para obtener las preguntas del examen final asociadas a este curso
+                                                                $sqlQuestionsFinale = "SELECT * FROM examefinale WHERE coursId = " . $dataCours['coursId'];
+                                                                $queryQuestionsFinale = mysqli_query($conn, $sqlQuestionsFinale);
+
+                                                                // Iterar sobre cada pregunta y mostrarla en el formulario
+                                                                $index = 1;
+                                                                while ($questionData = mysqli_fetch_assoc($queryQuestionsFinale)) {
+                                                                    echo "<div class='question'>";
+                                                                    echo "<label for='question$index'>Question $index :</label><br>";
+                                                                    echo "<input type='text' name='questionsFinale[$index][questionFinale]' class='form-control' value='{$questionData['question']}'>";
+                                                                    echo "<br>";
+                                                                    echo "<label for='r1'>Réponse 1 :</label><br>";
+                                                                    echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_1']}'>";
+                                                                    echo "<br>";
+                                                                    echo "<label for='r2'>Réponse 2 :</label><br>";
+                                                                    echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_2']}'>";
+                                                                    echo "<br>";
+                                                                    echo "<label for='r3'>Réponse 3 :</label><br>";
+                                                                    echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_3']}'>";
+                                                                    echo "<br>";
+                                                                    echo "<label for='r4'>Réponse 4 :</label><br>";
+                                                                    echo "<input type='text' name='questionsFinale[$index][reponsesFinale][]' class='form-control' value='{$questionData['reponse_4']}'>";
+                                                                    echo "<br>";
+                                                                    echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+                                                                    echo "<select name='questionsFinale[$index][correctFinale]' class='form-control'>";
+                                                                    for ($i = 1; $i <= 4; $i++) {
+                                                                        $selected = ($questionData['reponse_correcte'] == $i) ? 'selected' : '';
+                                                                        echo "<option value='$i' $selected>$i</option>";
+                                                                    }
+                                                                    echo "</select>";
+                                                                    echo "</div>";
+                                                                    $index++;
+                                                                }
+                                                                ?>
+                                                            </div>
+
+
+                                                            <!-- Campo de formación -->
+                                                            <div class="form-group">
+                                                                <label for="formation">Sélectionner la formation</label>
+                                                                <select name="formation" class="form-control">
+                                                                    <?php
+                                                                    // Consulta SQL para obtener todas las formaciones disponibles
+                                                                    $sqlFormations = "SELECT * FROM formation";
+                                                                    $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                                                                    // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                                                                    while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                                                        $selected = ($formation['formationID'] == $dataCours['formation']) ? 'selected' : '';
+                                                                        echo "<option value='" . $formation['formationID'] . "' $selected>" . $formation['titre'] . "</option>";
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+
+
+
+                                                            <!-- Sección de preguntas del quiz -->
+                                                            <div class="form-group">
+                                                                <label for="questions">Questions du quiz :</label><br>
+                                                                <?php
+                                                                // Consulta SQL para obtener las preguntas asociadas a este curso
+                                                                $sqlQuestions = "SELECT * FROM quiz WHERE chapitreId IN (SELECT chapitreId FROM chapitre WHERE coursId='" . $dataCours['coursId'] . "')";
+                                                                $queryQuestions = mysqli_query($conn, $sqlQuestions);
+
+                                                                // Iterar sobre cada pregunta y mostrarla en el formulario
+                                                                $index = 1;
+                                                                while ($questionData = mysqli_fetch_assoc($queryQuestions)) {
+                                                                    echo "<div class='question'>";
+                                                                    echo "<label for='question$index'>Question $index :</label><br>";
+                                                                    echo "<input type='text' name='questions[$index][question]' class='form-control' value='{$questionData['question']}'><br>";
+                                                                    echo "<label for='r1'>Réponse 1 :</label><br>";
+                                                                    echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_1']}'><br>";
+                                                                    echo "<label for='r2'>Réponse 2 :</label><br>";
+                                                                    echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_2']}'><br>";
+                                                                    echo "<label for='r3'>Réponse 3 :</label><br>";
+                                                                    echo "<input type='text' name='questions[$index][reponses][]' class='form-control' value='{$questionData['reponse_3']}'><br>";
+                                                                    echo "<label for='num_rep_correct'>Numéro de la réponse correcte :</label><br>";
+                                                                    echo "<select name='questions[$index][correct]' class='form-control'>";
+                                                                    for ($i = 1; $i <= 3; $i++) {
+                                                                        $selected = ($questionData['num_reponse_correcte'] == $i) ? 'selected' : '';
+                                                                        echo "<option value='$i' $selected>$i</option>";
+                                                                    }
+                                                                    echo "</select><br>";
+                                                                    echo "</div>";
+                                                                    $index++;
+                                                                }
+                                                                ?>
+
+
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                            <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+                                                        </div>
+                                                    </form>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- fin de editar en ventana modal -->
+                                    <?php } ?>
+                                </div>
+
+                                <!--- ventana modal para editar Registro --->
+                                <div class="modal fade" id="modificar<?php echo $dataCours['coursId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #0190e0 !important;">
+                                                <h6 class="modal-nomCours" style="color: #fff; text-align: center;">Modifier les informations du cours</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="POST" action="recibUpdateCours.php" enctype="multipart/form-data">
+                                                <input type="hidden" name="coursId" value="<?php echo $dataCours['coursId']; ?>">
+                                                <input type="hidden" name="datePublish" value="<?php echo $dataCours['datePublish']; ?>">
+                                                <div class="modal-body" id="cont_modal">
+                                                    <div class="form-group">
+                                                        <label for="nomCours">Nom du cours</label>
+                                                        <input type="text" name="nomCours" class="form-control" value="<?php echo $dataCours['nomCours']; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="description">Description du cours</label>
+                                                        <textarea class="form-control" name="description" rows="3"><?php echo $dataCours['description']; ?></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="image">Photo</label><br>
+                                                        <input type="file" name="image" accept="image/*">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="video">Vidéo</label><br>
+                                                        <input type="file" name="video" accept="video/*">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="pdf">PDF</label><br>
+                                                        <input type="file" name="pdf" accept=".pdf">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="datePublish">Date de publication</label>
+                                                        <input type="date" name="datePublish" class="form-control" value="<?php echo $dataCours['datePublish']; ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formation">Sélectionner la formation</label>
+                                                        <select name="formation" class="form-control">
+                                                            <?php
+                                                            // Consulta SQL para obtener todas las formaciones disponibles
+                                                            $sqlFormations = "SELECT * FROM formation";
+                                                            $queryFormations = mysqli_query($conn, $sqlFormations);
+
+                                                            // Iterar sobre cada formación y mostrarla como una opción en el campo de selección
+                                                            while ($formation = mysqli_fetch_assoc($queryFormations)) {
+                                                                echo "<option value='" . $formation['formationID'] . "'>" . $formation['titre'] . "</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
+                                </div>
 
                             </div>
                             <!-- fin de editar en ventana modal -->
-                        <?php } ?>
+
                         </div>
 
 

@@ -213,9 +213,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
 <li><a href="cours.php"><span>Approver Les Cours</span></a></li>
 </ul>
 </li>
-                            <li>
-                                <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
-                            </li>
+
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
@@ -351,16 +349,16 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                                                 <td><?php echo $row['telephone']; ?></td>
                                                                 <td><?php echo $row['date_naissance']; ?></td>
                                                                 <td class="text-right">
-                                                                    <button onclick="updateStatus(<?php echo $row['etudId']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
+                                                                    <button onclick="updateStatusEtud(<?php echo $row['etudId']; ?>)" type="button" class="btn btn-outline-success"> ✔ </button>
 
-                                                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequest(<?php echo $row['etudId']; ?>)">
+                                                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequestEtud(<?php echo $row['etudId']; ?>)">
                                                                         <i class="far fa-trash-alt"></i>
                                                                     </button>
                                                                 </td>
                                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                                                                 <script>
-                                                                    function updateStatus(etudId) {
+                                                                    function updateStatusEtud(etudId) {
                                                                         $.ajax({
                                                                             url: 'updateStatus.php',
                                                                             type: 'POST',
@@ -377,7 +375,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                                                     }
                                                                 </script>
                                                                 <script>
-                                                                    function deleteRequest(etudId) {
+                                                                    function deleteRequestEtud(etudId) {
                                                                         $.ajax({
                                                                             url: 'deleteRequest.php',
                                                                             type: 'POST',
@@ -432,7 +430,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                                     <script>
                                                         function downloadPDF() {
                                                             // Redirect to the PHP script that generates the PDF
-                                                            window.location.href = 'generate_pdf.php';
+                                                            window.location.href = 'generate_pdf_prof.php';
                                                         }
                                                     </script>
 

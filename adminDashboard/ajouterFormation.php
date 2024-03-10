@@ -267,8 +267,8 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             <div class="form-group">
                                                         <label>statut</label>
                                                         <select class="form-control select" name="statut">
-                                                            <option>Actif</option>
-                                                            <option>InActif</option>
+                                                            <option value="Actif">Actif</option>
+                                                            <option value="Inactif">Inactif</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">

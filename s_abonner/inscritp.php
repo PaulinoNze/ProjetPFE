@@ -169,7 +169,7 @@
           <div class="row">
             <div class="col">
               <label>Image</label>
-              <input type="file" name="image" class="form-control" require>
+              <input type="file" name="image" class="form-control" required>
             </div>
 
           </div><br>

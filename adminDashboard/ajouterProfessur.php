@@ -211,9 +211,6 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <li><a href="cours.php"><span>Approver Les Cours</span></a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
-                            </li>
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
@@ -275,10 +272,6 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                         <label>Date de Naissance</label>
                                                         <input type="date" name="dateNaissance" class="form-control">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Salle</label>
-                                                        <input type="text" class="form-control" name="salle">
-                                                    </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="form-group">
@@ -286,22 +279,24 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                     <input type="text" class="form-control" name="nom">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Comfirmez le mot de passe</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Telephone</label>
+                                                <label>Telephone</label>
                                                     <input type="text" class="form-control" name="telephone">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Cours</label>
-                                                    <input type="text" class="form-control" name="cours">
-                                                    </select>
+                                                <label>Comfirmez le mot de passe</label>
+                                                    <input type="password" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>CIN</label>
-                                                    <input type="text" class="form-control" name="cin">
+                                                <label>Statut</label>
+                                                        <select class="form-control select" name="statut">
+                                                            <option value="1">Actif</option>
+                                                            <option value="0">Inactif</option>
+                                                        </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Image</label>
+                                                    <input type="file" name="image" class="form-control">
+                                    </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
@@ -310,15 +305,9 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <div class="form-group">
-                                                    <label>File</label>
-                                                    <input type="file" name="image" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group text-center custom-mt-form-group">
                                                     <button class="btn btn-primary mr-2" type="submit">Soumettre</button>
-                                                    <button class="btn btn-secondary" type="reset"><a href="tousProfesseur">Annuler</a></button>
+                                                    <button class="btn btn-secondary" type="reset"><a href="tousProfesseur" style="color: white;">Annuler</a></button>
                                                 </div>
                                                 </form>
                                             </div>

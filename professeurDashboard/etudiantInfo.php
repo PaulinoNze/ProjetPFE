@@ -77,7 +77,7 @@
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
     <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo $_SESSION['image'];?>" width="30" alt="professeur">
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
     <?php else: ?>
         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
     <?php endif; ?>
@@ -172,7 +172,6 @@
 <h3 class="user-name m-t-0"><?php echo $user['prenom'] ." ". $user['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
 <small class="text-muted">Etudiant</small>
-<div class="staff-id">CIN : <?php echo $user['cin']; ?></div>
 </div>
 </div>
 <div class="col-md-7">
@@ -190,8 +189,8 @@
 <span class="text"><?php echo $user['date_naissance']; ?></span>
 </li>
 <li>
-<span class="title">Salle:</span>
-<span class="text"><?php echo $user['salle']; ?></span>
+<span class="title">Adresse:</span>
+<span class="text"><?php echo $user['adresse']; ?></span>
 </li>
 <li>
 <span class="title">Genre:</span>

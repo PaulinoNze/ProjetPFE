@@ -12,13 +12,13 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
 
 // Add a cell with a table title
-$pdf->Cell(40, 10, 'Demandes Des Etudiants');
+$pdf->Cell(40, 10, 'Demandes Des Professeurs');
 
 // Add a line break
 $pdf->Ln(10);
 
 // Fetch data from the etudiant table
-$sql = "SELECT * FROM etudiant WHERE statut = '0'";
+$sql = "SELECT * FROM professeur WHERE statut = '0'";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
@@ -46,9 +46,9 @@ if (mysqli_num_rows($result) > 0) {
     }
 } else {
     // No rows returned from the database
-    $pdf->Cell(0, 10, 'Aucun étudiant', 1, 1, 'C');
+    $pdf->Cell(0, 10, 'Aucun professeur', 1, 1, 'C');
 }
 
 // Close and output PDF document
-$pdf->Output('Demandes Des Etudiants.pdf', 'D');
+$pdf->Output('Demandes Des Professeurs.pdf', 'D');
 ?>

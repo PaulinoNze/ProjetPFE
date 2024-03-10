@@ -12,24 +12,23 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
 
 // Add a cell with a table title
-$pdf->Cell(40, 10, 'Demandes Des Etudiants');
+$pdf->Cell(40, 10, 'Les Cours');
 
 // Add a line break
 $pdf->Ln(10);
 
 // Fetch data from the etudiant table
-$sql = "SELECT * FROM etudiant WHERE statut = '0'";
+$sql = "SELECT * FROM cours";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
 if (mysqli_num_rows($result) > 0) {
     // Table header
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 10, 'Nom', 1);
-    $pdf->Cell(30, 10, 'Prenom', 1);
-    $pdf->Cell(30, 10, 'Email', 1);
-    $pdf->Cell(30, 10, 'Telephone', 1);
-    $pdf->Cell(40, 10, 'Date de Naissance', 1);
+    $pdf->Cell(30, 10, 'Nom Du Cours', 1);
+    $pdf->Cell(30, 10, 'Description', 1);
+    $pdf->Cell(30, 10, 'Date Publish', 1);
+    $pdf->Cell(30, 10, 'Statut', 1);
     $pdf->Ln();
 
     // Set font for data rows
@@ -37,18 +36,17 @@ if (mysqli_num_rows($result) > 0) {
 
     // Fetch and add data rows
     while ($row = mysqli_fetch_assoc($result)) {
-        $pdf->Cell(30, 10, $row['nom'], 1);
-        $pdf->Cell(30, 10, $row['prenom'], 1);
-        $pdf->Cell(30, 10, $row['email'], 1);
-        $pdf->Cell(30, 10, $row['telephone'], 1);
-        $pdf->Cell(40, 10, $row['date_naissance'], 1);
+        $pdf->Cell(30, 10, $row['nomCours'], 1);
+        $pdf->Cell(30, 10, $row['description'], 1);
+        $pdf->Cell(30, 10, $row['datePublish'], 1);
+        $pdf->Cell(30, 10, $row['statut'], 1);
         $pdf->Ln();
     }
 } else {
     // No rows returned from the database
-    $pdf->Cell(0, 10, 'Aucun étudiant', 1, 1, 'C');
+    $pdf->Cell(0, 10, 'Aucun cours', 1, 1, 'C');
 }
 
 // Close and output PDF document
-$pdf->Output('Demandes Des Etudiants.pdf', 'D');
+$pdf->Output('Les Cours.pdf', 'D');
 ?>
