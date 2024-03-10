@@ -72,7 +72,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="../adminDashboard/cours.php">Retour pour approuver le cour</a>
+                                <a class="nav-link bg-body-tertiary text-dark" aria-current="page" href="../adminDashboard/cours.php">Retour pour approuver le cour</a>
                             </li>
                         </ul>
                     </div>
@@ -105,7 +105,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                         </div>
                                         <div class="blog-image">
                                             <a href="#"><?php if (!empty($user['image'])) : ?>
-                                                    <img class="img-fluid" src="<?php echo 'data:image;base64,' . base64_encode($user['image']); ?>">
+                                                    <img class="img-fluid" src="../professeurDashboard/<?php echo $user['image']; ?>">
                                                 <?php else : ?>
                                                     <img class="img-fluid" src="../Img/logo2.png" alt="Default Image">
                                                     <?php endif; ?></a>

@@ -66,7 +66,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="../adminDashboard/approveformation.php">Retour pour approuver la formation</a>
+                                <a class="nav-link bg-body-tertiary text-dark" aria-current="page" href="../adminDashboard/approveformation.php">Retour pour approuver la formation</a>
                             </li>
                         </ul>
                     </div>

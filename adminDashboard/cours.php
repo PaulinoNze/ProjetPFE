@@ -289,8 +289,9 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 ?>
                                                         <tr>
                                                             <td>
-                                                                <h2><a href="../cours/coursInfo.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white"><?php if (!empty($row['image'])) : ?>
-                                                                            <img class="avatar" src="../professeurDashboard/FotosCursos/<?php echo $user['image']; ?>" alt="User Image">
+                                                                <h2><a href="../cours/coursInfo.php?id=<?php echo $row['coursId']; ?>" class="avatar text-white">
+                                                                <?php if (!empty($row['image'])) : ?>
+                                                                            <img class="avatar" src="../professeurDashboard/<?php echo $row['image']; ?>" alt="User Image">
                                                                         <?php else : ?>
                                                                             <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
                                                                         <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>

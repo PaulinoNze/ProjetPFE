@@ -207,9 +207,6 @@
 
 </ul>
 </li>
-<li>
-<a href="Exam.php"><img src="../assets/img/sidebar/icon-7.png" alt="icon"> <span>Examen</span></a>
-</li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
