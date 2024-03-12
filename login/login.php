@@ -39,7 +39,7 @@
 
 <main class="form-signin">
   <form action="loginauth.php" method="post">
-    <img class="mb-4" src="../Img/logo2.png" alt="" width="300" height="200" style="border-radius: 20px;">
+    <img class="mb-4" src="../Img/school_logo.png" alt="" width="500" height="200" style="border-radius: 20px;">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     <?php if(isset($_GET['error'])){ ?>
       <p class = "error" style="color: red;"> <?php echo $_GET['error']; ?></p>

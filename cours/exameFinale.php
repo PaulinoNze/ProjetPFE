@@ -1,5 +1,5 @@
 <?php
-    $sitename = 'Quiz';
+    $sitename = 'Examen final';
     $note = 'Si vous ne cliquez sur aucune réponse, les notes correspondantes à cette question seront marquées <strong>ZÉRO</strong> et les modifications ultérieures ne pourront pas être annulées.';
 ?>
 <!DOCTYPE html>
@@ -25,11 +25,11 @@
         <form id="quizForm" method="POST">
             <ol type="1" >
                 <?php
-                    include "../../database.php";
-                    if (isset($_GET['chapitreId'])) {
-                        $chapitreId = $_GET['chapitreId'];
+                    include "../database.php";
+                    if (isset($_GET['coursId'])) {
+                        $coursId = $_GET['coursId'];
                         $n = 0; // Start numbering from 0
-                        $sql = "SELECT idQuiz, question, reponse_1, reponse_2, reponse_3, num_reponse_correcte FROM quiz WHERE chapitreId = $chapitreId";
+                        $sql = "SELECT exameFinaleId, question, reponse_1, reponse_2, reponse_3, reponse_4, reponse_correcte FROM examefinale WHERE coursId = $coursId";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
@@ -40,8 +40,8 @@
                     <input type="radio" name="answer-<?php echo $n; ?>" value="1" ><?php echo $row['reponse_1'];?><br>
                     <input type="radio" name="answer-<?php echo $n; ?>" value="2" ><?php echo $row['reponse_2'];?><br>
                     <input type="radio" name="answer-<?php echo $n; ?>" value="3" ><?php echo $row['reponse_3'];?><br>
-                    <input type="hidden" name="idQuiz" value="<?php echo $row['idQuiz'];?>">
-                    <input type="hidden" name="chapireId" value="<?php echo $chapitreId;?>">
+                    <input type="radio" name="answer-<?php echo $n; ?>" value="4" ><?php echo $row['reponse_4'];?><br>
+                    <input type="hidden" name="coursId" value="<?php echo $coursId;?>">
                     <br>
                 </div>
                 <?php
@@ -49,7 +49,6 @@
                         }
                     }
                 ?>
-                <input name="btn" value="Soumettre" type="button" class="btn btn-primary mt-3" id="submitBtn">
             </ol>
         </form>
         
@@ -64,7 +63,7 @@
             $('#submitBtn').click(function() {
                 var formData = $('#quizForm').serialize();
                 $.ajax({
-                    url: 'result.php',
+                    url: 'examResult.php',
                     type: 'POST',
                     data: formData,
                     success: function(response) {

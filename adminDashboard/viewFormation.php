@@ -4,18 +4,10 @@ include "../database.php";
 if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
     if (isset($_GET['id'])) {
         $userId = $_GET['id'];
-        $sql = "SELECT * FROM formation WHERE formationID = $userId";
+        $sql = "SELECT coursId, nomCours, description, datePublish, image FROM cours WHERE statut = 'Actif' AND formationID = $userId";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            $user = mysqli_fetch_assoc($result);
-        } else {
-            echo "Utilisateur non trouvé.";
-            exit();
-        }
-    } else {
-        echo "ID de l'utilisateur non spécifié.";
-        exit();
-    }
+            
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -59,8 +51,8 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                 <div class="container-fluid">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
-                            <img src="../Img/logo2.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                            Cours
+                            <img src="../Img/school_logo.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top">
+
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -89,29 +81,37 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                             <div class="col-md-10">
                                 <div class="blog-view">
                                     <article class="blog blog-single-post">
-                                        <h3 class="blog-title"><?php echo $user['titre'] ?></h3>
-                                        <div class="blog-info clearfix">
-                                            <div class="post-left">
-                                                <ul>
-                                                    <li><a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> <span><?php echo $user['datePublish'] ?></span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="blog-image">
-                                            <a href="#"><?php if (!empty($user['image'])) : ?>
-                                                    <img class="img-fluid" src="<?php echo 'data:image;base64,' . base64_encode($user['image']); ?>">
-                                                <?php else : ?>
-                                                    <img class="img-fluid" src="../Img/logo2.png" alt="Default Image">
-                                                    <?php endif; ?></a>
-                                        </div>
-                                        <div id="curso">
-                                            <div class="container">
-                                                <div class="blog-content mt-4">
-                                                    <h2>Introduction</h2>
-                                                    <p><?php echo $user['description'] ?></p>
-                                                    <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre Le Cours</button>
+                                    <div class="row">
+                                        <?php
+                                        while ($user = mysqli_fetch_assoc($result)) { ?>
+                                            <div class="col-md-4">
+                                                <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
+                                                    <img src="../professeurDashboard/<?php echo $user['image']; ?>" class="card-img-top" alt="<?php echo $user['nomCours']; ?>" style="max-height: 300px;">
+                                                    <div class="card-body">
+                                                        <h2 class="card-title course-title"><?php echo $user['nomCours']; ?></h2>
+                                                        <p class="card-text"><?php echo $user['description']; ?></p>
+                                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                                            <div>
+                                                                <i class="fas fa-calendar-alt mr-2"></i> <!-- Icono de calendario -->
+                                                                <?php echo $user['datePublish']; ?> <!-- Fecha de publicación -->
+                                                            </div>
+                                                                <a href="../cours/coursInfo.php?id=<?php echo $user['coursId'];?>" class="btn btn-primary">Suivre La formation</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        <?php
+                                        }
+                                    } else {
+                                        echo "Utilisateur non trouvé.";
+                                        exit();
+                                    }
+                                } else {
+                                    echo "ID de l'utilisateur non spécifié.";
+                                    exit();
+                                }
+                                        ?>
+                                    </div>
                                     </article>
 
 

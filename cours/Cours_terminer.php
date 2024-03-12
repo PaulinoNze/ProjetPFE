@@ -174,7 +174,7 @@
 <div class="sidebar-inner slimscroll">
 <div id="sidebar-menu" class="sidebar-menu">
 <div class="header-left">
-<a href="adminDashboard.php" class="logo">
+<a href="../Etudiant/etudiantdashboard.php" class="logo">
 <img src="../Img/logo1.jpg"  height="60" alt="">
 <span class="text-uppercase">EST-D</span>
 </a>
@@ -217,7 +217,7 @@
 </div>
 <div class="col-md-6">
 <ul class="breadcrumb mb-0 p-0 float-right">
-<li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
+<li class="breadcrumb-item"><a href="../Etudiant/etudiantdashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><span>Tableau de Bord</span></li>
 </ul>
 </div>
@@ -290,7 +290,7 @@ if (mysqli_num_rows($result) > 0) {
                         <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
                     <?php else: ?>
                         <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
-                    <?php endif; ?></a></a><a href="adminInfo.php"> <span></span></a></h2>
+                    <?php endif; ?></a></a><a href="modifierprofil.php"> <span></span></a></h2>
             </td>
             <td><?php echo $row['nomCours']; ?></td>
             <td><?php echo $row['description']; ?></td>

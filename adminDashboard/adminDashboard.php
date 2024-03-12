@@ -203,14 +203,14 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
-                                    <li><a href="approveformation.php"><span>Approver Formation</span></a></li>
+                                    <li><a href="approveformation.php"><span>Les Formation</span></a></li>
                                     <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cour</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+<li><a href="cours.php"><span>Les Cours</span></a></li>
 </ul>
 </li>
 
@@ -252,7 +252,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                 <div class="dash-widget-info text-right">
                                     <span>Etudiants</span>
                                     <?php
-                                    $sqlEtud = "SELECT COUNT(*) AS student_count FROM etudiant";
+                                    $sqlEtud = "SELECT COUNT(*) AS student_count FROM etudiant WHERE statut = '1'";
                                     $resultEtud = mysqli_query($conn, $sqlEtud);
                                     $rowEtud = mysqli_fetch_assoc($resultEtud);
                                     if ($rowEtud != 0) {
@@ -271,7 +271,7 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                 <div class="dash-widget-info text-left d-inline-block">
                                     <span>Professeurs</span>
                                     <?php
-                                    $sqlProf = "SELECT COUNT(*) AS professeur_count FROM professeur";
+                                    $sqlProf = "SELECT COUNT(*) AS professeur_count FROM professeur WHERE statut = '1'";
                                     $resultProf = mysqli_query($conn, $sqlProf);
                                     $rowProf = mysqli_fetch_assoc($resultProf);
                                     if ($rowProf != 0) {
@@ -299,11 +299,11 @@ if (isset($_SESSION['adminId']) && isset($_SESSION['email'])) {
                                             </div>
                                             <div class="col-sm-6 text-sm-right">
                                                 <div class=" mt-sm-0 mt-2">
-                                                    <button class="btn btn-outline-danger mr-2" onclick="downloadPDF()">
+                                                    <button class="btn btn-outline-danger mr-2" onclick="downloadEtudPDF()">
                                                         <img src="../assets/img/pdf.png" alt="" height="18"><span class="ml-2">PDF</span>
                                                     </button>
                                                     <script>
-                                                        function downloadPDF() {
+                                                        function downloadEtudPDF() {
                                                             // Redirect to the PHP script that generates the PDF
                                                             window.location.href = 'generate_pdf.php';
                                                         }

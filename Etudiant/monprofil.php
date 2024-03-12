@@ -169,7 +169,7 @@
 <div class="sidebar-inner slimscroll">
 <div id="sidebar-menu" class="sidebar-menu">
 <div class="header-left">
-<a href="adminDashboard.php" class="logo">
+<a href="etudiantdashboard.php" class="logo">
 <img src="../Img/logo1.jpg"  height="60" alt="">
 <span class="text-uppercase">EST-D</span>
 </a>

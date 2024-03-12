@@ -25,15 +25,15 @@
         <form id="quizForm" method="POST">
             <ol type="1" >
                 <?php
-                    include "../../database.php";
+                    include "../database.php";
                     if (isset($_GET['chapitreId'])) {
                         $chapitreId = $_GET['chapitreId'];
-                        $n = 0; // Start numbering from 0
+                        $n = 0;
                         $sql = "SELECT idQuiz, question, reponse_1, reponse_2, reponse_3, num_reponse_correcte FROM quiz WHERE chapitreId = $chapitreId";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
-                                $n++; // Increment before use
+                                $n++; 
                 ?>
                 <div id="question-container">
                     <li><h6 class="question" id="<?php echo $n; ?>" ><?php echo $row['question'];?></h6></li>
@@ -49,7 +49,6 @@
                         }
                     }
                 ?>
-                <input name="btn" value="Soumettre" type="button" class="btn btn-primary mt-3" id="submitBtn">
             </ol>
         </form>
         

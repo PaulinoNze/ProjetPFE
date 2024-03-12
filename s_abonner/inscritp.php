@@ -15,7 +15,7 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-      <img class="mb-4" src="logo1.jpg" alt="" width="300" style="border-radius: 20px; margin-left: 170px;">
+      <img class="mb-4" src="../Img/school_logo.png" alt="" width="300" style="border-radius: 20px; margin-left: 170px;">
         <h2 class="mb-4" style="text-align: center;">Créer un compte</h2>
         <form action="abonnerauth.php" method="POST" enctype="multipart/form-data">
           <div class="row">

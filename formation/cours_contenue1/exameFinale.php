@@ -51,7 +51,7 @@
                         }
                     }
                 ?>
-                <input name="btn" value="Submit" type="button" id="submitBtn">
+                <input name="btn" value="Soumettre" type="button" class="btn btn-primary mt-3" id="submitBtn">
             </ol>
         </form>
         

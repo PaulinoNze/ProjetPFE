@@ -199,14 +199,14 @@
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-5.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a class="active" href="approveformation.php"><span>Approver Formation</span></a></li>
+<li><a class="active" href="approveformation.php"><span>Les Formation</span></a></li>
 <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
 </ul>
 </li>
 <li class="submenu">
 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Cour</span> <span class="menu-arrow"></span></a>
 <ul class="list-unstyled" style="display: none;">
-<li><a href="cours.php"><span>Approver Les Cours</span></a></li>
+<li><a href="cours.php"><span>Les Cours</span></a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -227,13 +227,13 @@
 <div class="page-header">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-<h5 class="text-uppercase mb-0 mt-0 page-title">Approver Formation</h5>
+<h5 class="text-uppercase mb-0 mt-0 page-title">Les Formation</h5>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
 <ul class="breadcrumb float-right p-0 mb-0">
 <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
 <li class="breadcrumb-item"><a href="approveformation.php">Formation</a></li>
-<li class="breadcrumb-item"><span> Approver Formation</span></li>
+<li class="breadcrumb-item"><span>Les Formation</span></li>
 </ul>
 </div>
 </div>
