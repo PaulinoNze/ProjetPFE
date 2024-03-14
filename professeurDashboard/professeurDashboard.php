@@ -49,10 +49,7 @@
 <a href="javascript:void(0);" class="responsive-search">
 <i class="fa fa-search"></i>
 </a>
-<form action="search.html">
-<input class="form-control" type="text" placeholder="Recherche">
-<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-</form>
+
 </div>
 </li>
 <li>
@@ -157,6 +154,7 @@ $sqlEtud = "SELECT COUNT(e.etudId) AS student_count
 FROM etudiant e
 JOIN coursInscrit ci ON e.etudId = ci.etudId
 JOIN cours c ON ci.coursId = c.coursId
+JOIN formation f ON f.formationID = f.formationID
 WHERE c.profId = $profId;";
 $resultEtud = mysqli_query($conn, $sqlEtud);
 $rowEtud = mysqli_fetch_assoc($resultEtud);

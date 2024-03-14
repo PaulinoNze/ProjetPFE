@@ -45,10 +45,6 @@
 <a href="javascript:void(0);" class="responsive-search">
 <i class="fa fa-search"></i>
 </a>
-<form action="search.html">
-<input class="form-control" type="text" placeholder="Search here">
-<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-</form>
 </div>
 </li>
 <li>
@@ -57,9 +53,6 @@
 </ul>
 
 <ul class="nav user-menu float-right">
-<li class="nav-item dropdown d-none d-sm-block">
-<a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img src="../assets/img/sidebar/icon-23.png" alt=""> </a>
-</li>
 <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
 <span class="user-img">
@@ -160,6 +153,7 @@ $sql = "SELECT e.*, ci.*
 FROM etudiant e
 JOIN coursInscrit ci ON e.etudId = ci.etudId
 JOIN cours c ON ci.coursId = c.coursId
+JOIN formation f ON f.formationID = f.formationID
 WHERE c.profId = $profId;";
 $result = mysqli_query($conn, $sql);
 
