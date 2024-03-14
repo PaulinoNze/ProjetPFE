@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "../database.php";
 if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
 
 ?>
@@ -8,7 +9,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
 
     <head>
         <meta charset="utf-8">
-        <title>ESTD Etudiant Profil </title>
+        <title>ESTD compte Etudiant </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -20,10 +21,16 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
         <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
 
+        <link rel="stylesheet" href="../assets/css/fullcalendar.min.css">
+
+        <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
+
+        <link rel="stylesheet" href="../assets/plugins/morris/morris.css">
+
         <link rel="stylesheet" href="../assets/css/style.css">
         <!--[if lt IE 9]>
-		<script src="../assets/js/html5shiv.min.js"></script>
-		<script src="../assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
     </head>
 
@@ -39,14 +46,14 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     </a>
 
                     <ul class="nav float-left">
-                        
+                       
                         <li>
                             <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
                     <ul class="nav user-menu float-right">
-                        
+                       
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
                                 <span class="user-img">
@@ -55,13 +62,11 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <?php else : ?>
                                         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
                                     <?php endif; ?>
-                                </span>
-
-                                <span class="status online"></span></span>
+                                    <span class="status online"></span></span>
                                 <span><?php echo $_SESSION['prenom']; ?></span>
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="monprofil.php">Mon profil</a>
+                                <a class="dropdown-item" href="monprofil.php">Mon Profil</a>
                                 <a class="dropdown-item" href="modifierprofil.php">Modifier le profil</a>
 
                                 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
@@ -71,10 +76,10 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <div class="dropdown mobile-user-menu float-right">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
-                            <a class="dropdown-item" href="modifierAdmin.php">Modifier le profil</a>
+                            <a class="dropdown-item" href="monprofil.php">Mon Profil</a>
+                            <a class="dropdown-item" href="modifierprofil.php">Modifier le profil</a>
 
-                            <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../PHP/index.php">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +97,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                         </div>
                         <ul class="sidebar-ul">
                             <li class="menu-title">Menu</li>
-                            <li>
+                            <li class="active">
                                 <a href="etudiantdashboard.php"><img src="../assets/img/sidebar/icon-1.png" alt="icon"><span>Tableau de Bord</span></a>
                             </li>
                             <li class="submenu">
@@ -116,86 +121,62 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                 </div>
             </div>
 
-
             <div class="page-wrapper">
                 <div class="content container-fluid">
                     <div class="page-header">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                <h5 class="text-uppercase mb-0 mt-0 page-title">Mon Profil</h5>
+                                <h5 class="text-uppercase mb-0 mt-0 page-title">Forum</h5>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <ul class="breadcrumb float-right p-0 mb-0">
-                                    <li class="breadcrumb-item"><a href="etudintdashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-                                    <li class="breadcrumb-item"><a href="tousProfessur.php">Pages</a></li>
-                                    <li class="breadcrumb-item"><span> Mon Profil</span></li>
+                                    <li class="breadcrumb-item"><a href="professeurDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                    <li class="breadcrumb-item"><span> Forum</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="card-box m-b-0">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="profile-view">
-                                    <div class="profile-img-wrap">
-                                        <div class="profile-img">
-                                            <a href=""><img class="avatar" src="<?php echo !empty($_SESSION['image']) ? 'data:image;base64,' . base64_encode($_SESSION['image']) : '../assets/img/user.jpg'; ?>" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="profile-basic">
-                                        <div class="row">
-                                        <?php
-                                                include "../database.php";
-                                                $etudId = $_SESSION['userid'];
-                                                $sql = "SELECT * FROM etudiant WHERE etudId = $etudId";
-                                                $result = mysqli_query($conn, $sql);
-                                                $row = mysqli_fetch_array($result);
-                                                ?>
-                                            <div class="col-md-5">
-                                                <div class="profile-info-left">
-                                                    <h3 class="user-name m-t-0"><?php echo $row['prenom'] . " " . $row['nom']; ?></h3>
-                                                    <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
-                                                    <small class="text-muted">Etudiant(e)</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <ul class="personal-info">
-                                                    <li>
-                                                        <span class="title">Telephone</span>
-                                                        <span class="text"><a href=""><?php echo $row['telephone']; ?></a></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Email:</span>
-                                                        <span class="text"><?php echo $row['email']; ?></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Date de Naissance</span>
-                                                        <span class="text"><?php echo $row['date_naissance']; ?></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Adresse:</span>
-                                                        <span class="text"><?php echo $row['adresse']; ?></span>
-                                                    </li>
-                                                    <br>
-                                                    <li>
-                                                        <span class="title">Genre:</span>
-                                                        <span class="text"><?php echo $row['gender']; ?></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                    
+                    <div class="row">
+                        <?php
+                        include "../database.php";
+                        $sql = "SELECT * FROM forum";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            <div class="blog grid-blog">
+                                <div class="blog-image">
+                                <a href="forumInfo.php?id=<?php echo $row['forumID']; ?>">
+                                            <?php if (!empty($row['image'])) : ?>
+                                                <img class="img-fluid" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>">
+                                            <?php else : ?>
+                                                <img class="img-fluid" src="../assets/img/user.jpg" alt="Default Image">
+                                            <?php endif; ?>
+                                        </a>
+                                </div>
+                                <div class="blog-content">
+                                    <h3 class="blog-title"><a href="forumInfo.php"><?php echo $row['title']; ?></a></h3>
+                                    <p><?php echo $row['description']; ?></p>
+                                    <a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
+                                    
                                 </div>
                             </div>
                         </div>
+                        <?php
+                            }
+                        }else{
+                            echo "Aucun Forum";
+                        }
+                        ?>
                     </div>
                 </div>
-                
             </div>
 
         </div>
 
-        <script data-cfasync="false" src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
         <script src="../assets/js/bootstrap.bundle.min.js"></script>

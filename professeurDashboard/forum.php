@@ -9,7 +9,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
     <head>
         <meta charset="utf-8">
-        <title>EST-D professeur compte</title>
+        <title>ESTD professeur compte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
@@ -21,12 +21,16 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
         <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
 
-        <link rel="stylesheet" href="../assets/css/select2.min.css">
+        <link rel="stylesheet" href="../assets/css/fullcalendar.min.css">
+
+        <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
+
+        <link rel="stylesheet" href="../assets/plugins/morris/morris.css">
 
         <link rel="stylesheet" href="../assets/css/style.css">
         <!--[if lt IE 9]>
-		<script src="../assets/js/html5shiv.min.js"></script>
-		<script src="../assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
     </head>
 
@@ -47,6 +51,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 <a href="javascript:void(0);" class="responsive-search">
                                     <i class="fa fa-search"></i>
                                 </a>
+
                             </div>
                         </li>
                         <li>
@@ -78,7 +83,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
                             <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-                            <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../PHP/index.php">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -106,16 +111,19 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <li><a href="tousEtudiants.php"><span>Etudiants inscrits à la formation</span></a></li>
                                 </ul>
                             </li>
-
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="cours.php"><span>Cours</span></a></li>
                                 </ul>
                             </li>
-                        </ul>
-                        </li>
-
+                            <li class="submenu">
+                                <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled" style="display: none;">
+                                    <li><a href="forum.php"><span>Forum</span></a></li>
+                                    
+                                </ul>
+                            </li>
                     </div>
                 </div>
             </div>
@@ -126,121 +134,54 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <div class="page-header">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                <h5 class="text-uppercase mb-0 mt-0 page-title">Etudiants inscrits à la formation</h5>
+                                <h5 class="text-uppercase mb-0 mt-0 page-title">Forum</h5>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <ul class="breadcrumb float-right p-0 mb-0">
                                     <li class="breadcrumb-item"><a href="professeurDashboard.php"><i class="fas fa-home"></i> Accueil</a></li>
-                                    <li class="breadcrumb-item"><a href="professeurDashboard.php">Etudiants</a></li>
-                                    <li class="breadcrumb-item"> <span>Etudiants inscrits à la formation</span></li>
+                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                    <li class="breadcrumb-item"><span> Forum</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
-                        <div class="col-sm-4 col-12">
-                        </div>
-                    </div>
-                    <div class="row filter-row">
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group form-focus">
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <?php
-                    $profId = $_SESSION['profId'];
-                    $sql = "SELECT e.*, ci.*
-FROM etudiant e
-JOIN coursInscrit ci ON e.etudId = ci.etudId
-JOIN cours c ON ci.coursId = c.coursId
-JOIN formation f ON f.formationID = f.formationID
-WHERE c.profId = $profId;";
-                    $result = mysqli_query($conn, $sql);
-
-                    if (mysqli_num_rows($result) > 0) {
-                        echo '<div class="row">'; // Start of row
-                        while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                            <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-                                <div class="profile-widget">
-                                    <div class="profile-img">
-                                        <a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>" class="avatar text-white">
+                        <?php
+                        include "../database.php";
+                        $sql = "SELECT * FROM forum";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            <div class="blog grid-blog">
+                                <div class="blog-image">
+                                <a href="forumInfo.php?id=<?php echo $row['forumID']; ?>">
                                             <?php if (!empty($row['image'])) : ?>
-                                                <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
+                                                <img class="img-fluid" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>">
                                             <?php else : ?>
-                                                <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
+                                                <img class="img-fluid" src="../assets/img/user.jpg" alt="Default Image">
                                             <?php endif; ?>
                                         </a>
-                                    </div>
-                                    <div class="dropdown profile-action">
-                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                    </div>
-                                    <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
-                                        <a href="etudiantInfo.php?id=<?php echo $row['etudId']; ?>">
-                                            <?php echo $row['nom']; ?>
-                                        </a>
-                                    </h4>
+                                </div>
+                                <div class="blog-content">
+                                    <h3 class="blog-title"><a href="forumInfo.php"><?php echo $row['title']; ?></a></h3>
+                                    <p><?php echo $row['description']; ?></p>
+                                    <a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
+                                    
                                 </div>
                             </div>
-                    <?php
+                        </div>
+                        <?php
+                            }
+                        }else{
+                            echo "Aucun Forum";
                         }
-                        echo '</div>'; // End of row
-                    } else {
-                        echo "Aucun professeur trouvé";
-                    }
-                    ?>
-
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            $('.delete-etudiant').click(function(e) {
-                                e.preventDefault();
-                                var etudiantId = $(this).data('etudiant-id');
-                                if (confirm("Êtes-vous sûr de vouloir supprimer ce etudiant ?")) {
-                                    $.ajax({
-                                        url: 'tousEtudiants.php',
-                                        type: 'POST',
-                                        data: {
-                                            etudId: etudiantId
-                                        }, // Update to match the attribute name in HTML
-                                        success: function(response) {
-                                            // Reload the page after successful deletion
-                                            window.location.reload();
-                                        },
-                                        error: function(xhr, status, error) {
-                                            console.error(xhr.responseText);
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    </script>
-                    <?php
-                    include '../database.php';
-
-                    if (isset($_POST['etudId'])) {
-                        $etudiantId = $_POST['etudId'];
-
-                        // SQL to delete a professor
-                        $sql = "DELETE FROM etudiant WHERE etudId = $etudiantId";
-
-                        if (mysqli_query($conn, $sql)) {
-                            // Deletion successful
-                            echo "Professor deleted successfully";
-                        } else {
-                            // Error in deletion
-                            echo "Error deleting professor: " . mysqli_error($conn);
-                        }
-                    }
-                    ?>
-
+                        ?>
+                    </div>
                 </div>
             </div>
-
 
         </div>
 
@@ -249,9 +190,6 @@ WHERE c.profId = $profId;";
         <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
         <script src="../assets/js/jquery.slimscroll.js"></script>
-
-        <script src="../assets/js/select2.min.js"></script>
-        <script src="../assets/js/moment.min.js"></script>
 
         <script src="../assets/js/app.js"></script>
     </body>

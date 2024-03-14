@@ -9,7 +9,6 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
     <head>
         <meta charset="utf-8">
-        <nomCours>EST-D professeur compte</nomCours>
         <title>EST-D professeur compte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <?php include('css.html'); ?>
@@ -22,7 +21,6 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             ul li a:hover {
                 color: #333 !important;
             }
-            
         </style>
         <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
 
@@ -46,53 +44,54 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
         <div class="main-wrapper">
 
-        <div class="header-outer">
-<div class="header" >
-<a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fas fa-bars" aria-hidden="true"></i></a>
-<a id="toggle_btn" class="float-left" href="javascript:void(0);">
-<img src="../assets/img/sidebar/icon-21.png" alt="">
-</a>
+            <div class="header-outer">
+                <div class="header">
+                    <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fas fa-bars" aria-hidden="true"></i></a>
+                    <a id="toggle_btn" class="float-left" href="javascript:void(0);">
+                        <img src="../assets/img/sidebar/icon-21.png" alt="">
+                    </a>
 
-<ul class="nav float-left">
-<li>
+                    <ul class="nav float-left">
+                        <li>
 
-</li>
-<li>
-<a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
-</li>
-</ul>
+                        </li>
+                        <li>
+                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                        </li>
+                    </ul>
 
-<ul class="nav user-menu float-right">
-<li class="nav-item dropdown has-arrow">
-<a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img">
-    <?php if(!empty($_SESSION['image'])): ?>
-        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
-    <?php else: ?>
-        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
-    <?php endif; ?>
-</span>
+                    <ul class="nav user-menu float-right">
+                        <li class="nav-item dropdown has-arrow">
+                            <a href="professeurDashboard.php" class=" nav-link user-link" data-toggle="dropdown-menu">
 
- <span class="status online"></span></span>
-<span><?php echo $_SESSION['prenom']; ?></span>
-</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
-</div>
-</li>
-</ul>
-<div class="dropdown mobile-user-menu float-right"> 
-<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
-<a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
-</div>
-</div>
-</div>
-</div>
+                                <span class="user-img">
+                                    <?php if (!empty($_SESSION['image'])) : ?>
+                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
+                                    <?php else : ?>
+                                        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+                                    <?php endif; ?>
+                                </span>
+
+                                <span class="status online"></span></span>
+                                <span><?php echo $_SESSION['prenom']; ?></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
+                                <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
+                                <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="dropdown mobile-user-menu float-right">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
+                            <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
+                            <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="sidebar" id="sidebar">
                 <div class="sidebar-inner slimscroll">
@@ -514,7 +513,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         </div>
                                     </form>
-                           
+
 
                                 </div>
                             </div>
@@ -534,23 +533,23 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             </div>
 
 
-//Ce sont les scripts qui gèrent l'insertion des chapitres, les quiz et l'examen final.
+            //Ce sont les scripts qui gèrent l'insertion des chapitres, les quiz et l'examen final.
 
 
             <script>
-        // Script para agregar capítulos
-        function agregarCapitulos() {
-            var numChapitres = document.getElementById('numChapitres').value;
-            var container = document.getElementById('chapitres-section');
+                // Script para agregar capítulos
+                function agregarCapitulos() {
+                    var numChapitres = document.getElementById('numChapitres').value;
+                    var container = document.getElementById('chapitres-section');
 
-            // Limpiar el contenedor antes de agregar nuevos elementos
-            container.innerHTML = '';
+                    // Limpiar el contenedor antes de agregar nuevos elementos
+                    container.innerHTML = '';
 
-            // Generar campos para cada capítulo
-            for (var i = 1; i <= numChapitres; i++) {
-                var div = document.createElement('div');
-                div.className = 'chapitre-existing';
-                div.innerHTML = `
+                    // Generar campos para cada capítulo
+                    for (var i = 1; i <= numChapitres; i++) {
+                        var div = document.createElement('div');
+                        div.className = 'chapitre-existing';
+                        div.innerHTML = `
                     <div class="form-group">
                         <label for="chapitre${i}">Chapitre ${i}</label>
                         <input type="text" name="nomChapitre[]" class="form-control" placeholder="Nom du chapitre" required>
@@ -560,43 +559,43 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                         <input type="file" name="pdf[]" accept=".pdf" class="form-control" required>
                     </div>
                 `;
-                container.appendChild(div);
-            }
-        }
-    </script>
+                        container.appendChild(div);
+                    }
+                }
+            </script>
 
             <script src="../assets/js/jquery-3.6.0.min.js"></script>
             <script>
-    $(document).ready(function() {
-        var questionIndexQuiz = 0; // Declaración de la variable questionIndexQuiz
+                $(document).ready(function() {
+                    var questionIndexQuiz = 0; // Declaración de la variable questionIndexQuiz
 
-        $('#numChapitres').on('change', function() {
-            var numChapitres = $(this).val();
-            var html = '';
+                    $('#numChapitres').on('change', function() {
+                        var numChapitres = $(this).val();
+                        var html = '';
 
-            for (var i = 1; i <= numChapitres; i++) {
-                html += '<div class="form-group">';
-                html += '<label for="chapitre' + i + '">Chapitre ' + i + '</label>';
-                html += '<input type="text" name="nomChapitre' + i + '" class="form-control" >';
-                html += '<label for="video' + i + '">Vidéo</label>';
-                html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control" required>';
-                html += '<label for="pdf' + i + '">PDF</label>';
-                html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control" required><br>';
-                html += '<div class="questions"></div>'; // Contenedor de las preguntas
-                html += '<button type="button" class="ajouter_Question btn btn-primary">Ajouter une Question au Quiz</button><br>';
-                // Puedes agregar más campos aquí según sea necesario
-                html += '</div>';
-            }
+                        for (var i = 1; i <= numChapitres; i++) {
+                            html += '<div class="form-group">';
+                            html += '<label for="chapitre' + i + '">Chapitre ' + i + '</label>';
+                            html += '<input type="text" name="nomChapitre' + i + '" class="form-control" >';
+                            html += '<label for="video' + i + '">Vidéo</label>';
+                            html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control" required>';
+                            html += '<label for="pdf' + i + '">PDF</label>';
+                            html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control" required><br>';
+                            html += '<div class="questions"></div>'; // Contenedor de las preguntas
+                            html += '<button type="button" class="ajouter_Question btn btn-primary">Ajouter une Question au Quiz</button><br>';
+                            // Puedes agregar más campos aquí según sea necesario
+                            html += '</div>';
+                        }
 
-            $('#chapitres-container').html(html);
-        });
+                        $('#chapitres-container').html(html);
+                    });
 
-        // Delegar el evento clic a un elemento padre
-        $('#chapitres-container').on('click', '.ajouter_Question', function() {
-            var questions = $(this).siblings('.questions');
-            var nouvelleQuestion = $('<div class="question">');
+                    // Delegar el evento clic a un elemento padre
+                    $('#chapitres-container').on('click', '.ajouter_Question', function() {
+                        var questions = $(this).siblings('.questions');
+                        var nouvelleQuestion = $('<div class="question">');
 
-            nouvelleQuestion.html(`
+                        nouvelleQuestion.html(`
                 <!-- Contenido de la pregunta del quiz -->
                 <hr>
                 <label for="question">Question du Quiz:</label><br>
@@ -615,20 +614,20 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                 </select><br>
             `);
 
-            questions.append(nouvelleQuestion);
-            questionIndexQuiz++;
-        });
-    });
-</script>
+                        questions.append(nouvelleQuestion);
+                        questionIndexQuiz++;
+                    });
+                });
+            </script>
 
-<script>
-    let questionExamenIndex = 0; // Contador para preguntas de examen final
-    document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
-        var questionsExamen = document.getElementById('questionsExamen');
-        var nouvelleQuestion = document.createElement('div');
-        nouvelleQuestion.classList.add('question');
+            <script>
+                let questionExamenIndex = 0; // Contador para preguntas de examen final
+                document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
+                    var questionsExamen = document.getElementById('questionsExamen');
+                    var nouvelleQuestion = document.createElement('div');
+                    nouvelleQuestion.classList.add('question');
 
-        nouvelleQuestion.innerHTML = `
+                    nouvelleQuestion.innerHTML = `
             <!-- Contenido de la pregunta de examen final -->
             <hr>
             <label for="question">Question de l'examen :</label><br>
@@ -649,12 +648,12 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                 <option value="4">4</option>
             </select><br>
         `;
-        questionsExamen.appendChild(nouvelleQuestion);
-        questionExamenIndex++;
-    });
-</script>
+                    questionsExamen.appendChild(nouvelleQuestion);
+                    questionExamenIndex++;
+                });
+            </script>
 
-//et ils finissent ici
+            //et ils finissent ici
 
             <script src="../assets/js/bootstrap.bundle.min.js"></script>
 

@@ -38,4 +38,13 @@ if(isset($_POST['coursId'])) {
         echo "Error deleting record: " . mysqli_error($conn);
     }
 }
+if(isset($_POST['forumID'])) {
+    $forumID = $_POST['forumID'];
+    $sql = "DELETE FROM forum WHERE forumID = '$forumID'";
+    if(mysqli_query($conn, $sql)) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . mysqli_error($conn);
+    }
+}
 ?>
