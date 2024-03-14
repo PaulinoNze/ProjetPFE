@@ -532,6 +532,11 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
 
             </div>
+
+
+//Ce sont les scripts qui gèrent l'insertion des chapitres, les quiz et l'examen final.
+
+
             <script>
         // Script para agregar capítulos
         function agregarCapitulos() {
@@ -648,6 +653,9 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
         questionExamenIndex++;
     });
 </script>
+
+//et ils finissent ici
+
             <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
             <script src="../assets/js/jquery.slimscroll.js"></script>
