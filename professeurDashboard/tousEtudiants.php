@@ -74,7 +74,6 @@
 <div class="dropdown-menu">
 <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
 <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="professeurSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </li>
@@ -84,7 +83,6 @@
 <div class="dropdown-menu dropdown-menu-right">
 <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
 <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-<a class="dropdown-item" href="professeurSettings.php">Parametres</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
 </div>
@@ -151,13 +149,10 @@
 <div class="row filter-row">
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus">
-<input type="text" class="form-control floating">
-<label class="focus-label">Nom</label>
+
 </div>
 </div>
-<div class="col-sm-6 col-md-3">
-<a href="#" class="btn btn-search rounded btn-block mb-3"> Recherche</a>
-</div>
+
 </div>
 <?php
 $profId = $_SESSION['profId'];

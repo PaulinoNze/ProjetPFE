@@ -62,12 +62,16 @@
           <img src="Img/curs.jpeg" width="100%" height="100%" />
           <div class="container">
             <div class="carousel-caption text-start">
-              <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                 Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime!
-                  Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
-                  <a href="#" class="btn btn-primary me-2">S'abonner</a>
-        <a href="#" class="btn btn-outline-success">Connect</a>
+            <h1>l'EST'D e-learning.</h1>
+              <p>Dans le monde actuel, l'éducation en ligne a révolutionné la manière dont les gens 
+                accèdent aux connaissances et acquièrent de nouvelles compétences. EST'D e-learning offre 
+                la flexibilité d'apprendre à votre propre rythme, n'importe quand et n'importe où.
+                Nos cours en ligne sont conçus pour vous offrir une expérience éducative
+                 interactive et immersive, où vous pourrez explorer des sujets passionnants et développer 
+                 de nouvelles compétences de manière efficace.
+                </p>
+                  <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
+        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -76,12 +80,16 @@
           <img src="Img/cursOnly.webp" width="100%" height="100%" />
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                 Saepe cumque quae libero, porro aliquam nesciunt, commodi sed dolores maxime! 
-                 Ratione voluptatum error magni mollitia soluta eaque nemo impedit, cum nulla.</p>
-                 <a href="#" class="btn btn-primary me-2">S'abonner</a>
-        <a href="#" class="btn btn-outline-success">Connect</a>
+              <h1>l'EST'D e-learning.</h1>
+              <p>Dans le monde actuel, l'éducation en ligne a révolutionné la manière dont les gens 
+                accèdent aux connaissances et acquièrent de nouvelles compétences. EST'D e-learning offre 
+                la flexibilité d'apprendre à votre propre rythme, n'importe quand et n'importe où.
+                Nos cours en ligne sont conçus pour vous offrir une expérience éducative
+                 interactive et immersive, où vous pourrez explorer des sujets passionnants et développer 
+                 de nouvelles compétences de manière efficace.
+                </p>
+                 <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
+        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -89,12 +97,16 @@
           <img src="Img/stablecment.jpg" width="100%" height="100%" />
           <div class="container">
             <div class="carousel-caption text-end">
-              <h1>Example headline.</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe cumque quae libero, 
-                porro aliquam nesciunt, commodi sed dolores maxime! Ratione voluptatum error magni mollitia
-                 soluta eaque nemo impedit, cum nulla.</p>
-                 <a href="#" class="btn btn-primary me-2">S'abonner</a>
-        <a href="#" class="btn btn-outline-success">Connect</a>
+            <h1>l'EST'D e-learning.</h1>
+              <p>Dans le monde actuel, l'éducation en ligne a révolutionné la manière dont les gens 
+                accèdent aux connaissances et acquièrent de nouvelles compétences. EST'D e-learning offre 
+                la flexibilité d'apprendre à votre propre rythme, n'importe quand et n'importe où.
+                Nos cours en ligne sont conçus pour vous offrir une expérience éducative
+                 interactive et immersive, où vous pourrez explorer des sujets passionnants et développer 
+                 de nouvelles compétences de manière efficace.
+                </p>
+                 <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
+        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
             </div>
           </div>
         </div>
@@ -114,27 +126,34 @@
       <div class="row">
         <div class="col-lg-4">
           <img src="Img/aprender-en-linea.png" alt="" class="img-fluid" style="max-width: 100px;">
-          <title>Placeholder</title>
+          <title>Éducatives Numériques</title>
           </svg>
 
-          <h2>Heading</h2>
-          <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+          <h2>Éducatives Numériques</h2>
+          <p>Plongez dans une expérience éducative interactive où la technologie et 
+            la connaissance se rejoignent. Découvrez un environnement d'apprentissage dynamique qui
+             vous permet d'explorer de nouveaux horizons académiques de manière innovante.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
         <img src="Img/libro.png" alt="" class="img-fluid" style="max-width: 100px;">
-          <title>Placeholder</title>
+          <title>Apprentissage Interactif</title>
           </svg>
 
-          <h2>Heading</h2>
-          <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+          <h2>Collaboration Éducative</h2>
+          <p>Connectez-vous à une communauté éducative vibrante et collaborative,
+            où vous pourrez partager des idées, participer à des discussions et travailler sur des projets communs.
+             Découvrez le pouvoir de la collaboration dans l'apprentissage
+             et enrichissez votre expérience éducative de manière significative.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img src="Img/leccion-en-linea.png" alt="" class="img-fluid" style="max-width: 100px;">
-          <title>Placeholder</title>
+          <title>Ressources Éducatives Numériques</title>
           </svg>
 
-          <h2>Heading</h2>
-          <p>And lastly this, the third column of representative placeholder content.</p>
+          <h2>Apprentissage Interactif </h2>
+          <p> Accédez à une variété de ressources éducatives numériques qui enrichiront votre
+             processus d'apprentissage. Des livres électroniques interactifs au contenu multimédia, 
+            découvrez comment la technologie peut renforcer votre éducation de manière unique.</p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
       <?php
@@ -201,11 +220,11 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Reprehenderit aliquid odit mollitia atque ipsam, adipisci sit quaerat nulla a,
-            hic repellendus amet culpa cum.
-            Minima odio dolores odit. Illum, nobis.</p>
+          <h2 class="featurette-heading">Découvrez l'Effiçacité et <span class="text-muted">la Convivialité de notre Application EST'D </span></h2>
+          <p class="lead">Notre application EST'D a été conçue avec un accent mis sur l'efficacité et la convivialité
+             pour vous offrir la meilleure expérience éducative possible. Avec une interface intuitive et facile à utiliser, 
+             vous pourrez naviguer à travers nos cours, 
+            accéder à des ressources éducatives et participer à des activités interactives de manière simple et rapide.</p>
         </div>
         <div class="col-md-7">
           <img src="Img/index.png" class="w-100 h-100" alt="">
@@ -219,8 +238,10 @@
 
       <div class="row featurette">
         <div class="col-md-5 order-md-2">
-          <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+          <h2 class="featurette-heading">Découverte de l'Apprentissage  <span class="text-muted">en Ligne avec EST'D</span></h2>
+          <p class="lead"> Nos cours en ligne sont conçus pour vous offrir une expérience éducative interactive et immersive, où vous pourrez explorer
+              des sujets passionnants et développer de nouvelles compétences de manière efficace
+            </p>
         </div>
         <div class="col-md-7 order-md-1">
         <img src="Img/caracteristicas-plataforma-elearning-2.jpg" class="w-100 h-200" alt="">
@@ -243,47 +264,41 @@
 
   <div class="container">
     <div class="title title__style-02">
-      <h2 class="title__title text-center">Nos créateurs de cours</h2>
+      <h2 class="title__title text-center">NOS SPONSORS</h2>
       <hr>
     </div>
 
 
     <section class="customer-logos slider mb-5">
-      <div class="slide">
-        <img src="Img/e2.jpg">
+    <div class="slide">
+        <img src="Img/IMG_7.png">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_3.jpg">
+      </div>
+     <div class="slide">
+        <img src="Img/logo1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/Salle.jpg">
+        <img src="Img/bcm.jpeg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_3.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/IMG_1.jpg">
       </div>
       <div class="slide">
         <img src="Img/logo1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_6.png">
       </div>
       <div class="slide">
-        <img src="Img/logo1.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/logo1.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e5.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e4.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e3.jpg">
+        <img src="Img/bcm.jpeg">
       </div>
     </section>
     <br><br>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Paulino nze, syabonga, and edmon evens">
-  <title>Contacto</title>
+  <title>Contact</title>
   <!-- Incluimos Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -79,9 +79,10 @@
       <div class="col-md-5">
         <!-- Título y descripción -->
         <h2>Contactez-Nous Pour Plus D'informations</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, 
-            architecto mollitia! Non corrupti debitis officia. Corrupti rerum amet hic cumque laboriosam,
-             commodi nihil a tenetur impedit possimus fuga esse similique.</p>
+        <p>N'hésitez pas à nous contacter pour obtenir plus d'informations sur nos programmes, 
+          nos services et nos offres éducatives. Notre équipe dévouée est là pour répondre à toutes vos questions,
+           vous guider dans votre parcours éducatif et vous fournir les détails nécessaires pour 
+           prendre des décisions éclairées.</p>
              <div class="row">
     <div class="col-md-4">
       <!-- Detalles de contacto -->
@@ -100,8 +101,8 @@
     </div>
   </div>
         <!-- Enlaces -->
-        <a href="#" class="btn btn-primary me-2">S'abonner</a>
-        <a href="#" class="btn btn-outline-success">Connect</a>
+        <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
+        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
       </div>
     </div>
   </div>

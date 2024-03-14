@@ -1,5 +1,8 @@
 <?php
-
+    session_start();
+    include "../database.php";
+    if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']){
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +72,7 @@
 <span><?php echo $_SESSION['prenom']; ?></span>
 </a>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="professeurInfo.php">Modifier le profil</a>
+<a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
 <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
 <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
 </div>
@@ -143,9 +146,13 @@
 <div class="col-md-12">
 <div class="profile-view">
 <div class="profile-img-wrap">
-<div class="profile-img">
-<a href=""><img class="avatar" src="<?php echo !empty($_SESSION['image']) ? $_SESSION['image'] : '../assets/img/user.jpg'; ?>" alt=""></a>
-</div>
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
+<span class="status online"></span></span>
 </div>
 <div class="profile-basic">
 <div class="row">
@@ -153,9 +160,6 @@
 <div class="profile-info-left">
 <h3 class="user-name m-t-0"><?php echo $_SESSION['prenom']." ". $_SESSION['nom']; ?></h3>
 <h5 class="company-role m-t-0 m-b-0">L'Ecole Superirure de Technologie - Dakhla</h5>
-<small class="text-muted"><?php echo $_SESSION['designation'];?></small>
-
-<div class="staff-id">CIN: <?php echo $_SESSION['cin'];?></div>
 </div>
 </div>
 <div class="col-md-7">
@@ -204,5 +208,8 @@
 </body>
 </html>
 <?php
-
+    }else{
+        header("Location: index.php");
+        exit();
+    }
 ?>

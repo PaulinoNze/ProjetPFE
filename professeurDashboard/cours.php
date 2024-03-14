@@ -10,6 +10,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
     <head>
         <meta charset="utf-8">
         <nomCours>EST-D professeur compte</nomCours>
+        <title>EST-D professeur compte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <?php include('css.html'); ?>
         <style type="text/css" media="screen">
@@ -21,6 +22,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             ul li a:hover {
                 color: #333 !important;
             }
+            
         </style>
         <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
 
@@ -44,63 +46,53 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
         <div class="main-wrapper">
 
-            <div class="header-outer">
-                <div class="header">
-                    <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fas fa-bars" aria-hidden="true"></i></a>
-                    <a id="toggle_btn" class="float-left" href="javascript:void(0);">
-                        <img src="../assets/img/sidebar/icon-21.png" alt="">
-                    </a>
+        <div class="header-outer">
+<div class="header" >
+<a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fas fa-bars" aria-hidden="true"></i></a>
+<a id="toggle_btn" class="float-left" href="javascript:void(0);">
+<img src="../assets/img/sidebar/icon-21.png" alt="">
+</a>
 
-                    <ul class="nav float-left">
-                        <li>
-                            <div class="top-nav-search">
-                                <a href="javascript:void(0);" class="responsive-search">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                                <form action="search.html">
-                                    <input class="form-control" type="text" placeholder="Search here">
-                                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
-                        </li>
-                    </ul>
+<ul class="nav float-left">
+<li>
 
-                    <ul class="nav user-menu float-right">
-                        <li class="nav-item dropdown d-none d-sm-block">
-                            <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img src="../assets/img/sidebar/icon-23.png" alt=""> </a>
-                        </li>
-                        <li class="nav-item dropdown has-arrow">
-                            <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-                                <span class="user-img">
-                                    <?php if (!empty($_SESSION['image'])) : ?>
-                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
-                                    <?php else : ?>
-                                        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
-                                    <?php endif; ?>
-                                    <span class="status online"></span></span>
-                                <span><?php echo $_SESSION['prenom']; ?></span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
-                                <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-                                <a class="dropdown-item" href="../PHP/logout.php">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="dropdown mobile-user-menu float-right">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
-                            <a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
-                            <a class="dropdown-item" href="../PHP/index.php">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</li>
+<li>
+<a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+</li>
+</ul>
 
+<ul class="nav user-menu float-right">
+<li class="nav-item dropdown has-arrow">
+<a href="#" class=" nav-link user-link" data-toggle="dropdown">
+<span class="user-img">
+    <?php if(!empty($_SESSION['image'])): ?>
+        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="professeur">
+    <?php else: ?>
+        <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
+    <?php endif; ?>
+</span>
+
+ <span class="status online"></span></span>
+<span><?php echo $_SESSION['prenom']; ?></span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+</div>
+</li>
+</ul>
+<div class="dropdown mobile-user-menu float-right"> 
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+<div class="dropdown-menu dropdown-menu-right">
+<a class="dropdown-item" href="professeurInfo.php">Mon Profil</a>
+<a class="dropdown-item" href="modifierprofesseur.php">Modifier le profil</a>
+<a class="dropdown-item" href="../PHP/logout.php">Logout</a>
+</div>
+</div>
+</div>
+</div>
 
             <div class="sidebar" id="sidebar">
                 <div class="sidebar-inner slimscroll">
@@ -503,7 +495,6 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             </div>
                                             <!-- Contenedor de los campos de los capítulos -->
                                             <div id="chapitres-container"></div>
-                                            <button type="button" id="ajouter_Question" class="btn btn-primary">Ajouter une Question au Quiz</button><br>
                                             <div id="questions">
                                                 <!-- Aquí se agregarán las preguntas dinámicamente -->
 
@@ -523,67 +514,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         </div>
                                     </form>
-                                    <script>
-                                        let questionIndex = 0; // Contador para preguntas
-                                        let questionExamenIndex = 0; // Contador para preguntas de examen
-
-                                        document.getElementById('ajouter_Question').addEventListener('click', function() {
-                                            var questions = document.getElementById('questions');
-                                            var nouvelleQuestion = document.createElement('div');
-                                            nouvelleQuestion.classList.add('question');
-
-                                            nouvelleQuestion.innerHTML = `
-                                                    <!-- Contenido de la pregunta del quiz -->
-                                                    <hr>
-                                                    <label for="question">Question du Quiz:</label><br>
-                                                    <input type="text" name="questions[${questionIndex}][question]" class="form-control"><br>
-                                                    <label for="r1">Réponse du Quiz 1 :</label><br>
-                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-                                                    <label for="r2">Réponse du Quiz 2 :</label><br>
-                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-                                                    <label for="r3">Réponse du Quiz 3 :</label><br>
-                                                    <input type="text" name="questions[${questionIndex}][reponses][]" class="form-control"><br>
-                                                    <label for="num_rep_correct">Num de la réponse correcte du Quiz :</label><br>
-                                                    <select name="questions[${questionIndex}][correct]" class="form-control">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                    </select><br>
-                                                `;
-                                            questions.appendChild(nouvelleQuestion);
-                                            questionIndex++;
-                                        });
-
-                                        document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
-                                            var questionsExamen = document.getElementById('questionsExamen');
-                                            var nouvelleQuestion = document.createElement('div');
-                                            nouvelleQuestion.classList.add('question');
-
-                                            nouvelleQuestion.innerHTML = `
-                                                        <!-- Contenido de la pregunta de examen final -->
-                                                        <hr>
-                                                        <label for="question">Question de l'examen :</label><br>
-                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][questionFinale]" class="form-control"><br>
-                                                        <label for="r1">Réponse de l'examen 1 :</label><br>
-                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-                                                        <label for="r2">Réponse de l'examen 2 :</label><br>
-                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-                                                        <label for="r3">Réponse de l'examen 3 :</label><br>
-                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-                                                        <label for="r4">Réponse de l'examen 4 :</label><br>
-                                                        <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
-                                                        <label for="num_rep_correct">Num de la réponse correcte de l'examen :</label><br>
-                                                        <select name="questionsFinale[${questionExamenIndex}][correctFinale]" class="form-control">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                        </select><br>
-                                                    `;
-                                            questionsExamen.appendChild(nouvelleQuestion);
-                                            questionExamenIndex++;
-                                        });
-                                    </script>
+                           
 
                                 </div>
                             </div>
@@ -602,45 +533,121 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
 
             </div>
             <script>
-                $(document).ready(function() {
-                    $('#numChapitres').on('change', function() {
-                        var numChapitres = $(this).val();
-                        var html = '';
-                        for (var i = 1; i <= numChapitres; i++) {
-                            html += '<div class="form-group">';
-                            html += '<label for="chapitre' + i + '">Chapitre ' + i + '</label>';
-                            html += '<input type="text" name="nomChapitre' + i + '" class="form-control" >';
-                            html += '<label for="video' + i + '">Vidéo</label>';
-                            html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control" required>';
-                            html += '<label for="pdf' + i + '">PDF</label>';
-                            html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control" required>';
-                            // Puedes agregar más campos aquí según sea necesario
-                            html += '</div>';
-                        }
-                        $('#chapitres-container').html(html);
-                    });
-                });
-            </script>
-            <script>
-                function agregarCapitulos() {
-                    var numChapitres = document.getElementById('numChapitres').value;
-                    var container = document.getElementById('chapitres-section');
+        // Script para agregar capítulos
+        function agregarCapitulos() {
+            var numChapitres = document.getElementById('numChapitres').value;
+            var container = document.getElementById('chapitres-section');
 
-                    // Generar campos para cada capítulo
-                    for (var i = 1; i <= numChapitres; i++) {
-                        var div = document.createElement('div');
-                        div.className = 'chapitre-existing';
-                        div.innerHTML = `
-                <input type="text" name="nomChapitre[]" class="form-control" placeholder="Nom du chapitre" required>
-                <input type="file" name="video[]" accept="video/*">
-                <input type="file" name="pdf[]" accept=".pdf">
-            `;
-                        container.appendChild(div);
-                    }
-                }
-            </script>
+            // Limpiar el contenedor antes de agregar nuevos elementos
+            container.innerHTML = '';
+
+            // Generar campos para cada capítulo
+            for (var i = 1; i <= numChapitres; i++) {
+                var div = document.createElement('div');
+                div.className = 'chapitre-existing';
+                div.innerHTML = `
+                    <div class="form-group">
+                        <label for="chapitre${i}">Chapitre ${i}</label>
+                        <input type="text" name="nomChapitre[]" class="form-control" placeholder="Nom du chapitre" required>
+                        <label for="video${i}">Vidéo</label>
+                        <input type="file" name="video[]" accept="video/*" class="form-control" required>
+                        <label for="pdf${i}">PDF</label>
+                        <input type="file" name="pdf[]" accept=".pdf" class="form-control" required>
+                    </div>
+                `;
+                container.appendChild(div);
+            }
+        }
+    </script>
+
             <script src="../assets/js/jquery-3.6.0.min.js"></script>
+            <script>
+    $(document).ready(function() {
+        var questionIndexQuiz = 0; // Declaración de la variable questionIndexQuiz
 
+        $('#numChapitres').on('change', function() {
+            var numChapitres = $(this).val();
+            var html = '';
+
+            for (var i = 1; i <= numChapitres; i++) {
+                html += '<div class="form-group">';
+                html += '<label for="chapitre' + i + '">Chapitre ' + i + '</label>';
+                html += '<input type="text" name="nomChapitre' + i + '" class="form-control" >';
+                html += '<label for="video' + i + '">Vidéo</label>';
+                html += '<input type="file" name="video' + i + '" accept="video/*" class="form-control" required>';
+                html += '<label for="pdf' + i + '">PDF</label>';
+                html += '<input type="file" name="pdf' + i + '" accept=".pdf" class="form-control" required><br>';
+                html += '<div class="questions"></div>'; // Contenedor de las preguntas
+                html += '<button type="button" class="ajouter_Question btn btn-primary">Ajouter une Question au Quiz</button><br>';
+                // Puedes agregar más campos aquí según sea necesario
+                html += '</div>';
+            }
+
+            $('#chapitres-container').html(html);
+        });
+
+        // Delegar el evento clic a un elemento padre
+        $('#chapitres-container').on('click', '.ajouter_Question', function() {
+            var questions = $(this).siblings('.questions');
+            var nouvelleQuestion = $('<div class="question">');
+
+            nouvelleQuestion.html(`
+                <!-- Contenido de la pregunta del quiz -->
+                <hr>
+                <label for="question">Question du Quiz:</label><br>
+                <input type="text" name="questions[${questionIndexQuiz}][question]" class="form-control"><br>
+                <label for="r1">Réponse du Quiz 1 :</label><br>
+                <input type="text" name="questions[${questionIndexQuiz}][reponses][]" class="form-control"><br>
+                <label for="r2">Réponse du Quiz 2 :</label><br>
+                <input type="text" name="questions[${questionIndexQuiz}][reponses][]" class="form-control"><br>
+                <label for="r3">Réponse du Quiz 3 :</label><br>
+                <input type="text" name="questions[${questionIndexQuiz}][reponses][]" class="form-control"><br>
+                <label for="num_rep_correct">Num de la réponse correcte du Quiz :</label><br>
+                <select name="questions[${questionIndexQuiz}][correct]" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select><br>
+            `);
+
+            questions.append(nouvelleQuestion);
+            questionIndexQuiz++;
+        });
+    });
+</script>
+
+<script>
+    let questionExamenIndex = 0; // Contador para preguntas de examen final
+    document.getElementById('ajouter_Question_examen').addEventListener('click', function() {
+        var questionsExamen = document.getElementById('questionsExamen');
+        var nouvelleQuestion = document.createElement('div');
+        nouvelleQuestion.classList.add('question');
+
+        nouvelleQuestion.innerHTML = `
+            <!-- Contenido de la pregunta de examen final -->
+            <hr>
+            <label for="question">Question de l'examen :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][questionFinale]" class="form-control"><br>
+            <label for="r1">Réponse de l'examen 1 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r2">Réponse de l'examen 2 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r3">Réponse de l'examen 3 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="r4">Réponse de l'examen 4 :</label><br>
+            <input type="text" name="questionsFinale[${questionExamenIndex}][reponsesFinale][]" class="form-control"><br>
+            <label for="num_rep_correct">Num de la réponse correcte de l'examen :</label><br>
+            <select name="questionsFinale[${questionExamenIndex}][correctFinale]" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select><br>
+        `;
+        questionsExamen.appendChild(nouvelleQuestion);
+        questionExamenIndex++;
+    });
+</script>
             <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
             <script src="../assets/js/jquery.slimscroll.js"></script>
@@ -649,6 +656,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
             <script src="../assets/js/moment.min.js"></script>
 
             <script src="../assets/js/app.js"></script>
+
     </body>
 
     </html>

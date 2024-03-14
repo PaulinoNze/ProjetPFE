@@ -38,12 +38,12 @@
       <div class="col-md-5">
         <!-- Título y descripción -->
         <h2>Notre Formation</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, 
-            architecto mollitia! Non corrupti debitis officia. Corrupti rerum amet hic cumque laboriosam,
-             commodi nihil a tenetur impedit possimus fuga esse similique.</p>
+        <p>Notre Formation représente un engagement envers l'excellence académique et le développement personnel. Dans ce programme éducatif, on encourage le développement intégral de chaque individu, en combinant des connaissances spécialisées avec des compétences pratiques. Avec un accent mis sur l'innovation et la collaboration, la Formation Notre devient un espace d'apprentissage enrichissant où les talents sont cultivés, la pensée critique est encouragée
+             et l'inspiration à atteindre des objectifs éducatifs et professionnels est présente.
+              Découvrez une expérience éducative unique et transformative avec la Formation Notre!</p>
         <!-- Enlaces -->
-        <a href="#" class="btn btn-primary me-2">S'abonner</a>
-        <a href="#" class="btn btn-outline-success">Connect</a>
+        <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
+        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
       </div>
     </div>
   </div>

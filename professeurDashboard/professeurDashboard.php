@@ -211,6 +211,7 @@ function downloadPDF() {
 <th>Email</th>
 <th>Telephone</th>
 <th>Date de Naissance</th>
+<th>Formation</th>
 </tr>
 </thead>
 <tbody>
@@ -218,12 +219,14 @@ function downloadPDF() {
 // Assuming you have already started the session and included the database connection
 $profId = $_SESSION['profId'];
 // Fetch data from the etudiant table
-$sql = "SELECT e.*, ci.*
+$sql = "SELECT e.*, ci.*,f.*
 FROM etudiant e
 JOIN coursInscrit ci ON e.etudId = ci.etudId
 JOIN cours c ON ci.coursId = c.coursId
+JOIN formation f ON f.formationID = f.formationID
 WHERE c.profId = $profId;";
 $result = mysqli_query($conn, $sql);
+
 
 // Check if there are any rows returned
 if (mysqli_num_rows($result) > 0) {
@@ -243,6 +246,8 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['telephone']; ?></td>
             <td><?php echo $row['date_naissance']; ?></td>
+            <td><?php echo $row['titre']; ?></td>
+
             <!-- Include jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

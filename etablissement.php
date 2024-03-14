@@ -267,47 +267,41 @@
 
 <div class="container">
     <div class="title title__style-02">
-      <h2 class="title__title text-center">Nos créateurs de cours</h2>
+      <h2 class="title__title text-center">NOS SPONSORS</h2>
       <hr>
     </div>
 
 
     <section class="customer-logos slider mb-5">
-      <div class="slide">
-        <img src="Img/e2.jpg">
+    <div class="slide">
+        <img src="Img/IMG_7.png">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_3.jpg">
+      </div>
+     <div class="slide">
+        <img src="Img/logo1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/Salle.jpg">
+        <img src="Img/bcm.jpeg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_3.jpg">
+      </div>
+      <div class="slide">
+        <img src="Img/IMG_1.jpg">
       </div>
       <div class="slide">
         <img src="Img/logo1.jpg">
       </div>
       <div class="slide">
-        <img src="Img/e2.jpg">
+        <img src="Img/IMG_6.png">
       </div>
       <div class="slide">
-        <img src="Img/logo1.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/logo1.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e5.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e4.jpg">
-      </div>
-      <div class="slide">
-        <img src="Img/e3.jpg">
+        <img src="Img/bcm.jpeg">
       </div>
     </section>
     <br><br>
