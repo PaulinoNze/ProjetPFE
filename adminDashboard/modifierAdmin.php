@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['adminId']) && $_SESSION['email']) {
 
 ?>
     <!DOCTYPE html>
@@ -47,22 +47,29 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <ul class="nav float-left">
                         
                         <li>
-                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../Img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
                     <ul class="nav user-menu float-right">
-                       
+                    <?php
+                    include "../database.php";
+                    $adminId = $_SESSION['adminId'];
+                    $sql = "SELECT nom, prenom, email, telephone, adminId, image  FROM admin where adminId = $adminId";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_array($result);
+                    ?>
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+                                
                                 <span class="user-img">
-                                    <?php if (!empty($_SESSION['image'])) : ?>
-                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
+                                    <?php if (!empty($row['image'])) : ?>
+                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" width="30" alt="Admin">
                                     <?php else : ?>
                                         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
                                     <?php endif; ?>
                                     <span class="status online"></span></span>
-                                <span><?php echo $_SESSION['prenom']; ?></span>
+                                <span><?php echo $row['prenom']; ?></span>
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -165,14 +172,11 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <?php
-                                                include "../database.php";
-                                                $adminId = $_SESSION['adminId'];
-                                                $sql = "SELECT email, password, telephone FROM admin";
-                                                $result = mysqli_query($conn, $sql);
-                                                $row = mysqli_fetch_array($result);
-                                                ?>
-                                                <form class="custom-mt-form" action="modiAdminAuth.php" method="post">
+                                                <form class="custom-mt-form" action="modiAdminAuth.php" method="post" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                        <label>Nom</label>
+                                                        <input type="text" class="form-control" value="<?php echo $row['nom']; ?>" name="nom">
+                                                    </div>
                                                     <div class="form-group">
                                                         <label>Email</label>
                                                         <input type="text" class="form-control" value="<?php echo $row['email']; ?>" name="email">
@@ -183,18 +187,27 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                     </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                        <label>prenom</label>
+                                                        <input type="text" class="form-control" value="<?php echo $row['prenom']; ?>" name="prenom">
+                                                    </div>
                                                 <div class="form-group">
                                                     <label>Telephone</label>
-                                                    <input type="number" class="form-control" name="telephone" value="<?php echo $row['telephone']; ?>">
+                                                    <input type="text" class="form-control" name="telephone" value="<?php echo $row['telephone']; ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Comfirmez le mot de passe</label>
                                                     <input type="password" class="form-control">
                                                 </div>
                                                 <input type="hidden" name="adminId" value="<?php echo $_SESSION['adminId']; ?>">
-
+                                                
                                             </div>
-
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="form-group">
+                                                        <label>Image de Formation</label>
+                                                        <input type="file" name="image" class="form-control">
+                                                    </div>
+                                                </div>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 

@@ -1,11 +1,10 @@
 <?php
 session_start();
-include "../database.php";
-if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['adminId']) && $_SESSION['email']) {
 
 ?>
     <!DOCTYPE html>
-    <html lang="zxx">
+    <html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -42,7 +41,7 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <ul class="nav float-left">
                         
                         <li>
-                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../Img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
@@ -50,14 +49,21 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                         
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+                            <?php
+                                include "../database.php";
+                                $adminId = $_SESSION['adminId'];
+                                $sql = "SELECT prenom, image FROM admin WHERE adminId = $adminId";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_array($result);
+                                ?>
                                 <span class="user-img">
-                                    <?php if (!empty($_SESSION['image'])) : ?>
-                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
+                                    <?php if (!empty($row['image'])) : ?>
+                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" width="30" alt="Admin">
                                     <?php else : ?>
                                         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
                                     <?php endif; ?>
                                     <span class="status online"></span></span>
-                                <span><?php echo $_SESSION['prenom']; ?></span>
+                                <span><?php echo $row['prenom']; ?></span>
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -97,8 +103,8 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-2.png" alt="icon"> <span> Professeurs</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
-                                    <li><a href="tousEtudiants.php"><span>Tous Professeurs</span></a></li>
-                                    <li><a href="ajouterEdutiant.php"><span>Ajouter Professeur</span></a></li>
+                                    <li><a href="tousProfessur.php"><span>Tous Professeurs</span></a></li>
+                                    <li><a href="ajouterProfessur.php"><span>Ajouter Professeur</span></a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
@@ -109,7 +115,7 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
+                                <a href="#"><img src="../assets/img/sidebar/icon-5.png" alt="icon"> <span> Formation</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="approveformation.php"><span>Approver Formation</span></a></li>
                                     <li><a href="ajouterFormation.php"><span>Ajouter Formation</span></a></li>
@@ -124,11 +130,12 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                             <li class="submenu">
                                 <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
-                                    <li><a href="forum.php"><span>Forum</span></a></li>
+                                    <li><a class="active" href="forum.php"><span>Forum</span></a></li>
                                     <li><a href="ajouterForum.php"><span>Ajouter Forum</span></a></li>
 
                                 </ul>
                             </li>
+
                     </div>
                 </div>
             </div>
@@ -144,27 +151,27 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <ul class="breadcrumb float-right p-0 mb-0">
                                     <li class="breadcrumb-item"><a href="adminDashboard.php"><i class="fas fa-home"></i> Tableau de Bord</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                                    <li class="breadcrumb-item"><span> Forum</span></li>
+                                    <li class="breadcrumb-item"><a href="forum.php">Forum</a></li>
+                                    <li class="breadcrumb-item"><span> Forum Info</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                    <?php
-                                                include "../database.php";
-                                                $forumId = $_GET['id'];
-                                                $sql = "SELECT * FROM forum WHERE forumId = $forumId";
-                                                $result = mysqli_query($conn, $sql);
-                                                $row = mysqli_fetch_array($result);
-                                                ?>
+                        <?php
+                        include "../database.php";
+                        $forumId = $_GET['id'];
+                        $sql = "SELECT * FROM forum WHERE forumId = $forumId";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_array($result);
+                        ?>
                         <div class="col-md-8">
                             <div class="blog-view">
                                 <article class="blog blog-single-post">
                                     <h3 class="blog-title"><?php echo $row['title']; ?></h3>
-                                    
+
                                     <div class="blog-image">
-                                    <a href="#">
+                                        <a href="#">
                                             <?php if (!empty($row['image'])) : ?>
                                                 <img class="img-fluid" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>">
                                             <?php else : ?>
@@ -173,7 +180,7 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                         </a>
                                     </div>
                                     <div class="blog-content">
-                                        <p><?php echo $row['content']; ?></p>
+                                        <p><?php echo nl2br($row['content']); ?></p>
                                     </div>
                                 </article>
                                 <?php
@@ -223,18 +230,19 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     </ul>
                                 </div>
                                 <div class="widget new-comment clearfix">
+                                    <?php
+                                    include "../database.php";
+                                    $adminId = $_SESSION['adminId'];
+                                    $sql = "SELECT * FROM admin WHERE adminID = $adminId";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_array($result);
+                                    ?>
                                     <h3>laissez un commentaire</h3>
-                                    <form action="ajoutCommentaire.php" method="POST">
+                                    <form action="ajoutCommentaire.php" method="POST" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <label>Nom <span class="text-red">*</span></label>
-                                                    <input type="text" class="form-control" name="nom">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Votre adresse email <span class="text-red">*</span></label>
-                                                    <input type="email" class="form-control" name="email">
-                                                </div>
+                                                    <input type="hidden" class="form-control" name="nom" value="<?php echo $row['nom'];?>">
+                                                    <input type="hidden" class="form-control" name="email" value="<?php echo $row['email']; ?> ">
                                                 <div class="form-group">
                                                     <label>Commentaire</label>
                                                     <input type="text" class="form-control" name="commentaire">
@@ -250,8 +258,8 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                             </div>
                         </div>
                         <aside class="col-md-4">
-                            
-                        <div class="widget post-widget ">
+
+                            <div class="widget post-widget ">
                                 <h5>Autres articles</h5>
                                 <?php
                                 include "../database.php";
@@ -287,12 +295,12 @@ if (isset($_SESSION['adminId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 }
                                 ?>
                             </div>
-                            
-                            
+
+
                         </aside>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>

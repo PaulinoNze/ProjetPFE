@@ -59,14 +59,14 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    
-    
-    
-    <button class="w-100 btn btn-lg btn-primary" type="submit" href="formation/loginFormation.php?id=<?php echo $dataCours['formationID']; ?>">Sign in</button>
+    <?php 
+    $formationId = $_GET['formation'];
+    ?>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" href="formation/loginFormation.php?formation=<?php echo $formation ?>">Sign in</button>
     <?php
-    if (isset($_GET['id'])) {
-        $userId = $_GET['id'];
-        echo "<input type='text' value = '$userId' name = 'userId' hidden>";
+    if (isset($_GET['formation'])) {
+        $formation = $_GET['formation'];
+        echo "<input type='text' value = '$formation' name = 'formation' hidden>";
     }
     ?>
   </form>

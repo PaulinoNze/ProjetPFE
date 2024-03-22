@@ -12,7 +12,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
     $statut = 1;
-    $userId = $_POST['userId'];
+    $formation = $_POST['formation'];
 
     if(empty($email) || empty($password)){
         header("Location: login.php?error=Email and password are required");
@@ -71,7 +71,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
                 $_SESSION['cour_inscrits'] = isset($row['cour_inscrits']) ? $row['cour_inscrits'] : '';
                 $_SESSION['notes_obtenues'] = isset($row['notes_obtenues']) ? $row['notes_obtenues'] : '';
-                header("Location: formation.php?id=$userId");
+                header("Location: formation.php?formation=$formation");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");
@@ -89,7 +89,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['telephone'] = isset($row['telephone']) ? $row['telephone'] : '';
                 $_SESSION['adresse'] = isset($row['adresse']) ? $row['adresse'] : '';
                 $_SESSION['image'] = isset($row['image']) ? $row['image'] : '';
-                header("Location: formation.php?id=$userId");
+                header("Location: formation.php?formation=$formation");
                 exit();
             }else {
                 header("Location: login.php?error=Incorrect Email or Password");

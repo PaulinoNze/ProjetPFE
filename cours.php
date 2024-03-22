@@ -63,51 +63,52 @@
                 </div>
 
                 <div class="row">
-                    <?php
-                    while ($dataCours = mysqli_fetch_array($queryCours)) { ?>
-                        <div class="col-md-4">
-                            <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
-                                <img src="<?php echo 'data:image;base64,' . base64_encode($dataCours['image']); ?>" class="card-img-top" alt="<?php echo $dataCours['titre']; ?>" style="max-height: 300px;">
-                                <div class="card-body">
-                                    <h2 class="card-title course-title"><?php echo $dataCours['titre']; ?></h2>
-                                    <p class="card-text"><?php echo $dataCours['description']; ?></p>
-                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <div>
-                                            <i class="fas fa-calendar-alt mr-2"></i> <!-- Icono de calendario -->
-                                            <?php echo $dataCours['datePublish']; ?> <!-- Fecha de publicación -->
-                                        </div>
-
-                                        <!-- Enlace -->
-                                        <!-- Agregar el atributo data-curso-id con el ID del curso -->
-                                        <!-- Botón "Ajouter Cours" -->
-                                        <button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre La formation
-                                        </button>
-
-                                        <!-- Modal de Inicio de Sesión -->
-
-                                    </div>
-                                </div>
-                            </div>
+    <?php
+    include "database.php";
+    $sql = "SELECT * from formation";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_array($result)){
+    ?>
+        <div class="col-md-4">
+            <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
+                <img src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" class="card-img-top" alt="<?php echo $row['titre']; ?>" style="max-height: 300px;">
+                <div class="card-body">
+                    <h2 class="card-title course-title"><?php echo $row['titre']; ?></h2>
+                    <p class="card-text"><?php echo $row['description']; ?></p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <?php echo $row['datePublish']; ?>
                         </div>
-                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="loginModalLabel">Authentifiez-Vous</h5>
-                                        <ul class="navbar-nav ml-auto" style="display:inline-block;">
-                                            <li class="nav-item d-inline" style="margin-right: 10px;">
-                                                <a class="btn btn-success" href="formation/loginFormation.php?id=<?php echo $dataCours['formationID']; ?>">Conectar</a>
-                                            </li>
-                                            <li class="nav-item d-inline">
-                                                <a class="btn btn-danger" href="s_abonner/inscritp.php">S'abonner</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
+                        <button id="add-course-btn-<?php echo $row['formationID']; ?>" class="btn btn-primary" data-toggle="modal" data-target="#loginModal-<?php echo $row['formationID']; ?>" data-Cours_inscrits="1">Suivre La formation</button>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal fade" id="loginModal-<?php echo $row['formationID']; ?>" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel-<?php echo $row['formationID']; ?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel-<?php echo $row['formationID']; ?>">Authentifiez-Vous</h5>
+                        <ul class="navbar-nav ml-auto" style="display:inline-block;">
+                            <li class="nav-item d-inline" style="margin-right: 10px;">
+                                <a class="btn btn-success" href="formation/loginFormation.php?formation=<?php echo $row['formationID']; ?>">Conectar</a>
+                            </li>
+                            <li class="nav-item d-inline">
+                                <a class="btn btn-danger" href="s_abonner/inscritp.php">S'abonner</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+        }
+    }
+    ?>
+</div>
+
             </div>
         </section>
 
