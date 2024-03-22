@@ -94,10 +94,10 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
             </div>
 
             <?php
-            if (isset($_GET['id'])) {
-                $userId = $_GET['id'];
+            if (isset($_GET['formation'])) {
+                $formation = $_GET['formation'];
                 $statut = "Actif";
-                $sql = "SELECT coursId, nomCours, description, datePublish, image FROM cours WHERE statut = 'Actif' AND formationID = $userId ";
+                $sql = "SELECT coursId, nomCours, description, datePublish, image FROM cours WHERE statut = 'Actif' AND formationID = $formation ";
                 $result = mysqli_query($conn, $sql);
                 // Comprobar si existen cursos
                 if (mysqli_num_rows($result) > 0) {
@@ -156,7 +156,7 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
                     }
                 } else {
                     // Formación no encontrada
-                    echo "Formation non trouvé.";
+                    echo " Auncun Formation.";
                     exit();
                 }
             } else {

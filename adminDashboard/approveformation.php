@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['adminId']) && $_SESSION['email']) {
 
 ?>
     <!DOCTYPE html>
@@ -45,21 +45,28 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <ul class="nav float-left">
                         
                         <li>
-                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../Img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
                     <ul class="nav user-menu float-right">
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+                            <?php
+                                include "../database.php";
+                                $adminId = $_SESSION['adminId'];
+                                $sql = "SELECT prenom, image FROM admin WHERE adminId = $adminId";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_array($result);
+                                ?>
                                 <span class="user-img">
-                                    <?php if (!empty($_SESSION['image'])) : ?>
-                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
+                                    <?php if (!empty($row['image'])) : ?>
+                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" width="30" alt="Admin">
                                     <?php else : ?>
                                         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
                                     <?php endif; ?>
                                     <span class="status online"></span></span>
-                                <span><?php echo $_SESSION['prenom']; ?></span>
+                                <span><?php echo $row['prenom']; ?></span>
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -171,7 +178,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 <script>
                                                     function downloadPDF() {
                                                         // Redirect to the PHP script that generates the PDF
-                                                        window.location.href = 'generate_pdf.php';
+                                                        window.location.href = 'generate_formation_pdf.php';
                                                     }
                                                 </script>
 

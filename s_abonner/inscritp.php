@@ -168,7 +168,7 @@
 
           <div class="row">
             <div class="col">
-              <label>Image</label>
+              <label>Image <small>*doit être une photo claire de vous</small></label>
               <input type="file" name="image" class="form-control" required>
             </div>
 

@@ -1,23 +1,18 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['adminId']) && $_SESSION['email']) {
     if (isset($_GET['id'])) {
         $userId = $_GET['id'];
-        // Fetch user information from the database using the user ID
         $sql = "SELECT * FROM professeur WHERE ProfId = $userId";
         $result = mysqli_query($conn, $sql);
-        // Check if user exists
         if (mysqli_num_rows($result) > 0) {
-            // User found, fetch user details
             $user = mysqli_fetch_assoc($result);
         } else {
-            // User not found
             echo "Utilisateur non trouvé.";
             exit();
         }
     } else {
-        // User ID not provided in URL
         echo "ID de l'utilisateur non spécifié.";
         exit();
     }
@@ -60,7 +55,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                     <ul class="nav float-left">
                         
                         <li>
-                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="adminDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../Img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
@@ -68,14 +63,21 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                        
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+                            <?php
+                                include "../database.php";
+                                $adminId = $_SESSION['adminId'];
+                                $sql = "SELECT prenom, image FROM admin WHERE adminId = $adminId";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_array($result);
+                                ?>
                                 <span class="user-img">
-                                    <?php if (!empty($_SESSION['image'])) : ?>
-                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
+                                    <?php if (!empty($row['image'])) : ?>
+                                        <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" width="30" alt="Admin">
                                     <?php else : ?>
                                         <img class="rounded-circle" src="../assets/img/user.jpg" width="30" alt="Default Image">
                                     <?php endif; ?>
                                     <span class="status online"></span></span>
-                                <span><?php echo $_SESSION['prenom']; ?></span>
+                                <span><?php echo $row['prenom']; ?></span>
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="adminInfo.php">Mon Profil</a>
@@ -196,11 +198,11 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 <ul class="personal-info">
                                                     <li>
                                                         <span class="title">Telephone:</span>
-                                                        <span class="text"><a href=""><?php echo $user['telephone']; ?></a></span>
+                                                        <span class="text"><a href='tel: <?php echo $user['telephone']; ?>'><?php echo $user['telephone']; ?></a></span>
                                                     </li>
                                                     <li>
                                                         <span class="title">Email:</span>
-                                                        <span class="text"><a href=""><?php echo $user['email']; ?></a></span>
+                                                        <span class="text"><a href='mailto: <?php echo $user['email']; ?>'><?php echo $user['email']; ?></a></span>
                                                     </li>
                                                     <li>
                                                         <span class="title">Date Naissance:</span>

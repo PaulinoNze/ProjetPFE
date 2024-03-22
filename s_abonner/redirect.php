@@ -85,7 +85,7 @@
     <div class="message">
     Votre demande d'inscription a été envoyée, vous la recevez et l'envoyez par email lorsqu'elle est approuvée.
     </div>
-    <button class="button"><a href="../cours.php" style="text-decoration: none; color: white;">VOIR LES COURS</a></button>
+    <button class="button"><a href="../cours.php" style="text-decoration: none; color: white;">VOIR LES FORMATIONS</a></button>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if(isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']){
+if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
 ?>
 
 <!DOCTYPE html>
