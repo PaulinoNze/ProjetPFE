@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="./Css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="Css/stileCours.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo2.png">
+
   <!-- Estilos adicionales -->
   <style>
     /* Estilo para la imagen del establecimiento */
@@ -102,7 +104,7 @@
   </div>
         <!-- Enlaces -->
         <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
-        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
+        <a href="login/login.php" class="btn btn-success">Connect</a>
       </div>
     </div>
   </div>

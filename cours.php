@@ -7,13 +7,30 @@
     <meta name="description" content="">
     <meta name="author" content="Paulino nze, syabonga, and edmon evens">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Cours</title>
+    <title>Formation</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="./Css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Css/stileCours.css">
-    
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo2.png">
+
+    <style>
+  .card {
+    height: 100%;
+  }
+
+  .card-body {
+    max-height: 400px; /* Ajusta esta altura máxima según tus necesidades */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Esto cortará el texto que exceda la altura máxima y mostrará puntos suspensivos */
+  }
+
+  .card-img-top {
+    max-height: 200px; /* Ajusta esta altura máxima según tus necesidades */
+    object-fit: cover; /* Esto asegurará que la imagen se ajuste dentro del contenedor sin distorsionarla */
+  }
+</style>
 </head>
 
 <body>
@@ -43,7 +60,7 @@
               Découvrez une expérience éducative unique et transformative avec la Formation Notre!</p>
         <!-- Enlaces -->
         <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
-        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
+        <a href="login/login.php" class="btn btn-success">Connect</a>
       </div>
     </div>
   </div>

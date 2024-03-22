@@ -12,7 +12,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
         <title>ESTD professeur compte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="../img/logo2.png">
 
         <link href="../../../../../css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 
@@ -55,7 +55,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                             </div>
                         </li>
                         <li>
-                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
@@ -168,7 +168,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 <div class="blog-content">
                                     <h3 class="blog-title"><a href="forumInfo.php"><?php echo $row['title']; ?></a></h3>
                                     <p><?php echo $row['description']; ?></p>
-                                    <a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
+                                    <a href="forumInfo.php?id=<?php echo $row['forumID']; ?>" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
                                     
                                 </div>
                             </div>

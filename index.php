@@ -8,6 +8,7 @@
   <meta name="author" content="Paulino nze, syabonga, and edmon evens">
   <meta name="generator" content="Hugo 0.84.0">
   <title>EST'D E-learning</title>
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo2.png">
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css">
@@ -36,7 +37,22 @@
       /* Flexbox para alinear las imágenes en filas */
     }
   </style>
+<style>
+  .card {
+    height: 100%;
+  }
 
+  .card-body {
+    max-height: 400px; /* Ajusta esta altura máxima según tus necesidades */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Esto cortará el texto que exceda la altura máxima y mostrará puntos suspensivos */
+  }
+
+  .card-img-top {
+    max-height: 200px; /* Ajusta esta altura máxima según tus necesidades */
+    object-fit: cover; /* Esto asegurará que la imagen se ajuste dentro del contenedor sin distorsionarla */
+  }
+</style>
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 
@@ -71,7 +87,7 @@
                  de nouvelles compétences de manière efficace.
                 </p>
                   <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
-        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
+        <a href="login/login.php" class="btn btn-success">Connect</a>
             </div>
           </div>
         </div>
@@ -89,7 +105,7 @@
                  de nouvelles compétences de manière efficace.
                 </p>
                  <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
-        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
+        <a href="login/login.php" class="btn btn-success">Connect</a>
             </div>
           </div>
         </div>
@@ -106,7 +122,7 @@
                  de nouvelles compétences de manière efficace.
                 </p>
                  <a href="s_abonner/inscritp.php" class="btn btn-primary me-2">S'abonner</a>
-        <a href="login/login.php" class="btn btn-outline-success">Connect</a>
+        <a href="login/login.php" class="btn btn-success">Connect</a>
             </div>
           </div>
         </div>
@@ -220,7 +236,7 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <h2 class="featurette-heading">Découvrez l'Effiçacité et <span class="text-muted">la Convivialité de notre Application EST'D </span></h2>
+          <h2 class="featurette-heading">Découvrez l'Effiçacité et <span class="text-muted">la Convivialité de notre Application E-learning </span></h2>
           <p class="lead">Notre application EST'D a été conçue avec un accent mis sur l'efficacité et la convivialité
              pour vous offrir la meilleure expérience éducative possible. Avec une interface intuitive et facile à utiliser, 
              vous pourrez naviguer à travers nos cours, 

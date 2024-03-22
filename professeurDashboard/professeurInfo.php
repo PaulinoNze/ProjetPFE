@@ -12,7 +12,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
         <title>ESTD professeur compte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="../img/logo2.png">
 
         <link href="../../../../../css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 
@@ -44,7 +44,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                            
                         </li>
                         <li>
-                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../assets/img/logo1.png" alt="" width="30" height="30"></a>
+                            <a href="professeurDashboard.php" class="mobile-logo d-md-block d-lg-none d-block"><img src="../img/logo2.png" alt="" width="30" height="30"></a>
                         </li>
                     </ul>
 
@@ -108,6 +108,13 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 <a href="#"><img src="../assets/img/sidebar/icon-3.png" alt="icon"> <span> Cours</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled" style="display: none;">
                                     <li><a href="cours.php"><span>Cours</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled" style="display: none;">
+                                    <li><a href="forum.php"><span>Forum</span></a></li>
+                                    
                                 </ul>
                             </li>
                         </ul>
