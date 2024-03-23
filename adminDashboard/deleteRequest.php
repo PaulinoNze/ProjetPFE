@@ -40,6 +40,8 @@ if(isset($_POST['coursId'])) {
 }
 if(isset($_POST['forumID'])) {
     $forumID = $_POST['forumID'];
+    $sqlComment ="DELETE FROM commentaire WHERE forumID = '$forumID'";
+    mysqli_query($conn, $sqlComment);
     $sql = "DELETE FROM forum WHERE forumID = '$forumID'";
     if(mysqli_query($conn, $sql)) {
         echo "Record deleted successfully";

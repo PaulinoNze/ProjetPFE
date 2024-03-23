@@ -182,9 +182,9 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                         </a>
                                 </div>
                                 <div class="blog-content">
-                                    <h3 class="blog-title"><a href="forumInfo.php"><?php echo $row['title']; ?></a></h3>
+                                    <h3 class="blog-title"><a href="forumInfo.php?id=<?php echo $row['forumID']; ?>"><?php echo $row['title']; ?></a></h3>
                                     <p><?php echo $row['description']; ?></p>
-                                    <a href="forumInfo.php" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
+                                    <a href="forumInfo.php?id=<?php echo $row['forumID']; ?>" class="read-more"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> En savoir plus</a>
                                     
                                 </div>
                                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteRequestEtud(<?php echo $row['forumID']; ?>)">

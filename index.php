@@ -175,7 +175,7 @@
                     <?php
                     include "database.php";
                     $counter = 0;
-                    $sql = "SELECT * from formation";
+                    $sql = "SELECT * from formation WHERE statut = 'Actif'";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_array($result)){

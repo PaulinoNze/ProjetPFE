@@ -77,7 +77,7 @@
                 <div class="row">
                     <?php
                     include "database.php";
-                    $sql = "SELECT * from formation";
+                    $sql = "SELECT * from formation WHERE statut = 'Actif'";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_array($result)){
@@ -108,7 +108,7 @@
                                 <a class="btn btn-success" href="formation/loginFormation.php?formation=<?php echo $row['formationID']; ?>">Conectar</a>
                             </li>
                             <li class="nav-item d-inline">
-                                <a class="btn btn-danger" href="s_abonner/inscritp.php">S'abonner</a>
+                                <a class="btn btn-danger" href="s_abonner/inscritp.php" >S'abonner</a>
                             </li>
                         </ul>
                     </div>
@@ -117,6 +117,8 @@
         </div>
     <?php
         }
+    }else{
+        echo "<h2>Aucun Formation</h2>";
     }
     ?>
 </div>
