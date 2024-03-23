@@ -266,7 +266,7 @@ if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
 
                                                             <div class="form-group">
                                                                 <label for="formation">Formation associée au cours</label>
-                                                                <select name="formation" class="form-control" disabled>
+                                                                <select name="formation" class="form-control" >
                                                                     <?php
                                                                     // Consulta SQL para obtener todas las formaciones disponibles
                                                                     $sqlFormations = "SELECT * FROM formation";

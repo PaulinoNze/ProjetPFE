@@ -16,7 +16,7 @@ if(mysqli_num_rows($result) > 0) {
         $color = imagecolorallocate($image, 19, 21, 22);
         $name = $row['nom']. " ". $row['prenom'];
         $cours = $row['nomCours'];
-        imagettftext($image, 90, 0, 690, 800, $color, $font, $name);
+        imagettftext($image, 90, 0, 400, 800, $color, $font, $name);
 
         // Adjusted code for `$cours` to appear in the red circle area
         // The font size is a guess; you'll need to adjust it to match the existing text
