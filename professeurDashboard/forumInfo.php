@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
 
 ?>
     <!DOCTYPE html>
@@ -179,7 +179,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                 $row = mysqli_fetch_array($result)
 
                                 ?>
-                                <div class="widget blog-comments clearfix">
+                                <div class="widget blog-comments clearfix" style="height: 300px; overflow-y: auto;">
                                     <h3>Commentaires (<?php echo $row['count(commentaire)']; ?>)</h3>
                                     <ul class="comments-list">
                                         <?php
@@ -189,23 +189,20 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                         $result = mysqli_query($conn, $sql);
                                         if (mysqli_num_rows($result) > 0) {
                                             while ($row = mysqli_fetch_array($result)) {
-
                                         ?>
                                                 <li>
-                                                <fieldset>
-                                                    <div class="comment">
-                                                    <div class="comment-author">
-												<img class="avatar" alt="" src="../assets/img/user.jpg">
-											</div>
-                                                        <div class="comment-block">
-                                                            <span class="comment-by">
-                                                                <span class="blog-author-name"><?php echo $row['nom']; ?></span>
-
-                                                            </span>
-                                                            <p><?php echo $row['commentaire']; ?></p>
-
+                                                    <fieldset >
+                                                        <div class="comment" >
+                                                            <div class="comment-block" >
+                                                                <img class="avatar" alt="" src="../assets/img/user.jpg">
+                                                            </div>
+                                                            <div class="comment-block">
+                                                                <span class="comment-by">
+                                                                    <span class="blog-author-name"><?php echo $row['nom']; ?></span>
+                                                                </span>
+                                                                <p><?php echo $row['commentaire']; ?></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </fieldset>
                                                 </li>
                                         <?php
@@ -214,22 +211,22 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                             echo "<h3> Pas des commentaires </h3>";
                                         }
                                         ?>
-
                                     </ul>
                                 </div>
                                 <div class="widget new-comment clearfix">
+                                    <?php
+                                    include "../database.php";
+                                    $profId = $_SESSION['profId'];
+                                    $sql = "SELECT * FROM professeur WHERE profId = $profId";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_array($result);
+                                    ?>
                                     <h3>laissez un commentaire</h3>
-                                    <form action="../PHP/ajoutCommentaire.php" method="POST">
+                                    <form action="../PHP/ajoutCommentaire.php" method="POST" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <label>Nom <span class="text-red">*</span></label>
-                                                    <input type="text" class="form-control" name="nom">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Votre adresse email <span class="text-red">*</span></label>
-                                                    <input type="email" class="form-control" name="email">
-                                                </div>
+                                                    <input type="hidden" class="form-control" name="nom" value="<?php echo $row['nom'];?>">
+                                                    <input type="hidden" class="form-control" name="email" value="<?php echo $row['email']; ?> ">
                                                 <div class="form-group">
                                                     <label>Commentaire</label>
                                                     <input type="text" class="form-control" name="commentaire">

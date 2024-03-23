@@ -29,10 +29,16 @@ $result = mysqli_query($conn, $sql);
 
 // Check if there are any rows returned
 if (mysqli_num_rows($result) > 0) {
-    // Table header
+    // Set font for table header
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 10, 'Nom du Cours', 1);
-    $pdf->Cell(100, 10, 'Description', 1);
+
+    // Define cell widths
+    $cellWidth = 30;
+    $descriptionWidth = 170;
+
+    // Table header
+    $pdf->Cell($cellWidth, 10, 'Nom du Cours', 1);
+    $pdf->Cell($descriptionWidth, 10, 'Description', 1);
     $pdf->Ln();
 
     // Set font for data rows
@@ -40,8 +46,21 @@ if (mysqli_num_rows($result) > 0) {
 
     // Fetch and add data rows
     while ($row = mysqli_fetch_assoc($result)) {
-        $pdf->Cell(30, 10, $row['nomCours'], 1);
-        $pdf->Cell(100, 10, $row['description'], 1);
+        // Calculate the number of lines in the description
+        $numLines = ceil($pdf->GetStringWidth($row['description']) / $descriptionWidth);
+
+        // Calculate the height of the Description cell based on the number of lines
+        $descriptionHeight = 10 * $numLines;
+
+        // Nom du Cours cell (with adjusted height)
+        $pdf->Cell($cellWidth, $descriptionHeight, $row['nomCours'], 1);
+
+        // Description cell (multi-line)
+        $pdf->MultiCell($descriptionWidth, 10, $row['description'], 1);
+
+        // Add empty cell to align with the first column
+        $pdf->Cell($cellWidth, $descriptionHeight, '', 'LRB');
+        $pdf->Cell($descriptionWidth, 0, '', 'LRB');
         $pdf->Ln();
     }
 } else {

@@ -67,12 +67,7 @@
 </section>
 
        
-        <?php
-        include('config.php');
-        $sqlCours = "SELECT * FROM formation where statut = 'Actif'";
-        $queryCours = mysqli_query($conn, $sqlCours);
-        ?>
-
+       
         <section class="awe-section">
             <div class="container">
                 <div class="title title__style-02">
@@ -80,13 +75,13 @@
                 </div>
 
                 <div class="row">
-    <?php
-    include "database.php";
-    $sql = "SELECT * from formation";
-    $result = mysqli_query($conn, $sql);
-    if(mysqli_num_rows($result) > 0){
-        while($row = mysqli_fetch_array($result)){
-    ?>
+                    <?php
+                    include "database.php";
+                    $sql = "SELECT * from formation";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_array($result)){
+                    ?>
         <div class="col-md-4">
             <div class="card mb-4" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
                 <img src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" class="card-img-top" alt="<?php echo $row['titre']; ?>" style="max-height: 300px;">

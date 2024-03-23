@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']){
+    if (isset($_SESSION['profId']) && isset($_SESSION['email']) ){
         
 ?>
 <!DOCTYPE html>

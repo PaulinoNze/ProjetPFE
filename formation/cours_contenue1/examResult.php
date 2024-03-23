@@ -34,10 +34,8 @@ for ($i = 1; $i <= $totalQues; $i++) {
                 $letterAns = "a";
             }elseif($ans[$i - 1] == 2){
                 $letterAns = "b";
-            }elseif($ans[$i - 1] == 3){
-                $letterAns = "c";
             }else{
-                $letterAns = "d";
+                $letterAns = "c";
             }
             echo "<p style='color: red;'>Réponse incorrecte à la question $i, la bonne réponse est : " . $letterAns  . "<br>";
         }

@@ -30,7 +30,7 @@
                         $coursId = $_GET['coursId'];
                         $etudId = $_GET['etudId'];
                         $n = 0; // Start numbering from 0
-                        $sql = "SELECT exameFinaleId, question, reponse_1, reponse_2, reponse_3, reponse_4, reponse_correcte FROM examefinale WHERE coursId = $coursId";
+                        $sql = "SELECT exameFinaleId, question, reponse_1, reponse_2, reponse_3, reponse_correcte FROM examefinale WHERE coursId = $coursId";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
@@ -41,7 +41,6 @@
                     <input type="radio" name="answer-<?php echo $n; ?>" value="1" ><?php echo $row['reponse_1'];?><br>
                     <input type="radio" name="answer-<?php echo $n; ?>" value="2" ><?php echo $row['reponse_2'];?><br>
                     <input type="radio" name="answer-<?php echo $n; ?>" value="3" ><?php echo $row['reponse_3'];?><br>
-                    <input type="radio" name="answer-<?php echo $n; ?>" value="4" ><?php echo $row['reponse_4'];?><br>
                     <input type="hidden" name="etudId" value="<?php echo $etudId;?>">
                     <input type="hidden" name="coursId" value="<?php echo $coursId;?>">
                     <br>

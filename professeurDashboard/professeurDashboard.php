@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
 
 ?>
     <!DOCTYPE html>
@@ -155,12 +155,11 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                     <?php
                                     $profId = $_SESSION['profId'];
                                     // Fetch data from the etudiant table
-                                    $sqlEtud = "SELECT COUNT(e.etudId) AS student_count
+                                    $sqlEtud = "SELECT count(DISTINCT e.etudId) as student_count
                                     FROM etudiant e
-                                    JOIN coursInscrit ci ON e.etudId = ci.etudId
+                                    JOIN coursinscrit ci ON e.etudId = ci.etudId
                                     JOIN cours c ON ci.coursId = c.coursId
-                                    JOIN formation f ON f.formationID = f.formationID
-                                    WHERE c.profId = $profId;";
+                                    WHERE c.profId = $profId";
                                     $resultEtud = mysqli_query($conn, $sqlEtud);
                                     $rowEtud = mysqli_fetch_assoc($resultEtud);
                                     if ($rowEtud != 0) {
@@ -215,7 +214,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                         <th>Telephone</th>
                                                         <th>Date de Naissance</th>
                                                         <th>Cours</th>
-                                                        <th>Formation</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -223,12 +222,11 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                     // Assuming you have already started the session and included the database connection
                                                     $profId = $_SESSION['profId'];
                                                     // Fetch data from the etudiant table
-                                                    $sql = "SELECT e.*, ci.*,f.*, c.nomCours
-                                                        FROM etudiant e
-                                                        JOIN coursInscrit ci ON e.etudId = ci.etudId
-                                                        JOIN cours c ON ci.coursId = c.coursId
-                                                        JOIN formation f ON f.formationID = f.formationID
-                                                        WHERE c.profId = $profId;";
+                                                    $sql = "SELECT e.etudId, e.nom, e.prenom, e.email, e.telephone, e.date_naissance, e.image, c.nomCours
+                                                    FROM etudiant e
+                                                    JOIN coursinscrit ci ON e.etudId = ci.etudId
+                                                    JOIN cours c ON ci.coursId = c.coursId
+                                                    WHERE c.profId = $profId";
                                                     $result = mysqli_query($conn, $sql);
 
 
@@ -251,7 +249,7 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                                 <td><?php echo $row['telephone']; ?></td>
                                                                 <td><?php echo $row['date_naissance']; ?></td>
                                                                 <td><?php echo $row['nomCours']; ?></td>
-                                                                <td><?php echo $row['titre']; ?></td>
+                                                                
 
                                                                 <!-- Include jQuery library -->
                                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

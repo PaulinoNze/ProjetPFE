@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
 
 ?>
 <!DOCTYPE html>
@@ -63,7 +63,7 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
                             
                                 <ul class="nav user-menu float-right">
                                     <li class="nav-item dropdown has-arrow">
-                                        <a href="#" class=" nav-link user-link" data-toggle="dropdown">
+                                        <a href="../Etudiant/etudiantdashboard.php" class=" nav-link user-link" data-toggle="dropdown">
                                             <span class="user-img">
                                                 <?php if (!empty($_SESSION['image'])) : ?>
                             <img class="rounded-circle" src="<?php echo 'data:image;base64,' . base64_encode($_SESSION['image']); ?>" width="30" alt="Admin">
@@ -135,8 +135,19 @@ if (isset($_SESSION['etudId ']) || $_SESSION['nom'] || $_SESSION['email']) {
                                                 <h2>Introduction</h2>
                                                 <p><?php echo $user['description'] ?></p>
                                                 <br>
-                                                
-                                                <a href="add_course.php?coursId=<?php echo $user['coursId']; ?>&etudId=<?php echo $_SESSION['etudId']; ?>"><button id="add-course-btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-Cours_inscrits="1">Suivre Le Cours</button></a>
+                                                <?php
+                                                $coursId = $user['coursId'];
+                                                $etudId = $_SESSION['userid'];
+                                                $sqlCount = "SELECT count(*) FROM  coursinscrit where coursId = $coursId and etudId = $etudId";
+                                                $resultCount = mysqli_query($conn, $sqlCount);
+                                                $rowCount = mysqli_fetch_assoc($resultCount);
+                                                $count = $rowCount['count(*)'];
+                                                if($count > 0){
+                                                    echo '<span style="color: green;"><h5>Vous êtes déjà inscrit dans ce cours</h5></span>';
+                                                }else{
+                                                    echo "<a href='add_course.php?coursId=$coursId&etudId=$etudId'><button id='add-course-btn' class='btn btn-primary' data-toggle='modal' data-target='#loginModal' data-Cours_inscrits='1'>Suivre Le Cours</button></a>";
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                 </article>

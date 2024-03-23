@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../../database.php";
-if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
 
 ?>
   <!DOCTYPE html>
@@ -56,9 +56,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
 
           <ul class="nav user-menu float-right">
             <li class="nav-item dropdown d-none d-sm-block">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <img src="../../assets/img/sidebar/icon-22.png" alt="">
-              </a>
+              
               
             <li class="nav-item dropdown has-arrow">
               <a href="#" class=" nav-link user-link" data-toggle="dropdown">
@@ -103,7 +101,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
             </div>
             <ul class="sidebar-ul">
             <li>
-<a href="../../Etudiant/etudiantdashboard.php" class="border-top-0"><i class="fas fa-home back-icon"></i> Retour a Accueil</a>
+<a href="../../Etudiant/etudiantdashboard.php" class="border-top-0"><i class="fas fa-home back-icon"></i> Aller au tableau de bord </a>
 </li>
               <li >
               <a href="#" class="cargar-pagina" data-url="introductio.php?coursId=<?php echo $_GET['coursId']; ?>  "><img src="../../assets/img/sidebar/icon-17.png" alt="icon"><span>introduction</span></a>
@@ -183,7 +181,23 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
 
           <!--------------------------------------------contents----------------------------------------------->
           <section class="course-content" id="course-content" role="main" aria-label="Content">
-            <div id="contenido-pagina"></div>
+            <div id="contenido-pagina">
+            <?php
+include "../../database.php";
+if (isset($_GET['coursId'])) {
+    $coursId = $_GET['coursId'];
+    $sql = "SELECT description FROM cours WHERE coursId = $coursId";
+    $result = mysqli_query($conn, $sql);
+    $data = mysqli_fetch_assoc($result);
+
+    echo '<h2>introduction du cours</h2>';
+    echo '<p>' . $data['description'] . '</p>';
+} else {
+    // No rows returned from the database
+    echo "<p>Aucun cours</p>";
+}
+?>
+            </div>
           </section>
           
     <!-- jQuery (obligatorio para Bootstrap) -->
@@ -244,217 +258,7 @@ if (isset($_SESSION['userid']) || $_SESSION['nom'] || $_SESSION['email']) {
           previousScroll = currentScroll;
         });
       });
-    </script>
-          <!--------------------------------------------notifications------------------------------------------->
-          <div class="notification-box">
-            <div class="msg-sidebar notifications msg-noti">
-              <div class="topnav-dropdown-header">
-                <span>Messages</span>
-              </div>
-              <div class="drop-scroll msg-list-scroll">
-                <ul class="list-box">
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">R</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Richard Miles </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item new-message">
-                        <div class="list-left">
-                          <span class="avatar">J</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Ruth C. Gault</span>
-                          <span class="message-time">1 Aug</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">T</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Tarah Shropshire </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">M</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Mike Litorus</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">C</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Catherine Manseau </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">D</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Domenic Houston </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">B</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Buster Wigton </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">R</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Rolland Webber </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">C</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Claire Mapes </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">M</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Melita Faucher</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">J</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Jeffery Lalor</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">L</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Loren Gatlin</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">T</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Tarah Shropshire</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="topnav-dropdown-footer">
-                <a href="chat.html">See all messages</a>
-              </div>
-            </div>
-          </div>
+      </script>
         </div>
       </div>
 

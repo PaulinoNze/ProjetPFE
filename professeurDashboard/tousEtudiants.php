@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../database.php";
-if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
+if (isset($_SESSION['profId']) && isset($_SESSION['email']) ){
 
 ?>
     <!DOCTYPE html>
@@ -158,12 +158,12 @@ if (isset($_SESSION['profId']) || $_SESSION['nom'] || $_SESSION['email']) {
                     </div>
                     <?php
                     $profId = $_SESSION['profId'];
-                    $sql = "SELECT e.*, ci.*
-FROM etudiant e
-JOIN coursInscrit ci ON e.etudId = ci.etudId
-JOIN cours c ON ci.coursId = c.coursId
-JOIN formation f ON f.formationID = f.formationID
-WHERE c.profId = $profId;";
+                    $sql = "SELECT DISTINCT e.etudId, e.nom, e.prenom,  e.image
+                    FROM etudiant e
+                    JOIN coursinscrit ci ON e.etudId = ci.etudId
+                    JOIN cours c ON ci.coursId = c.coursId
+                    WHERE c.profId = $profId
+                    ;";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {

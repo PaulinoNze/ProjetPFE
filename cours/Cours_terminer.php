@@ -194,7 +194,7 @@ if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
 
                                                 $etudId = $_SESSION['userid'];
 
-                                                $sql = "SELECT c.coursId, c.nomCours, c.description, ci.note
+                                                $sql = "SELECT c.coursId, c.nomCours, c.description, c.image, ci.note
                                                         FROM cours c
                                                         JOIN coursinscrit ci ON c.coursId = ci.coursId
                                                         JOIN etudiant e ON ci.etudId = e.etudId
@@ -208,8 +208,9 @@ if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
                                                 ?>
                                                         <tr>
                                                             <td>
-                                                                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>&etudId=<?php echo $_SESSION['userid'] ?>" class="avatar text-white"><?php if (!empty($row['image'])) : ?>
-                                                                            <img class="avatar" src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" alt="User Image">
+                                                                <h2><a href="../formation/cours_contenue1/contenuCours.php?coursId=<?php echo $row['coursId']; ?>&etudId=<?php echo $_SESSION['userid'] ?>" class="avatar text-white">
+                                                                <?php if (!empty($row['image'])) : ?>
+                                                                            <img class="avatar" src="../professeurDashboard/<?php echo $row['image']; ?>" alt="User Image">
                                                                         <?php else : ?>
                                                                             <img class="avatar" src="../assets/img/user.jpg" alt="Default Image">
                                                                         <?php endif; ?></a></a><a href="modifierprofil.php"> <span></span></a></h2>

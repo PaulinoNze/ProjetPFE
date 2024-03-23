@@ -191,7 +191,7 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                 $row = mysqli_fetch_array($result)
 
                                 ?>
-                                <div class="widget blog-comments clearfix">
+                                <div class="widget blog-comments clearfix" style="height: 300px; overflow-y: auto;">
                                     <h3>Commentaires (<?php echo $row['count(commentaire)']; ?>)</h3>
                                     <ul class="comments-list">
                                         <?php
@@ -201,23 +201,20 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                         $result = mysqli_query($conn, $sql);
                                         if (mysqli_num_rows($result) > 0) {
                                             while ($row = mysqli_fetch_array($result)) {
-
                                         ?>
                                                 <li>
-                                                <fieldset>
-                                                    <div class="comment">
-                                                    <div class="comment-author">
-												<img class="avatar" alt="" src="../assets/img/user.jpg">
-											</div>
-                                                        <div class="comment-block">
-                                                            <span class="comment-by">
-                                                                <span class="blog-author-name"><?php echo $row['nom']; ?></span>
-
-                                                            </span>
-                                                            <p><?php echo $row['commentaire']; ?></p>
-
+                                                    <fieldset >
+                                                        <div class="comment" >
+                                                            <div class="comment-block" >
+                                                                <img class="avatar" alt="" src="../assets/img/user.jpg">
+                                                            </div>
+                                                            <div class="comment-block">
+                                                                <span class="comment-by">
+                                                                    <span class="blog-author-name"><?php echo $row['nom']; ?></span>
+                                                                </span>
+                                                                <p><?php echo $row['commentaire']; ?></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </fieldset>
                                                 </li>
                                         <?php
@@ -226,7 +223,6 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                             echo "<h3> Pas des commentaires </h3>";
                                         }
                                         ?>
-
                                     </ul>
                                 </div>
                                 <div class="widget new-comment clearfix">

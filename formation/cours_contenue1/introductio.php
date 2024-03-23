@@ -12,5 +12,6 @@ if (isset($_GET['coursId'])) {
     // No rows returned from the database
     echo "<p>Aucun cours</p>";
 }
+?>
 
 
