@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include "../database.php";
@@ -220,9 +221,6 @@ if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
                                                                 <br>
                                                                 <img src="<?php echo $dataCours['image']; ?>" style="width: 100%; width:150px; border-radius: 5px;">
                                                                 <br><br>
-                                                                <label style="float:left;">Changer Photo</label>
-                                                                <br>
-                                                                <input type="file" name="image" accept="image/*">
                                                             </div>
 
                                                             <!-- Sección para editar los capítulos del curso -->
@@ -266,11 +264,9 @@ if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
                                                             }
                                                             ?>
 
-
-                                                            <!-- Campo de selección de formación -->
                                                             <div class="form-group">
-                                                                <label for="formation">Sélectionner la formation</label>
-                                                                <select name="formation" class="form-control">
+                                                                <label for="formation">Formation associée au cours</label>
+                                                                <select name="formation" class="form-control" disabled>
                                                                     <?php
                                                                     // Consulta SQL para obtener todas las formaciones disponibles
                                                                     $sqlFormations = "SELECT * FROM formation";
@@ -284,6 +280,7 @@ if (isset($_SESSION['profId']) && isset($_SESSION['email']) ) {
                                                                     ?>
                                                                 </select>
                                                             </div>
+
 
                                                             <!-- Sección para editar las preguntas del quiz -->
                                                             <div class="form-group">

@@ -50,10 +50,10 @@ if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="../index.php"><i class="fas fa-home text-white"></i><strong>Home</strong> </a>
+                <a class="nav-link" href="../index.php"><i class="fas fa-home text-dark"></i><strong>Home</strong> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../cours.php"><i class="fas fa-book-open text-white"></i> <strong>Cours</strong></a>
+                <a class="nav-link" href="../cours.php"><i class="fas fa-book-open text-dark"></i> <strong>Formation</strong></a>
             </li>
         </ul>
     </div>
