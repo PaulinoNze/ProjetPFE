@@ -218,34 +218,30 @@ if (isset($_SESSION['userid']) && isset($_SESSION['email'])) {
                                                             <td><?php echo $row['description']; ?></td>
 
                                                             <td class="text-right">
-                                                                <button type="button" class="btn btn-danger btn-sm mb-1 delete-btn" data-toggle="modal" data-target="#delete_employee" data-etudid="<?php echo $row['coursId']; ?>">
+                                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_employee" onclick="deleteCours(<?php echo $row['coursId']; ?>, <?php echo $_SESSION['userid']; ?>)">
                                                                     <i class="far fa-trash-alt"></i>
                                                                 </button>
                                                                 <!-- Include jQuery library -->
                                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                                                                 <script>
-                                                                    $(document).ready(function() {
-                                                                        $('.delete-btn').click(function() {
-                                                                            var coursId = $(this).data('coursId');
-                                                                            // Send AJAX request to delete.php
-                                                                            $.ajax({
-                                                                                url: 'etudiantdashboard.php',
-                                                                                type: 'POST',
-                                                                                data: {
-                                                                                    coursId: coursId
-                                                                                },
-                                                                                success: function(response) {
-                                                                                    // Redirect to the current page after successful deletion
-                                                                                    window.location.reload();
-                                                                                },
-                                                                                error: function(xhr, status, error) {
-                                                                                    console.error(xhr.responseText);
-                                                                                }
-                                                                            });
-                                                                        });
+                                                                function deleteCours(coursId, userid) {
+                                                                    $.ajax({
+                                                                        url: 'deleteCours.php',
+                                                                        type: 'POST',
+                                                                        data: {
+                                                                            coursId: coursId,
+                                                                            userid: userid
+                                                                        },
+                                                                        success: function(response) {
+                                                                            window.location.reload();
+                                                                        },
+                                                                        error: function(xhr, status, error) {
+                                                                            console.error(xhr.responseText);
+                                                                        }
                                                                     });
-                                                                </script>
+                                                                }
+                                                            </script>
                                                                 <?php
                                                                 if (isset($_POST['coursId'])) {
                                                                     $coursId = $_POST['coursId'];
