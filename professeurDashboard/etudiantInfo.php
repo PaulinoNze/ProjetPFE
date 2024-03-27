@@ -133,6 +133,13 @@ if (isset($_SESSION['profId']) && isset($_SESSION['email'])) {
                                     <li><a href="cours.php"><span>Cours</span></a></li>
                                 </ul>
                             </li>
+                            <li class="submenu">
+                                <a href="#"><img src="../assets/img/sidebar/icon-12.png" alt="icon"> <span> Forum</span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled" style="display: none;">
+                                    <li><a href="forum.php"><span>Forum</span></a></li>
+                                    
+                                </ul>
+                            </li>
                     </div>
                 </div>
             </div>
