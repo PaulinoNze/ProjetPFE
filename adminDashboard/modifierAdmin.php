@@ -179,11 +179,46 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input type="text" class="form-control" value="<?php echo $row['email']; ?>" name="email">
+                                                        <input type="text" class="form-control" value="<?php echo $row['email']; ?>" name="email" id="emailInput">
+                                                        <span id="emailError" style="color: red;"></span>
+                                                        <script>
+                                                            document.addEventListener("DOMContentLoaded", function() {
+                                                                const emailInput = document.getElementById("emailInput");
+                                                                const emailError = document.getElementById("emailError");
+                                                                const submitButton = document.getElementById("submitButton");
+
+                                                                emailInput.addEventListener("input", function() {
+                                                                const email = emailInput.value.trim();
+                                                                if (email === "") {
+                                                                    emailError.textContent = "";
+                                                                    return;
+                                                                }
+
+                                                                // AJAX request to check if email exists
+                                                                const xhr = new XMLHttpRequest();
+                                                                xhr.open("POST", "../s_abonner/check_email.php", true);
+                                                                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                                xhr.onreadystatechange = function() {
+                                                                    if (xhr.readyState === 4 && xhr.status === 200) {
+                                                                    const response = JSON.parse(xhr.responseText);
+                                                                    if (response.exists) {
+                                                                        emailError.textContent = "Email already registered";
+                                                                        submitButton.disabled = true;
+                                                                    } else {
+                                                                        emailError.textContent = "";
+                                                                        submitButton.disabled = false;
+                                                                    }
+                                                                    }
+                                                                };
+                                                                xhr.send("email=" + encodeURIComponent(email));
+                                                                });
+                                                            });
+                                                        </script>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Mot de Passe</label>
-                                                        <input type="password" class="form-control" name="password">
+                                                        <input type="password" class="form-control" name="password" id="password">
                                                     </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -197,7 +232,27 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Comfirmez le mot de passe</label>
-                                                    <input type="password" class="form-control">
+                                                    <input type="password" class="form-control" name="Cpassword" id="confirmPassword">
+                                                    <small id="passwordMismatch" class="form-text text-danger" style="display: none;">Les mots de passe ne correspondent pas</small>
+                                                    <script>
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                        var passwordInput = document.getElementById('password');
+                                                        var confirmPasswordInput = document.getElementById('confirmPassword');
+                                                        var passwordMismatchText = document.getElementById('passwordMismatch');
+                                                        var passwordRequirementsText = document.getElementById('passwordRequirements');
+
+                                                        confirmPasswordInput.addEventListener('input', function() {
+                                                            if (passwordInput.value !== confirmPasswordInput.value) {
+                                                            passwordMismatchText.style.display = 'block';
+                                                            } else {
+                                                            passwordMismatchText.style.display = 'none';
+                                                            }
+                                                        });
+
+                                                        
+                                                        });
+                                                    </script>
+                                                </div>
                                                 </div>
                                                 <input type="hidden" name="adminId" value="<?php echo $_SESSION['adminId']; ?>">
                                                 
@@ -212,7 +267,7 @@ if (isset($_SESSION['adminId']) && $_SESSION['email']) {
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
                                                 <div class="form-group text-center custom-mt-form-group">
-                                                    <button class="btn btn-primary mr-2" type="submit" name="submit">Soumettre</button>
+                                                    <button class="btn btn-primary mr-2" type="submit" name="submit" >Soumettre</button>
                                                     <button class="btn btn-secondary" type="reset">Annuler</button>
                                                 </div>
                                                 </form>
